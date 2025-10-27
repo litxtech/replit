@@ -45,11 +45,11 @@ app.post('/api/stripe/checkout', async (req, res) => {
   try {
     const { packageId, packageName, packagePrice } = req.body
 
-    if (!packageId || !STRIPE_PRODUCTS[packageId as keyof typeof STRIPE_PRODUCTS]) {
+    if (!packageId || !STRIPE_PRODUCTS[packageId]) {
       return res.status(400).json({ error: 'Geçersiz paket ID' })
     }
 
-    const product = STRIPE_PRODUCTS[packageId as keyof typeof STRIPE_PRODUCTS]
+    const product = STRIPE_PRODUCTS[packageId]
 
     // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
