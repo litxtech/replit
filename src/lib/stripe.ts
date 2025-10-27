@@ -1,12 +1,14 @@
-// Development Stripe checkout integration
-// This connects to localhost server for testing
+// Real Stripe checkout integration for production
+// This connects to Vercel serverless function on www.litxtech.com
+
+const API_BASE_URL = 'https://www.litxtech.com'
 
 export async function createCheckoutSession(priceId: string, packageName: string, packagePrice: number) {
   try {
-    // Determine package ID from price ID
-    let packageId = 'starter'
-    if (priceId.includes('professional')) packageId = 'professional'
-    if (priceId.includes('enterprise')) packageId = 'enterprise'
+    // Map price ID to package ID
+    let packageId = 'starter-web'
+    if (priceId.includes('professional')) packageId = 'professional-web'
+    if (priceId.includes('enterprise')) packageId = 'enterprise-web'
     if (priceId.includes('ai-lite')) packageId = 'ai-lite'
     if (priceId.includes('ai-pro')) packageId = 'ai-pro'
     if (priceId.includes('ai-enterprise')) packageId = 'ai-enterprise'
@@ -19,12 +21,12 @@ export async function createCheckoutSession(priceId: string, packageName: string
     if (priceId.includes('brand-launch-kit')) packageId = 'brand-launch-kit'
     if (priceId.includes('sales-automation-pro')) packageId = 'sales-automation-pro'
     if (priceId.includes('full-digital-suite')) packageId = 'full-digital-suite'
-    if (priceId.includes('custom-software')) packageId = 'custom-software'
-    if (priceId.includes('annual-maintenance')) packageId = 'annual-maintenance'
-    if (priceId.includes('ui-ux-design')) packageId = 'ui-ux-design'
+    if (priceId.includes('custom-software')) packageId = 'custom-software-development'
+    if (priceId.includes('annual-maintenance')) packageId = 'annual-maintenance-plan'
+    if (priceId.includes('ui-ux-design')) packageId = 'ui-ux-design-suite'
 
-    // Use localhost for development
-    const response = await fetch('http://localhost:3001/api/stripe/checkout', {
+    // Connect to real Stripe API
+    const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -49,16 +51,15 @@ export async function createCheckoutSession(priceId: string, packageName: string
   }
 }
 
-// Health check function - check localhost for development
+// Health check function for production
 export async function checkServerHealth() {
   try {
-    // Check localhost server for development
-    const localhostResponse = await fetch('http://localhost:3001/api/health', {
+    const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
       method: 'GET',
     })
-    return localhostResponse.ok
+    return response.ok
   } catch (error) {
-    console.error('Localhost API failed:', error)
+    console.error('Production API failed:', error)
     return false
   }
 }
