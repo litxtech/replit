@@ -4,36 +4,44 @@ on:
   push:
     branches: [ main, master ]
   pull_request:
+    types: [ closed ]          # sadece merge edildiğinde
     branches: [ main, master ]
 
 jobs:
   deploy:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
-    
+
     steps:
-    - name: 📥 Checkout code
-      uses: actions/checkout@v4
-      
-    - name: 📦 Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
-        cache: 'npm'
-        
-    - name: 📥 Install dependencies
-      run: npm ci
-      
-    - name: 🔨 Build project
-      run: npm run build
-      
-    - name: 🚀 Deploy to Vercel
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./
-        vercel-args: '--prod'
-        
-    - name: ✅ Deployment Success
-      run: echo "🎉 Website successfully deployed to Vercel!"
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: npm
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      # (Opsiyonel) testlerin varsa aç
+      # - name: ✅ Run tests
+      #   run: npm test --if-present
+
+      - name: 🔨 Build project
+        run: npm run build --if-present
+
+      # Resmi Vercel Action
+      - name: 🚀 Deploy to Vercel (Prod)
+        uses: vercel/actions@v1
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}        # Vercel -> Settings -> Tokens
+          project-id: ${{ secrets.VERCEL_PROJECT_ID }}     # Project Settings -> General
+          scope: ${{ secrets.VERCEL_ORG_ID }}              # Team/Org ID
+          working-directory: ./                            # Monorepo ise ilgili alt klasörü yaz
+          prod: true
+
+      - name: ✅ Deployment Success
+        run: echo "🎉 Website successfully deployed to Vercel!"
+
