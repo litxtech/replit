@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { CheckCircle, CreditCard, Loader2, AlertCircle } from 'lucide-react'
-import { createCheckoutSession } from '../lib/stripe'
+import { useState, useEffect } from 'react'
+import { CheckCircle, CreditCard, Loader2, Wifi, WifiOff } from 'lucide-react'
+import { createCheckoutSession, checkServerHealth } from '../lib/stripe'
 
 interface Package {
   id: string
@@ -21,7 +21,16 @@ interface CheckoutModalProps {
 
 export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  const [, setError] = useState('')
+  const [serverStatus, setServerStatus] = useState<'checking' | 'online' | 'offline'>('checking')
+
+  useEffect(() => {
+    if (isOpen) {
+      checkServerHealth().then(isOnline => {
+        setServerStatus(isOnline ? 'online' : 'offline')
+      })
+    }
+  }, [isOpen])
 
   const handleCheckout = async () => {
     setIsLoading(true)
@@ -89,24 +98,46 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
             </ul>
           </div>
 
-          {/* Error */}
-          {error && (
-            <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg flex items-center space-x-2">
-              <AlertCircle className="w-4 h-4 text-red-500" />
-              <span className="text-red-700 text-sm">{error}</span>
-            </div>
-          )}
+        {/* Server Status */}
+        <div className="mb-4">
+          <div className={`flex items-center space-x-2 text-sm ${
+            serverStatus === 'online' ? 'text-green-600' : 
+            serverStatus === 'offline' ? 'text-red-600' : 'text-yellow-600'
+          }`}>
+            {serverStatus === 'online' ? (
+              <>
+                <Wifi className="w-4 h-4" />
+                <span>Ödeme sistemi aktif</span>
+              </>
+            ) : serverStatus === 'offline' ? (
+              <>
+                <WifiOff className="w-4 h-4" />
+                <span>Ödeme sistemi offline</span>
+              </>
+            ) : (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                <span>Bağlantı kontrol ediliyor...</span>
+              </>
+            )}
+          </div>
+        </div>
 
           {/* Checkout Button */}
           <button
             onClick={handleCheckout}
-            disabled={isLoading}
+            disabled={isLoading || serverStatus !== 'online'}
             className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-semibold flex items-center justify-center space-x-2 disabled:opacity-50"
           >
             {isLoading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
                 <span>İşleniyor...</span>
+              </>
+            ) : serverStatus !== 'online' ? (
+              <>
+                <WifiOff className="w-4 h-4" />
+                <span>Ödeme Sistemi Offline</span>
               </>
             ) : (
               <>
