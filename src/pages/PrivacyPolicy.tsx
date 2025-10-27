@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Shield, Lock, Eye, Database, Users, Mail, Phone, MapPin } from 'lucide-react'
+import { ArrowLeft, Shield, Lock, Database, Users, Mail, Phone, MapPin } from 'lucide-react'
 
 export function PrivacyPolicy() {
   return (

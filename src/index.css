@@ -72,13 +72,13 @@
 
 body {
   background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
-  color: #18181b;
+  color: #1f2937; /* Darker text for better contrast */
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
 
 .dark body {
-  color: #fafafa;
+  color: #f9fafb; /* Brighter text for dark mode */
 }
 
 /* Glassmorphism Effects - Improved Readability */

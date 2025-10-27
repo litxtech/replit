@@ -44,7 +44,7 @@ export function HomePage() {
                 <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                   LitxTech
                 </Link>
-                <p className="text-xs text-gray-400">Build. Automate. Scale.</p>
+                <p className="text-xs text-zinc-600 dark:text-zinc-400">Build. Automate. Scale.</p>
               </div>
             </div>
             
@@ -613,12 +613,12 @@ export function HomePage() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white">LitxTech</h3>
-                  <p className="text-xs text-gray-400">Build. Automate. Scale.</p>
+                  <p className="text-xs text-zinc-600 dark:text-zinc-400">Build. Automate. Scale.</p>
                 </div>
               </div>
-              <p className="text-gray-200 text-sm mb-4">
-                Leading technology solutions for modern businesses worldwide.
-              </p>
+                  <p className="text-zinc-700 dark:text-zinc-200 text-sm mb-4">
+                    Leading technology solutions for modern businesses worldwide.
+                  </p>
               <div className="flex space-x-4">
                 <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
                   <span className="text-white text-xs font-bold">GH</span>
@@ -633,31 +633,31 @@ export function HomePage() {
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
-              <ul className="space-y-2 text-gray-200">
-                <li><Link to="/packages" className="hover:text-white transition-colors">Software Packages</Link></li>
-                <li><Link to="/ai-builder" className="hover:text-white transition-colors">AI Builder</Link></li>
-                <li><Link to="/investment" className="hover:text-white transition-colors">Custom Solutions</Link></li>
+              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
+                <li><Link to="/packages" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Software Packages</Link></li>
+                <li><Link to="/ai-builder" className="hover:text-zinc-900 dark:hover:text-white transition-colors">AI Builder</Link></li>
+                <li><Link to="/investment" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Custom Solutions</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4 text-white">Company</h4>
-              <ul className="space-y-2 text-gray-200">
-                <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
-                <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
+                <li><Link to="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About Us</Link></li>
+                <li><Link to="/blog" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Blog</Link></li>
+                <li><Link to="/contact" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4 text-white">Legal</h4>
-              <ul className="space-y-2 text-gray-200">
-                <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link to="/refund" className="hover:text-white transition-colors">Refund Policy</Link></li>
+              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
+                <li><Link to="/privacy" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/refund" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Refund Policy</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="text-lg font-semibold mb-4 text-white">Contact Info</h4>
-              <div className="space-y-2 text-gray-200 text-sm">
+              <div className="space-y-2 text-zinc-700 dark:text-zinc-200 text-sm">
                 <p><strong className="text-white">LITXTECH LLC</strong></p>
                 <p>D-U-N-S®: 144849529</p>
                 <p>15442 Ventura Blvd., STE 201-1834</p>

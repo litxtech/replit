@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, RefreshCw, CreditCard, Shield, Mail, Phone, MapPin } from 'lucide-react'
+import { ArrowLeft, RefreshCw, CreditCard, Mail, Phone, MapPin } from 'lucide-react'
 
 export function RefundPolicy() {
   return (

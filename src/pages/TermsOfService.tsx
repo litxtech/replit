@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowLeft, FileText, Scale, CreditCard, Shield, Mail, Phone, MapPin } from 'lucide-react'
+import { ArrowLeft, FileText, Scale, CreditCard, Mail, Phone, MapPin } from 'lucide-react'
 
 export function TermsOfService() {
   return (
