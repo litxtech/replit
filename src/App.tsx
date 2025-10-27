@@ -14,6 +14,7 @@ import { LegalDocumentPage } from './pages/LegalDocumentPage'
 import { PrivacyPolicy } from './pages/PrivacyPolicy'
 import { TermsOfService } from './pages/TermsOfService'
 import { RefundPolicy } from './pages/RefundPolicy'
+import { DataSecurityPolicy } from './pages/DataSecurityPolicy'
 
 function App() {
   return (
@@ -31,9 +32,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/legal" element={<LegalDocumentPage />} />
-        <Route path="/privacy" element={<PrivacyPolicy />} />
-        <Route path="/terms" element={<TermsOfService />} />
-        <Route path="/refund" element={<RefundPolicy />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/data-security-policy" element={<DataSecurityPolicy />} />
       </Routes>
     </div>
   )
