@@ -11,6 +11,9 @@ import { Packages } from './pages/Packages'
 import { LoginPage } from './pages/LoginPage'
 import { AuthCallback } from './pages/AuthCallback'
 import { LegalDocumentPage } from './pages/LegalDocumentPage'
+import { PrivacyPolicy } from './pages/PrivacyPolicy'
+import { TermsOfService } from './pages/TermsOfService'
+import { RefundPolicy } from './pages/RefundPolicy'
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/auth/callback" element={<AuthCallback />} />
         <Route path="/legal" element={<LegalDocumentPage />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
+        <Route path="/refund" element={<RefundPolicy />} />
       </Routes>
     </div>
   )

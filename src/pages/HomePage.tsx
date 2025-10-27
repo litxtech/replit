@@ -26,10 +26,11 @@ export function HomePage() {
   }, [])
 
   return (
-    <div className="min-h-screen relative">
-      {/* Animated Background */}
-      <div className="animated-bg"></div>
-      <div className="particles"></div>
+      <div className="min-h-screen relative">
+        {/* Animated Background */}
+        <div className="animated-bg"></div>
+        <div className="bg-overlay"></div>
+        <div className="particles"></div>
 
       {/* Navigation */}
       <nav className="glass fixed top-0 left-0 right-0 z-50 mx-4 mt-4">
@@ -49,10 +50,10 @@ export function HomePage() {
             
             {/* Desktop Navigation */}
                 <div className="hidden md:flex items-center space-x-8">
-                  <Link to="/" className="text-gray-200 hover:text-white transition-colors font-medium">Home</Link>
-                  <Link to="/packages" className="text-gray-200 hover:text-white transition-colors font-medium">Packages</Link>
-                  <Link to="/about" className="text-gray-200 hover:text-white transition-colors font-medium">About</Link>
-                  <Link to="/contact" className="text-gray-200 hover:text-white transition-colors font-medium">Contact</Link>
+                  <Link to="/" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Home</Link>
+                  <Link to="/packages" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Packages</Link>
+                  <Link to="/about" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">About</Link>
+                  <Link to="/contact" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Contact</Link>
                   <Link to="/packages" className="glow-button">
                     Get Started
                   </Link>
@@ -119,10 +120,10 @@ export function HomePage() {
                     We Build Fast, Secure,
                   </span>
                   <br />
-                  <span className="text-white">and Scalable Software</span>
+                  <span className="text-zinc-900 dark:text-white">and Scalable Software</span>
                 </h1>
                 
-                <p className="text-xl md:text-2xl text-gray-100 mb-8 max-w-4xl mx-auto fade-in">
+                <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-200/90 mb-8 max-w-4xl mx-auto fade-in">
                   From AI-powered apps to automation dashboards — LitxTech delivers production-ready systems in days, not weeks.
                 </p>
 
@@ -644,6 +645,14 @@ export function HomePage() {
                 <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
                 <li><Link to="/blog" className="hover:text-white transition-colors">Blog</Link></li>
                 <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4 text-white">Legal</h4>
+              <ul className="space-y-2 text-gray-200">
+                <li><Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+                <li><Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link></li>
+                <li><Link to="/refund" className="hover:text-white transition-colors">Refund Policy</Link></li>
               </ul>
             </div>
             <div>
