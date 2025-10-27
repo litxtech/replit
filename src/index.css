@@ -96,9 +96,9 @@ body {
 }
 
 .glass-card {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 20px;
   box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.25);
   transition: all 0.3s ease;
@@ -110,8 +110,8 @@ body {
 }
 
 .dark .glass-card {
-  background: rgba(24, 24, 27, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(30, 30, 30, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 /* Neon Glow Effects */

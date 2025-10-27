@@ -75,7 +75,7 @@ export function Packages() {
               Software Packages
             </span>
           </h1>
-              <p className="text-xl text-zinc-700 dark:text-zinc-200/90 max-w-3xl mx-auto mb-8">
+              <p className="text-xl text-gray-700 dark:text-gray-200 max-w-3xl mx-auto mb-8">
                 Choose the perfect package for your business needs. All packages include modern tech stack and professional design.
               </p>
           <div className="flex items-center justify-center space-x-2 text-yellow-400">
@@ -109,8 +109,8 @@ export function Packages() {
                 } group-hover:scale-110 transition-transform duration-300`}>
                   {pkg.icon}
                 </div>
-                <h2 className="text-3xl font-bold mb-2 text-white">{pkg.name}</h2>
-                    <p className="text-zinc-700 dark:text-zinc-200/90 mb-4">{pkg.description}</p>
+                <h2 className="text-3xl font-bold mb-2 text-gray-900 dark:text-white">{pkg.name}</h2>
+                    <p className="text-gray-700 dark:text-gray-200 mb-4">{pkg.description}</p>
                 <div className="text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
                   {pkg.price}
                   <span className="text-lg text-gray-400">{pkg.period}</span>
@@ -123,7 +123,7 @@ export function Packages() {
                     <div className="w-5 h-5 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Check className="w-3 h-3 text-white" />
                     </div>
-                        <span className="text-zinc-700 dark:text-zinc-200/90">{feature}</span>
+                        <span className="text-gray-700 dark:text-gray-200">{feature}</span>
                   </li>
                 ))}
               </ul>
