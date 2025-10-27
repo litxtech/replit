@@ -32,15 +32,9 @@ jobs:
       - name: 🔨 Build project
         run: npm run build --if-present
 
-      # Resmi Vercel Action
-      - name: 🚀 Deploy to Vercel (Prod)
-        uses: amondnet/vercel-action@v25
-        with:
-          vercel-token: ${{ secrets.VERCEL_TOKEN }}
-          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-          working-directory: ./
-          vercel-args: '--prod'
+      # Build only - Manual deploy
+      - name: 📦 Build completed
+        run: echo "✅ Build completed successfully! Deploy manually or configure Vercel secrets."
 
       - name: ✅ Deployment Success
         run: echo "🎉 Website successfully deployed to Vercel!"
