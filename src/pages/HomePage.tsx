@@ -49,25 +49,25 @@ export function HomePage() {
             
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link to="/" className="text-white hover:text-blue-400 transition-colors font-medium">Ana Sayfa</Link>
-              <Link to="/about" className="text-white hover:text-blue-400 transition-colors font-medium">Hakkımızda</Link>
+              <Link to="/" className="text-white hover:text-blue-400 transition-colors font-medium">🏠 Home</Link>
+              <Link to="/about" className="text-white hover:text-blue-400 transition-colors font-medium">🧍‍♂️ About</Link>
               <div className="relative group">
                 <button className="text-white hover:text-blue-400 transition-colors font-medium flex items-center space-x-1">
-                  <span>Çözümler</span>
+                  <span>🧩 Solutions</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4">
                   <div className="space-y-2">
-                    <Link to="/solutions/hotels" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏨 Oteller için Çözüm</Link>
-                    <Link to="/solutions/restaurants" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🍽️ Restoran & Kafeler</Link>
-                    <Link to="/solutions/construction" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏗️ İnşaat & Emlak</Link>
-                    <Link to="/solutions/pharma" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">💊 Eczaneler & Klinikler</Link>
+                    <Link to="/solutions/hotels" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏨 Hotel Solutions</Link>
+                    <Link to="/solutions/restaurants" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🍽️ Restaurant & Cafes</Link>
+                    <Link to="/solutions/construction" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏗️ Construction & Real Estate</Link>
+                    <Link to="/solutions/pharma" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">💊 Pharmacy & Clinics</Link>
                   </div>
                 </div>
               </div>
-              <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">💰 Fiyatlarımız</Link>
+              <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">💰 Pricing</Link>
               <Link to="/blog" className="text-white hover:text-blue-400 transition-colors font-medium">📰 Blog</Link>
-              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">📞 İletişim</Link>
+              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">📞 Contact</Link>
             </div>
 
             {/* Right Side */}
@@ -77,9 +77,9 @@ export function HomePage() {
                 <span className="text-gray-400">|</span>
                 <button className="text-gray-400 hover:text-white transition-colors text-sm">EN</button>
               </div>
-              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">🔑 Giriş</Link>
+              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">🔑 Login</Link>
               <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                🚀 Teklif Al
+                🚀 Get Quote
               </Link>
             </div>
 
@@ -96,14 +96,14 @@ export function HomePage() {
           {isMenuOpen && (
             <div className="lg:hidden mt-4 pb-4 border-t border-white/20 pt-4">
               <div className="space-y-4">
-                <Link to="/" className="block text-white hover:text-blue-400 transition-colors">Ana Sayfa</Link>
-                <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">Hakkımızda</Link>
-                <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">Fiyatlarımız</Link>
-                <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">Blog</Link>
-                <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">İletişim</Link>
+                <Link to="/" className="block text-white hover:text-blue-400 transition-colors">🏠 Home</Link>
+                <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">🧍‍♂️ About</Link>
+                <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">💰 Pricing</Link>
+                <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">📰 Blog</Link>
+                <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">📞 Contact</Link>
                 <div className="pt-4 border-t border-white/20">
-                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">Giriş Yap</Link>
-                  <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">Teklif Al</Link>
+                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">🔑 Login</Link>
+                  <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">🚀 Get Quote</Link>
                 </div>
               </div>
             </div>

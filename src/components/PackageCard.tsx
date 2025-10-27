@@ -65,8 +65,8 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
         <div className="p-6 border-b border-gray-200">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-bold text-gray-900">Satın Al</h2>
-              <p className="text-gray-600">{pkg.name} Paketi</p>
+              <h2 className="text-2xl font-bold text-gray-900">Purchase</h2>
+              <p className="text-gray-600">{pkg.name} Package</p>
             </div>
             <button
               onClick={onClose}
@@ -87,7 +87,7 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
 
           {/* Features */}
           <div className="mb-6">
-            <h4 className="text-sm font-medium text-gray-900 mb-3">Paket Özellikleri:</h4>
+            <h4 className="text-sm font-medium text-gray-900 mb-3">Package Features:</h4>
             <ul className="space-y-2">
               {pkg.features.map((feature, index) => (
                 <li key={index} className="flex items-center space-x-2">
@@ -107,17 +107,17 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
             {serverStatus === 'online' ? (
               <>
                 <Wifi className="w-4 h-4" />
-                <span>Ödeme sistemi aktif</span>
+                <span>Payment system active</span>
               </>
             ) : serverStatus === 'offline' ? (
               <>
                 <WifiOff className="w-4 h-4" />
-                <span>Ödeme sistemi offline</span>
+                <span>Payment system offline</span>
               </>
             ) : (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>Bağlantı kontrol ediliyor...</span>
+                <span>Checking connection...</span>
               </>
             )}
           </div>
@@ -132,23 +132,23 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
             {isLoading ? (
               <>
                 <Loader2 className="w-4 h-4 animate-spin" />
-                <span>İşleniyor...</span>
+                <span>Processing...</span>
               </>
             ) : serverStatus !== 'online' ? (
               <>
                 <WifiOff className="w-4 h-4" />
-                <span>Ödeme Sistemi Offline</span>
+                <span>Payment System Offline</span>
               </>
             ) : (
               <>
                 <CreditCard className="w-4 h-4" />
-                <span>${pkg.price} ile Satın Al</span>
+                <span>Buy Now ${pkg.price}</span>
               </>
             )}
           </button>
 
           <p className="text-xs text-gray-500 text-center mt-3">
-            Güvenli ödeme Stripe ile işlenir
+            Secure payment processed by Stripe
           </p>
         </div>
       </div>
@@ -191,7 +191,7 @@ export function PackageCard({ pkg }: { pkg: Package }) {
           className={`w-full ${pkg.popular ? 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800' : 'bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'} text-white py-3 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center space-x-2`}
         >
           <CreditCard className="w-4 h-4" />
-          <span>Hemen Satın Al</span>
+          <span>Buy Now</span>
         </button>
       </div>
 
