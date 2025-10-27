@@ -18,6 +18,7 @@ import { DataSecurityPolicy } from './pages/DataSecurityPolicy'
 import { CommercialAgreement } from './pages/CommercialAgreement'
 import { Subprocessors } from './pages/Subprocessors'
 import { BlogManagement } from './pages/BlogManagement'
+import { AdminLogin } from './pages/AdminLogin'
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
         <Route path="/commercial-agreement" element={<CommercialAgreement />} />
         <Route path="/subprocessors" element={<Subprocessors />} />
         <Route path="/admin/blog" element={<BlogManagement />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
       </Routes>
     </div>
   )
