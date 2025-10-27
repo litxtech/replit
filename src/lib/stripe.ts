@@ -1,7 +1,5 @@
-// Real Stripe checkout integration for production
-// This connects to Vercel serverless function
-
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://www.litxtech.com'
+// Development Stripe checkout integration
+// This connects to localhost server for testing
 
 export async function createCheckoutSession(priceId: string, packageName: string, packagePrice: number) {
   try {
@@ -25,31 +23,8 @@ export async function createCheckoutSession(priceId: string, packageName: string
     if (priceId.includes('annual-maintenance')) packageId = 'annual-maintenance'
     if (priceId.includes('ui-ux-design')) packageId = 'ui-ux-design'
 
-    // Try production API first
-    try {
-      const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          packageId,
-          packageName,
-          packagePrice,
-        }),
-      })
-
-      const data = await response.json()
-
-      if (response.ok) {
-        return data
-      }
-    } catch (error) {
-      console.log('Production API failed, trying localhost...')
-    }
-
-    // Fallback to localhost for development
-    const localhostResponse = await fetch('http://localhost:3001/api/stripe/checkout', {
+    // Use localhost for development
+    const response = await fetch('http://localhost:3001/api/stripe/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -61,41 +36,29 @@ export async function createCheckoutSession(priceId: string, packageName: string
       }),
     })
 
-    const localhostData = await localhostResponse.json()
+    const data = await response.json()
 
-    if (!localhostResponse.ok) {
-      throw new Error(localhostData.error || 'Checkout could not be created')
+    if (!response.ok) {
+      throw new Error(data.error || 'Checkout could not be created')
     }
 
-    return localhostData
+    return data
   } catch (error: any) {
     console.error('Checkout error:', error)
     throw new Error(error.message || 'Payment process could not be started')
   }
 }
 
-// Health check function - try production first, fallback to localhost
+// Health check function - check localhost for development
 export async function checkServerHealth() {
   try {
-    // Try production API first
-    const productionResponse = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
-      method: 'GET',
-    })
-    if (productionResponse.ok) {
-      return true
-    }
-  } catch (error) {
-    console.log('Production API not available, trying localhost...')
-  }
-
-  try {
-    // Fallback to localhost for development
+    // Check localhost server for development
     const localhostResponse = await fetch('http://localhost:3001/api/health', {
       method: 'GET',
     })
     return localhostResponse.ok
   } catch (error) {
-    console.error('Both production and localhost APIs failed:', error)
+    console.error('Localhost API failed:', error)
     return false
   }
 }
