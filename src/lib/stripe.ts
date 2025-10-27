@@ -25,7 +25,31 @@ export async function createCheckoutSession(priceId: string, packageName: string
     if (priceId.includes('annual-maintenance')) packageId = 'annual-maintenance'
     if (priceId.includes('ui-ux-design')) packageId = 'ui-ux-design'
 
-    const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
+    // Try production API first
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          packageId,
+          packageName,
+          packagePrice,
+        }),
+      })
+
+      const data = await response.json()
+
+      if (response.ok) {
+        return data
+      }
+    } catch (error) {
+      console.log('Production API failed, trying localhost...')
+    }
+
+    // Fallback to localhost for development
+    const localhostResponse = await fetch('http://localhost:3001/api/stripe/checkout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -37,28 +61,41 @@ export async function createCheckoutSession(priceId: string, packageName: string
       }),
     })
 
-    const data = await response.json()
+    const localhostData = await localhostResponse.json()
 
-    if (!response.ok) {
-      throw new Error(data.error || 'Checkout could not be created')
+    if (!localhostResponse.ok) {
+      throw new Error(localhostData.error || 'Checkout could not be created')
     }
 
-    return data
+    return localhostData
   } catch (error: any) {
     console.error('Checkout error:', error)
     throw new Error(error.message || 'Payment process could not be started')
   }
 }
 
-// Health check function for production
+// Health check function - try production first, fallback to localhost
 export async function checkServerHealth() {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
+    // Try production API first
+    const productionResponse = await fetch(`${API_BASE_URL}/api/stripe-checkout`, {
       method: 'GET',
     })
-    return response.ok
+    if (productionResponse.ok) {
+      return true
+    }
   } catch (error) {
-    console.error('Server health check failed:', error)
+    console.log('Production API not available, trying localhost...')
+  }
+
+  try {
+    // Fallback to localhost for development
+    const localhostResponse = await fetch('http://localhost:3001/api/health', {
+      method: 'GET',
+    })
+    return localhostResponse.ok
+  } catch (error) {
+    console.error('Both production and localhost APIs failed:', error)
     return false
   }
 }
