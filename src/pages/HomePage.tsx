@@ -1,675 +1,456 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Zap, Rocket, Shield, Star, Building2, Users, Bot, Play, Monitor } from 'lucide-react'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, CheckCircle, Globe, Phone, Mail, ChevronDown } from 'lucide-react'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
 
-  // Particle animation effect
-  useEffect(() => {
-    const createParticle = () => {
-      const particle = document.createElement('div')
-      particle.className = 'particle'
-      particle.style.left = Math.random() * 100 + '%'
-      particle.style.animationDelay = Math.random() * 15 + 's'
-      particle.style.animationDuration = (Math.random() * 10 + 10) + 's'
-      document.querySelector('.particles')?.appendChild(particle)
-
-      setTimeout(() => {
-        particle.remove()
-      }, 25000)
-    }
-
-    const interval = setInterval(createParticle, 2000)
-    return () => clearInterval(interval)
-  }, [])
-
   return (
-      <div className="min-h-screen relative">
-        {/* Animated Background */}
-        <div className="animated-bg"></div>
-        <div className="bg-overlay"></div>
-        <div className="particles"></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+      {/* Animated Background */}
+      <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
+      
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${3 + Math.random() * 4}s`
+            }}
+          />
+        ))}
+      </div>
 
       {/* Navigation */}
-      <nav className="glass fixed top-0 left-0 right-0 z-50 mx-4 mt-4">
+      <nav className="relative z-50 bg-white/10 backdrop-blur-md border-b border-white/20">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                <Zap className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center shadow-lg">
+                <Zap className="w-7 h-7 text-white" />
               </div>
               <div>
-                <Link to="/" className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                <Link to="/" className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                   LitxTech
                 </Link>
-                <p className="text-xs text-zinc-600 dark:text-zinc-400">Build. Automate. Scale.</p>
+                <p className="text-sm text-gray-300 font-medium">Build. Automate. Scale.</p>
               </div>
             </div>
             
-            {/* Desktop Navigation */}
-                <div className="hidden md:flex items-center space-x-8">
-                  <Link to="/" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Home</Link>
-                  <Link to="/packages" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Packages</Link>
-                  <Link to="/about" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">About</Link>
-                  <Link to="/contact" className="text-zinc-700 dark:text-zinc-200 hover:text-zinc-900 dark:hover:text-white transition-colors font-medium">Contact</Link>
-                  <Link to="/packages" className="glow-button">
-                    Get Started
-                  </Link>
+            {/* Desktop Menu */}
+            <div className="hidden lg:flex items-center space-x-8">
+              <Link to="/" className="text-white hover:text-blue-400 transition-colors font-medium">Ana Sayfa</Link>
+              <Link to="/about" className="text-white hover:text-blue-400 transition-colors font-medium">Hakkımızda</Link>
+              <div className="relative group">
+                <button className="text-white hover:text-blue-400 transition-colors font-medium flex items-center space-x-1">
+                  <span>Çözümler</span>
+                  <ChevronDown className="w-4 h-4" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4">
+                  <div className="space-y-2">
+                    <Link to="/solutions/hotels" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏨 Oteller için Çözüm</Link>
+                    <Link to="/solutions/restaurants" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🍽️ Restoran & Kafeler</Link>
+                    <Link to="/solutions/construction" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">🏗️ İnşaat & Emlak</Link>
+                    <Link to="/solutions/pharma" className="block px-4 py-2 text-gray-700 hover:bg-blue-50 rounded-lg transition-colors">💊 Eczaneler & Klinikler</Link>
+                  </div>
                 </div>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-gray-300 hover:text-white"
-              >
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+              </div>
+              <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">💰 Fiyatlarımız</Link>
+              <Link to="/blog" className="text-white hover:text-blue-400 transition-colors font-medium">📰 Blog</Link>
+              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">📞 İletişim</Link>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden glass-card mx-4 mt-2 p-4">
-            <div className="space-y-4">
-              <Link to="/" className="block text-gray-300 hover:text-white">Home</Link>
-              <Link to="/packages" className="block text-gray-300 hover:text-white">Packages</Link>
-              <Link to="/about" className="block text-gray-300 hover:text-white">About</Link>
-              <Link to="/contact" className="block text-gray-300 hover:text-white">Contact</Link>
-              <Link to="/packages" className="glow-button block text-center">
-                Get Started
+            {/* Right Side */}
+            <div className="hidden lg:flex items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <button className="text-white hover:text-blue-400 transition-colors text-sm">TR</button>
+                <span className="text-gray-400">|</span>
+                <button className="text-gray-400 hover:text-white transition-colors text-sm">EN</button>
+              </div>
+              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">🔑 Giriş</Link>
+              <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                🚀 Teklif Al
               </Link>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden text-white p-2"
+            >
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
-        )}
+
+          {/* Mobile Menu */}
+          {isMenuOpen && (
+            <div className="lg:hidden mt-4 pb-4 border-t border-white/20 pt-4">
+              <div className="space-y-4">
+                <Link to="/" className="block text-white hover:text-blue-400 transition-colors">Ana Sayfa</Link>
+                <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">Hakkımızda</Link>
+                <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">Fiyatlarımız</Link>
+                <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">Blog</Link>
+                <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">İletişim</Link>
+                <div className="pt-4 border-t border-white/20">
+                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">Giriş Yap</Link>
+                  <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">Teklif Al</Link>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
       </nav>
 
-          {/* Hero Section */}
-          <section className="relative min-h-screen flex items-center justify-center px-4 pt-20">
-            <div className="max-w-6xl mx-auto text-center">
-              {/* Animated Code Lines Background */}
-              <div className="absolute inset-0 overflow-hidden opacity-20">
-                <div className="absolute top-20 left-10 text-green-400 font-mono text-sm animate-pulse">
-                  <div className="animate-bounce">const app = createApp()</div>
-                  <div className="animate-bounce delay-100">app.use(router)</div>
-                  <div className="animate-bounce delay-200">app.mount('#app')</div>
-                </div>
-                <div className="absolute top-40 right-20 text-blue-400 font-mono text-sm animate-pulse">
-                  <div className="animate-bounce delay-300">npm run build</div>
-                  <div className="animate-bounce delay-400">✅ Production ready</div>
-                </div>
-                <div className="absolute bottom-40 left-20 text-purple-400 font-mono text-sm animate-pulse">
-                  <div className="animate-bounce delay-500">deploy: success</div>
-                  <div className="animate-bounce delay-600">🚀 Live in 2 minutes</div>
-                </div>
-              </div>
-
-              {/* Main Hero Content */}
-              <div className="relative z-10">
-                {/* Trust Badge */}
-                <div className="inline-flex items-center space-x-2 bg-green-500/10 border border-green-500/20 rounded-full px-4 py-2 mb-8 fade-in">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-green-400 text-sm font-medium">✓ Verified U.S. Company • D-U-N-S® 144849529</span>
-                </div>
-
-                <h1 className="text-5xl md:text-7xl font-bold mb-6 fade-in">
-                  <span className="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    We Build Fast, Secure,
-                  </span>
-                  <br />
-                  <span className="text-zinc-900 dark:text-white">and Scalable Software</span>
-                </h1>
-                
-                <p className="text-xl md:text-2xl text-zinc-700 dark:text-zinc-200/90 mb-8 max-w-4xl mx-auto fade-in">
-                  From AI-powered apps to automation dashboards — LitxTech delivers production-ready systems in days, not weeks.
-                </p>
-
-                {/* Stats */}
-                <div className="flex flex-wrap justify-center gap-8 mb-12 fade-in">
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-blue-400">24h</div>
-                    <div className="text-sm text-gray-300">Project Start</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-400">7 Days</div>
-                    <div className="text-sm text-gray-300">Average Delivery</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-pink-400">100%</div>
-                    <div className="text-sm text-gray-300">Success Rate</div>
-                  </div>
-                </div>
-                
-                <div className="flex flex-col sm:flex-row gap-6 justify-center fade-in">
-                  <Link 
-                    to="/packages" 
-                    className="glow-button text-lg px-8 py-4 neon-blue"
-                  >
-                    View Packages
-                  </Link>
-                  <Link 
-                    to="/contact" 
-                    className="glass-card text-lg px-8 py-4 text-white hover:bg-white/10 transition-all duration-300"
-                  >
-                    Start a Project
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </section>
-
-      {/* How It Works Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                How It Works
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100 max-w-3xl mx-auto">
-              Get your software solution in 3 simple steps
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 tilt-card group text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:neon-blue transition-all duration-300">
-                <span className="text-2xl font-bold text-white">1</span>
-              </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">Choose Your Package</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Select from LITE, PRO, or ULTRA packages. Each designed for different business needs and budgets.
+      {/* Hero Section */}
+      <section className="relative z-10 pt-20 pb-32">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <div className="space-y-8">
+            {/* Main Heading */}
+            <div className="space-y-6">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
+                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Smart Software
+                </span>
+                <br />
+                <span className="text-white">Solutions for a</span>
+                <br />
+                <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  Fast World
+                </span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
+                Custom systems, automation tools, and cloud apps — all powered by LitxTech.
+                <br />
+                <span className="text-lg text-gray-400">Transform your business with AI-driven solutions.</span>
               </p>
             </div>
-            
-            <div className="glass-card p-8 tilt-card group text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:neon-purple transition-all duration-300">
-                <span className="text-2xl font-bold text-white">2</span>
-              </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">We Start Instantly</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Your project manager contacts you within 24 hours. Development begins immediately with daily updates.
-              </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+              <Link 
+                to="/packages" 
+                className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center space-x-2"
+              >
+                <span>View Packages</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <button 
+                onClick={() => setShowDemo(!showDemo)}
+                className="group border-2 border-white/30 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm flex items-center space-x-2"
+              >
+                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span>Watch Demo</span>
+              </button>
             </div>
-            
-            <div className="glass-card p-8 tilt-card group text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:neon-green transition-all duration-300">
-                <span className="text-2xl font-bold text-white">3</span>
+
+            {/* Stats */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">500+</div>
+                <div className="text-gray-300 font-medium">Projects Delivered</div>
               </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">Deliver in Days</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Receive your production-ready system with full documentation, hosting, and ongoing support.
-              </p>
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">99.9%</div>
+                <div className="text-gray-300 font-medium">Uptime Guarantee</div>
+              </div>
+              <div className="text-center">
+                <div className="text-4xl md:text-5xl font-bold text-pink-400 mb-2">24/7</div>
+                <div className="text-gray-300 font-medium">Support Available</div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Why Choose LitxTech?
-              </span>
+      <section className="relative z-10 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Why Choose <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">LitxTech</span>?
             </h2>
-            <p className="text-xl text-gray-100 max-w-3xl mx-auto">
-              We provide cutting-edge technology solutions that scale with your business
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              We don't just sell software, we scale your business with cutting-edge technology and AI-powered solutions.
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center mb-6 group-hover:neon-blue transition-all duration-300">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Rocket className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">Lightning Fast</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Deploy your software solutions in days, not months. Our streamlined process gets you to market faster.
+              <h3 className="text-2xl font-bold text-white mb-4">Lightning Fast</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Deploy your applications in minutes, not months. Our optimized infrastructure ensures maximum performance.
               </p>
             </div>
-            
-            <div className="glass-card p-8 tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mb-6 group-hover:neon-purple transition-all duration-300">
-                <Zap className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">AI-Powered</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Leverage cutting-edge AI and automation to build smarter, more efficient applications.
-              </p>
-            </div>
-            
-            <div className="glass-card p-8 tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl flex items-center justify-center mb-6 group-hover:neon-green transition-all duration-300">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-semibold mb-4 text-white">Enterprise Ready</h3>
-              <p className="text-gray-100 leading-relaxed">
-                Built with security and scalability in mind. Your solutions grow with your business.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Technology Stack Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Powered by Modern Tech
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100">
-              Our software solutions are built with the latest technologies
-            </p>
-          </div>
-          
-          {/* Marquee Effect */}
-          <div className="glass-card p-8 overflow-hidden">
-            <div className="flex animate-marquee">
-              {['React', 'Next.js', 'Supabase', 'Stripe', 'OpenAI', 'AWS', 'TypeScript', 'Tailwind', 'Expo', 'Framer', 'Vercel', 'PostgreSQL'].map((tech, index) => (
-                <div key={index} className="flex items-center space-x-2 px-6 py-3 glass rounded-lg mx-4 flex-shrink-0">
-                  <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="text-white font-medium">{tech}</span>
-                </div>
-              ))}
-              {/* Duplicate for seamless loop */}
-              {['React', 'Next.js', 'Supabase', 'Stripe', 'OpenAI', 'AWS', 'TypeScript', 'Tailwind', 'Expo', 'Framer', 'Vercel', 'PostgreSQL'].map((tech, index) => (
-                <div key={`duplicate-${index}`} className="flex items-center space-x-2 px-6 py-3 glass rounded-lg mx-4 flex-shrink-0">
-                  <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="text-white font-medium">{tech}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Industries & Solutions Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                Industries We Serve
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100">
-              Custom solutions for every business sector
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="glass-card p-6 tilt-card group text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:neon-blue transition-all duration-300">
-                <Building2 className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Hotels & Booking</h3>
-              <p className="text-gray-200 text-sm mb-4">Reservation automation systems</p>
-              <ul className="text-gray-300 text-xs space-y-1">
-                <li>• Online booking platforms</li>
-                <li>• Room management systems</li>
-                <li>• Payment processing</li>
-                <li>• Guest communication</li>
-              </ul>
-            </div>
-            
-            <div className="glass-card p-6 tilt-card group text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:neon-purple transition-all duration-300">
-                <Users className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Agencies</h3>
-              <p className="text-gray-200 text-sm mb-4">CRM dashboards & automation</p>
-              <ul className="text-gray-300 text-xs space-y-1">
-                <li>• Client management systems</li>
-                <li>• Project tracking tools</li>
-                <li>• Invoice automation</li>
-                <li>• Team collaboration</li>
-              </ul>
-            </div>
-            
-            <div className="glass-card p-6 tilt-card group text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-400 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:neon-green transition-all duration-300">
-                <Rocket className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-xl font-semibold text-white mb-3">Startups</h3>
-              <p className="text-gray-200 text-sm mb-4">MVP SaaS applications</p>
-              <ul className="text-gray-300 text-xs space-y-1">
-                <li>• Rapid prototyping</li>
-                <li>• User authentication</li>
-                <li>• Payment integration</li>
-                <li>• Analytics dashboards</li>
-              </ul>
-            </div>
-            
-            <div className="glass-card p-6 tilt-card group text-center">
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:neon-green transition-all duration-300">
+            {/* Feature 2 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Bot className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-xl font-semibold text-white mb-3">AI Tools</h3>
-              <p className="text-gray-200 text-sm mb-4">Chatbots & AI assistants</p>
-              <ul className="text-gray-300 text-xs space-y-1">
-                <li>• Customer support bots</li>
-                <li>• Data analysis tools</li>
-                <li>• Content generation</li>
-                <li>• Process automation</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                What Our Clients Say
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100">
-              Real results from real businesses
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="glass-card p-8 tilt-card group">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-lg">SL</span>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Sarah L.</h4>
-                  <p className="text-gray-300 text-sm">Startup Founder, NYC</p>
-                </div>
-              </div>
-              <p className="text-gray-100 leading-relaxed mb-4">
-                "LitxTech built our entire automation backend in under a week. The quality and speed exceeded all expectations."
+              <h3 className="text-2xl font-bold text-white mb-4">AI-Powered</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Leverage advanced AI and machine learning to automate processes and gain intelligent insights.
               </p>
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-              </div>
             </div>
-            
-            <div className="glass-card p-8 tilt-card group">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-lg">MJ</span>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Michael J.</h4>
-                  <p className="text-gray-300 text-sm">Agency Owner, London</p>
-                </div>
-              </div>
-              <p className="text-gray-100 leading-relaxed mb-4">
-                "From concept to deployment in 5 days. LitxTech's AI-powered approach saved us months of development time."
-              </p>
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-              </div>
-            </div>
-            
-            <div className="glass-card p-8 tilt-card group">
-              <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mr-4">
-                  <span className="text-white font-bold text-lg">AC</span>
-                </div>
-                <div>
-                  <h4 className="text-white font-semibold">Alex C.</h4>
-                  <p className="text-gray-300 text-sm">Hotel Manager, Miami</p>
-                </div>
-              </div>
-              <p className="text-gray-100 leading-relaxed mb-4">
-                "The booking automation system they built increased our efficiency by 300%. ROI was immediate and impressive."
-              </p>
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Live Demo Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                See It In Action
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100">
-              Experience our software solutions before you buy
-            </p>
-          </div>
-          
-          <div className="glass-card p-8 tilt-card group">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-              <div>
-                <h3 className="text-3xl font-bold text-white mb-4">Interactive Dashboard Preview</h3>
-                <p className="text-gray-100 mb-6 leading-relaxed">
-                  Get a hands-on experience with our AI-powered dashboard. See how easy it is to manage your business with our automation tools.
-                </p>
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                    <span className="text-gray-200">Real-time analytics</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                    <span className="text-gray-200">Automated workflows</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                    <span className="text-gray-200">User management</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-2 h-2 bg-pink-400 rounded-full"></div>
-                    <span className="text-gray-200">Payment processing</span>
-                  </div>
-                </div>
-                <button 
-                  onClick={() => setShowDemo(!showDemo)}
-                  className="glow-button text-lg px-8 py-4 neon-blue flex items-center space-x-2"
-                >
-                  <Play className="w-5 h-5" />
-                  <span>{showDemo ? 'Hide Demo' : 'Try Demo'}</span>
-                </button>
-              </div>
-              
-              <div className="relative">
-                <div className="glass-card p-4 bg-gradient-to-br from-gray-800 to-gray-900">
-                  <div className="flex items-center space-x-2 mb-4">
-                    <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                    <span className="text-gray-400 text-sm ml-4">dashboard.litxtech.com</span>
-                  </div>
-                  
-                  {showDemo ? (
-                    <div className="space-y-4">
-                      <div className="grid grid-cols-3 gap-4">
-                        <div className="bg-blue-500/20 p-3 rounded-lg text-center">
-                          <div className="text-2xl font-bold text-blue-400">1,247</div>
-                          <div className="text-xs text-gray-300">Active Users</div>
-                        </div>
-                        <div className="bg-green-500/20 p-3 rounded-lg text-center">
-                          <div className="text-2xl font-bold text-green-400">$12.4K</div>
-                          <div className="text-xs text-gray-300">Revenue</div>
-                        </div>
-                        <div className="bg-purple-500/20 p-3 rounded-lg text-center">
-                          <div className="text-2xl font-bold text-purple-400">98%</div>
-                          <div className="text-xs text-gray-300">Uptime</div>
-                        </div>
-                      </div>
-                      <div className="bg-gray-700/50 p-3 rounded-lg">
-                        <div className="text-sm text-gray-300 mb-2">Recent Activity</div>
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
-                            <span className="text-xs text-gray-300">New user registered</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                            <span className="text-xs text-gray-300">Payment processed</span>
-                          </div>
-                          <div className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                            <span className="text-xs text-gray-300">Automation triggered</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center h-48">
-                      <div className="text-center">
-                        <Monitor className="w-16 h-16 text-gray-500 mx-auto mb-4" />
-                        <p className="text-gray-400">Click "Try Demo" to see the preview</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Trust & Compliance Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16 fade-in">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-green-400 to-blue-500 bg-clip-text text-transparent">
-                Trust & Compliance
-              </span>
-            </h2>
-            <p className="text-xl text-gray-100">
-              Your security and trust are our top priorities
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="glass-card p-6 text-center tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-green-400 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:neon-green transition-all duration-300">
+            {/* Feature 3 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Stripe Secure Payments</h3>
-              <p className="text-gray-300 text-sm">Bank-level security for all transactions</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Enterprise Security</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Bank-level security with GDPR, CCPA, and KVKK compliance. Your data is always protected.
+              </p>
             </div>
-            
-            <div className="glass-card p-6 text-center tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:neon-blue transition-all duration-300">
-                <Zap className="w-8 h-8 text-white" />
+
+            {/* Feature 4 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Users className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">SSL Certified</h3>
-              <p className="text-gray-300 text-sm">256-bit encryption for all data</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Expert Team</h3>
+              <p className="text-gray-300 leading-relaxed">
+                Work with experienced developers and designers who understand your business needs.
+              </p>
             </div>
-            
-            <div className="glass-card p-6 text-center tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:neon-purple transition-all duration-300">
+
+            {/* Feature 5 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <Monitor className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-white mb-4">Scalable Solutions</h3>
+              <p className="text-gray-300 leading-relaxed">
+                From startup to enterprise, our solutions grow with your business needs and requirements.
+              </p>
+            </div>
+
+            {/* Feature 6 */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="w-16 h-16 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                 <Star className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-white mb-2">Verified U.S. Company</h3>
-              <p className="text-gray-300 text-sm">D-U-N-S® 144849529</p>
-            </div>
-            
-            <div className="glass-card p-6 text-center tilt-card group">
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:neon-green transition-all duration-300">
-                <Shield className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-lg font-semibold text-white mb-2">GDPR Compliant</h3>
-              <p className="text-gray-300 text-sm">Full data protection compliance</p>
+              <h3 className="text-2xl font-bold text-white mb-4">Premium Support</h3>
+              <p className="text-gray-300 leading-relaxed">
+                24/7 dedicated support team ready to help you succeed with your digital transformation.
+              </p>
             </div>
           </div>
-          
-          <div className="mt-12 text-center">
-            <div className="glass-card p-6 max-w-4xl mx-auto">
-              <p className="text-gray-200 text-sm">
-                <strong className="text-white">LITXTECH LLC</strong> is verified through Dun & Bradstreet (D-U-N-S®: 144849529) — ensuring transparent, compliant global operations.
-              </p>
+        </div>
+      </section>
+
+      {/* Packages Section */}
+      <section className="relative z-10 py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Choose Your <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Package</span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Flexible pricing plans designed to meet your business needs and budget.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* LITE Package */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">LITE</h3>
+                <p className="text-gray-300 mb-4">Basit web site (kurumsal / portföy)</p>
+                <div className="text-4xl font-bold text-blue-400 mb-2">$199</div>
+                <p className="text-gray-400">Tek seferlik ödeme</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">1 sayfa, mobil uyumlu</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Teslim 3 gün</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Temel SEO optimizasyonu</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">SSL sertifikası</span>
+                </li>
+              </ul>
+              <Link 
+                to="/packages" 
+                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center block"
+              >
+                Get Started
+              </Link>
+            </div>
+
+            {/* PRO Package */}
+            <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md border-2 border-blue-400/50 rounded-2xl p-8 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
+                  Most Popular
+                </span>
+              </div>
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">PRO</h3>
+                <p className="text-gray-300 mb-4">Otomasyonlu SaaS / API entegrasyonlu site</p>
+                <div className="text-4xl font-bold text-purple-400 mb-2">$499</div>
+                <p className="text-gray-400">Tek seferlik ödeme</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">3 sayfa + Dashboard</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Hosting dahil</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">API entegrasyonu</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Admin paneli</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">30 gün destek</span>
+                </li>
+              </ul>
+              <Link 
+                to="/packages" 
+                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 text-center block"
+              >
+                Get Started
+              </Link>
+            </div>
+
+            {/* ULTRA Package */}
+            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">ULTRA</h3>
+                <p className="text-gray-300 mb-4">Tam sistem + kullanıcı yönetimi + ödeme entegrasyonu</p>
+                <div className="text-4xl font-bold text-pink-400 mb-2">$999</div>
+                <p className="text-gray-400">Tek seferlik ödeme</p>
+              </div>
+              <ul className="space-y-4 mb-8">
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Admin paneli</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Stripe entegrasyonu</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Mail sistemi</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">Supabase veritabanı</span>
+                </li>
+                <li className="flex items-center space-x-3">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <span className="text-gray-300">90 gün destek</span>
+                </li>
+              </ul>
+              <Link 
+                to="/packages" 
+                className="w-full bg-gradient-to-r from-pink-600 to-pink-700 text-white py-3 rounded-xl font-semibold hover:from-pink-700 hover:to-pink-800 transition-all duration-300 text-center block"
+              >
+                Get Started
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="glass-card mx-4 mb-4 mt-20">
-        <div className="max-w-7xl mx-auto px-8 py-12">
+      <footer className="relative z-10 bg-white/5 backdrop-blur-md border-t border-white/20 mt-20">
+        <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
+            {/* Company Info */}
+            <div className="space-y-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
                   <Zap className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-xl font-bold text-white">LitxTech</h3>
-                  <p className="text-xs text-zinc-600 dark:text-zinc-400">Build. Automate. Scale.</p>
+                  <div className="text-xl font-bold text-white">LitxTech</div>
+                  <div className="text-sm text-gray-400">Build. Automate. Scale.</div>
                 </div>
               </div>
-                  <p className="text-zinc-700 dark:text-zinc-200 text-sm mb-4">
-                    Leading technology solutions for modern businesses worldwide.
-                  </p>
-              <div className="flex space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-r from-blue-400 to-purple-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">GH</span>
-                </div>
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">LI</span>
-                </div>
-                <div className="w-8 h-8 bg-gradient-to-r from-pink-400 to-red-500 rounded-lg flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">X</span>
-                </div>
+              <p className="text-gray-300 text-sm leading-relaxed">
+                LitxTech LLC - Wyoming, United States
+                <br />
+                D-U-N-S®: 144849529
+              </p>
+            </div>
+
+            {/* Quick Links */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white">Quick Access</h3>
+              <div className="space-y-2">
+                <Link to="/packages" className="block text-gray-300 hover:text-blue-400 transition-colors">Fiyatlarımız</Link>
+                <Link to="/about" className="block text-gray-300 hover:text-blue-400 transition-colors">Hakkımızda</Link>
+                <Link to="/blog" className="block text-gray-300 hover:text-blue-400 transition-colors">Blog</Link>
+                <Link to="/contact" className="block text-gray-300 hover:text-blue-400 transition-colors">İletişim</Link>
               </div>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white">Services</h4>
-              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
-                <li><Link to="/packages" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Software Packages</Link></li>
-                <li><Link to="/ai-builder" className="hover:text-zinc-900 dark:hover:text-white transition-colors">AI Builder</Link></li>
-                <li><Link to="/investment" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Custom Solutions</Link></li>
-              </ul>
+
+            {/* Legal */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white">Legal</h3>
+              <div className="space-y-2">
+                <Link to="/privacy-policy" className="block text-gray-300 hover:text-blue-400 transition-colors">Privacy Policy</Link>
+                <Link to="/terms-of-service" className="block text-gray-300 hover:text-blue-400 transition-colors">Terms of Service</Link>
+                <Link to="/commercial-agreement" className="block text-gray-300 hover:text-blue-400 transition-colors">Commercial Agreement</Link>
+                <Link to="/subprocessors" className="block text-gray-300 hover:text-blue-400 transition-colors">Subprocessors</Link>
+              </div>
             </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white">Company</h4>
-              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
-                <li><Link to="/about" className="hover:text-zinc-900 dark:hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/blog" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Blog</Link></li>
-                <li><Link to="/contact" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white">Legal</h4>
-              <ul className="space-y-2 text-zinc-700 dark:text-zinc-200">
-                <li><Link to="/privacy" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Privacy Policy</Link></li>
-                <li><Link to="/terms" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Terms of Service</Link></li>
-                <li><Link to="/refund" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Refund Policy</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4 text-white">Contact Info</h4>
-              <div className="space-y-2 text-zinc-700 dark:text-zinc-200 text-sm">
-                <p><strong className="text-white">LITXTECH LLC</strong></p>
-                <p>D-U-N-S®: 144849529</p>
-                <p>15442 Ventura Blvd., STE 201-1834</p>
-                <p>Sherman Oaks, California 91403</p>
-                <p>📞 +1 (307) 271-5151</p>
-                <p>✉️ support@litxtech.com</p>
-                <p className="text-xs text-gray-400 mt-2">United States • litxtech.com</p>
+
+            {/* Contact */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-white">Contact</h3>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <Phone className="w-4 h-4 text-blue-400" />
+                  <a href="tel:+13072715151" className="text-gray-300 hover:text-blue-400 transition-colors">+1 307 271 5151</a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Mail className="w-4 h-4 text-blue-400" />
+                  <a href="mailto:support@litxtech.com" className="text-gray-300 hover:text-blue-400 transition-colors">support@litxtech.com</a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Globe className="w-4 h-4 text-blue-400" />
+                  <a href="https://www.litxtech.com" className="text-gray-300 hover:text-blue-400 transition-colors">www.litxtech.com</a>
+                </div>
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-600 mt-8 pt-8 text-center text-gray-200">
-            <p>&copy; 2025 LitxTech LLC. All rights reserved.</p>
+
+          <div className="border-t border-white/20 mt-8 pt-8 text-center">
+            <p className="text-gray-400 text-sm">
+              © 2025 LitxTech LLC. All rights reserved. | 
+              <span className="text-blue-400 ml-1">Powered by DeepSeek AI • Hosted on Vercel • Database: Supabase</span>
+            </p>
           </div>
         </div>
       </footer>

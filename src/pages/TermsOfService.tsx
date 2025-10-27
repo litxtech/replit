@@ -1,404 +1,262 @@
-import { Scale, FileText, Shield, AlertTriangle, Users, CreditCard, Gavel, Globe } from 'lucide-react'
+import { Shield, CheckCircle, Globe, Phone, Mail } from 'lucide-react'
 
 export function TermsOfService() {
   return (
-    <div className="min-h-screen relative">
-      <div className="animated-bg"></div>
-      <div className="bg-overlay"></div>
-      <div className="particles"></div>
-
-      <div className="max-w-4xl mx-auto px-4 py-20 relative z-10">
-        <div className="glass-card p-8 mb-8">
-          <div className="text-center mb-8">
-            <Scale className="w-16 h-16 mx-auto mb-4 text-purple-400" />
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Terms of Service
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300">
-              Effective Date: October 27, 2025 | Last Updated: October 27, 2025
-            </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+      {/* Header */}
+      <div className="bg-white/10 backdrop-blur-md border-b border-white/20">
+        <div className="max-w-4xl mx-auto px-6 py-8">
+          <div className="flex items-center space-x-3 mb-4">
+            <Shield className="h-8 w-8 text-blue-400" />
+            <h1 className="text-3xl font-bold text-white">Terms of Service</h1>
           </div>
+          <p className="text-gray-300">Last Updated: August 8, 2025</p>
+        </div>
+      </div>
 
-          <div className="prose prose-lg max-w-none text-gray-700 dark:text-gray-200">
-            <div className="mb-8 p-6 bg-purple-50 dark:bg-purple-900/20 rounded-lg border-l-4 border-purple-400">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <FileText className="w-6 h-6 mr-2 text-purple-400" />
-                Company Information
-              </h2>
-              <p><strong>LitxTech LLC</strong> is a Wyoming Limited Liability Company registered in the State of Wyoming, United States.</p>
-              <p><strong>Business Address:</strong> 15442 Ventura Blvd., STE 201-1834, Sherman Oaks, California 91403, USA</p>
-              <p><strong>D-U-N-S® Number:</strong> 144849529</p>
-              <p><strong>Contact:</strong> support@litxtech.com | +1 (307) 271-5151</p>
+      {/* Content */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl p-8 space-y-8">
+          
+          {/* Section A */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-lg font-bold mr-4">A</span>
+              Acceptance of Terms
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>By using LitxTech's platforms, websites, mobile applications, or APIs (collectively "the Service"), you agree to these Terms of Service and our Privacy Policy.</p>
+              <p className="font-semibold text-red-600">If you do not agree, you may not use the Service.</p>
+              <p>You confirm that you are of legal age in your jurisdiction and have authority to enter this agreement. Commercial or agency use requires a separate business agreement with LitxTech.</p>
             </div>
+          </section>
 
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <Shield className="w-6 h-6 mr-2 text-blue-400" />
-                1. Agreement Overview
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">1.1 Acceptance of Terms</h3>
-              <p>These Terms of Service ("Terms") constitute a legally binding agreement between you ("User," "Customer," or "you") and LitxTech LLC ("Company," "we," "us," or "our"). By accessing or using our website, services, or software, you acknowledge that you have read, understood, and agree to be bound by these Terms.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">1.2 Services Covered</h3>
-              <p>These Terms apply to all services provided by LitxTech LLC, including but not limited to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Software development and web application services</li>
-                <li>AI Builder platform and no-code/low-code development tools</li>
-                <li>SaaS platform hosting and management</li>
-                <li>Consulting and technical support services</li>
-                <li>Custom software packages (LITE, PRO, ULTRA)</li>
-                <li>Third-party integrations and API services</li>
+          {/* Section B */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-lg font-bold mr-4">B</span>
+              Account Usage and Security
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <ul className="list-disc list-inside space-y-2">
+                <li>You are responsible for all activities occurring under your account.</li>
+                <li>Keep your password and API keys confidential.</li>
+                <li>LitxTech will not be liable for losses caused by unauthorized access resulting from your failure to secure your credentials.</li>
               </ul>
+            </div>
+          </section>
 
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">1.3 Modifications</h3>
-              <p>We reserve the right to modify these Terms at any time. Material changes will be communicated through:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Email notification to registered users</li>
-                <li>Prominent notice on our website</li>
-                <li>In-app notifications for active users</li>
-              </ul>
-              <p>Continued use of our services after changes constitutes acceptance of the modified Terms.</p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <Users className="w-6 h-6 mr-2 text-green-400" />
-                2. User Eligibility and Account Responsibilities
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">2.1 Eligibility Requirements</h3>
-              <p>To use our services, you must:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Be at least 18 years of age or the age of majority in your jurisdiction</li>
-                <li>Have the legal capacity to enter into binding agreements</li>
-                <li>Provide accurate and complete registration information</li>
-                <li>Comply with all applicable laws and regulations</li>
-                <li>Not be prohibited from receiving our services under applicable law</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">2.2 Account Registration</h3>
-              <p>When creating an account, you agree to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Provide accurate, current, and complete information</li>
-                <li>Maintain and update your information to keep it accurate</li>
-                <li>Use only one account per person or entity</li>
-                <li>Not share your account credentials with others</li>
-                <li>Notify us immediately of any unauthorized use</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">2.3 Account Security</h3>
-              <p>You are responsible for:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Maintaining the confidentiality of your login credentials</li>
-                <li>All activities that occur under your account</li>
-                <li>Implementing appropriate security measures for your data</li>
-                <li>Regularly updating passwords and security settings</li>
-                <li>Reporting security incidents promptly</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <CreditCard className="w-6 h-6 mr-2 text-yellow-400" />
-                3. Payment Terms and Billing
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">3.1 Payment Processing</h3>
-              <p>All payments are processed securely through Stripe, our PCI-compliant payment processor. By making a payment, you authorize us to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Charge your payment method for the agreed-upon amount</li>
-                <li>Process recurring payments for subscription services</li>
-                <li>Apply applicable taxes and fees</li>
-                <li>Handle refunds according to our Refund Policy</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">3.2 Pricing and Fees</h3>
-              <p>Our pricing structure includes:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li><strong>LITE Package:</strong> $1,199 per project (one-time payment)</li>
-                <li><strong>PRO Package:</strong> $2,359 per project (one-time payment)</li>
-                <li><strong>ULTRA Package:</strong> $4,980 per project (one-time payment)</li>
-                <li><strong>AI Builder Subscriptions:</strong> Monthly/annual recurring billing</li>
-                <li><strong>Custom Development:</strong> Hourly rates or project-based pricing</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">3.3 Payment Terms</h3>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Payment is due upon project initiation or subscription activation</li>
-                <li>Late payments may result in service suspension</li>
-                <li>All prices are in USD unless otherwise specified</li>
-                <li>Taxes are calculated based on your location and applicable laws</li>
-                <li>Payment disputes must be reported within 30 days</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">3.4 Refunds and Cancellations</h3>
-              <p>Refund policies are detailed in our separate Refund & Cancellation Policy. Generally:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Digital services are non-refundable once development begins</li>
-                <li>Subscription cancellations take effect at the end of the billing period</li>
-                <li>Refunds may be issued for technical failures or non-performance</li>
-                <li>All refund requests must be submitted through our support system</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <Gavel className="w-6 h-6 mr-2 text-red-400" />
-                4. Intellectual Property Rights
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">4.1 Company Intellectual Property</h3>
-              <p>All content, software, and materials provided by LitxTech LLC are protected by intellectual property laws. This includes:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Website design, layout, and user interface</li>
-                <li>AI Builder platform and associated tools</li>
-                <li>Proprietary algorithms and code libraries</li>
-                <li>Documentation, tutorials, and educational content</li>
-                <li>Trademarks, logos, and branding materials</li>
-                <li>Trade secrets and confidential information</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">4.2 User-Generated Content</h3>
-              <p>When you use our services, you retain ownership of your content but grant us necessary licenses to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Process and store your content on our platforms</li>
-                <li>Provide technical support and maintenance</li>
-                <li>Generate derivative works for your projects</li>
-                <li>Backup and restore your data</li>
-                <li>Comply with legal obligations</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">4.3 Custom Development Projects</h3>
-              <p>For custom development projects, intellectual property ownership depends on the agreement:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li><strong>Work-for-Hire:</strong> Client owns the final deliverable</li>
-                <li><strong>Licensed Components:</strong> We retain rights to reusable components</li>
-                <li><strong>Third-Party Libraries:</strong> Subject to respective open-source licenses</li>
-                <li><strong>Proprietary Tools:</strong> We retain rights to development tools and frameworks</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">4.4 Prohibited Uses</h3>
-              <p>You may not:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Reverse engineer, decompile, or disassemble our software</li>
-                <li>Copy, modify, or distribute our proprietary code</li>
-                <li>Use our services to create competing products</li>
-                <li>Remove or alter copyright notices or proprietary markings</li>
-                <li>Infringe on third-party intellectual property rights</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <AlertTriangle className="w-6 h-6 mr-2 text-orange-400" />
-                5. Acceptable Use Policy
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">5.1 Permitted Uses</h3>
-              <p>Our services may be used for:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Legitimate business and commercial purposes</li>
-                <li>Educational and research activities</li>
-                <li>Personal projects and portfolio development</li>
-                <li>Non-profit and charitable organizations</li>
-                <li>Government and public sector applications</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">5.2 Prohibited Activities</h3>
-              <p>You may not use our services to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Violate any applicable laws or regulations</li>
-                <li>Infringe on intellectual property rights</li>
-                <li>Distribute malware, viruses, or harmful code</li>
-                <li>Engage in fraudulent or deceptive practices</li>
-                <li>Harass, threaten, or harm others</li>
-                <li>Spam or send unsolicited communications</li>
-                <li>Access systems without authorization</li>
-                <li>Circumvent security measures or access controls</li>
-                <li>Create content that promotes violence, hate, or discrimination</li>
-                <li>Violate privacy rights or collect personal data unlawfully</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">5.3 Content Standards</h3>
-              <p>All content created using our services must:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Comply with applicable laws and regulations</li>
-                <li>Respect intellectual property rights</li>
-                <li>Not contain illegal, harmful, or offensive material</li>
-                <li>Be appropriate for the intended audience</li>
-                <li>Not violate platform-specific terms of service</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                6. Service Availability and Modifications
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">6.1 Service Level Commitment</h3>
-              <p>We strive to maintain high service availability but cannot guarantee uninterrupted access. Service availability may be affected by:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Scheduled maintenance windows</li>
-                <li>Emergency repairs and updates</li>
-                <li>Third-party service outages</li>
-                <li>Network connectivity issues</li>
-                <li>Force majeure events</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">6.2 Service Modifications</h3>
-              <p>We reserve the right to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Modify, update, or discontinue features</li>
-                <li>Change service specifications and capabilities</li>
-                <li>Implement new security measures</li>
-                <li>Update software and infrastructure</li>
-                <li>Adjust pricing and billing terms</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">6.3 Data Backup and Recovery</h3>
-              <p>While we implement regular backup procedures, you are responsible for:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Maintaining your own data backups</li>
-                <li>Ensuring data integrity and security</li>
-                <li>Testing backup and recovery procedures</li>
-                <li>Implementing appropriate disaster recovery plans</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                7. Limitation of Liability and Disclaimers
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">7.1 Service Disclaimers</h3>
-              <p>Our services are provided "as is" and "as available" without warranties of any kind. We disclaim all warranties, including:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Merchantability and fitness for a particular purpose</li>
-                <li>Non-infringement of third-party rights</li>
-                <li>Uninterrupted or error-free operation</li>
-                <li>Security against unauthorized access</li>
-                <li>Compatibility with all systems and software</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">7.2 Limitation of Liability</h3>
-              <p>To the maximum extent permitted by law, LitxTech LLC shall not be liable for:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Indirect, incidental, or consequential damages</li>
-                <li>Loss of profits, revenue, or business opportunities</li>
-                <li>Data loss or corruption</li>
-                <li>Third-party actions or content</li>
-                <li>System downtime or service interruptions</li>
-                <li>Damages exceeding the amount paid for services in the 12 months preceding the claim</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">7.3 Indemnification</h3>
-              <p>You agree to indemnify and hold harmless LitxTech LLC from claims arising from:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Your use of our services</li>
-                <li>Your violation of these Terms</li>
-                <li>Your violation of applicable laws</li>
-                <li>Your infringement of third-party rights</li>
-                <li>Content you create or distribute</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                8. Termination and Suspension
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">8.1 Termination by User</h3>
-              <p>You may terminate your account at any time by:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Contacting our support team</li>
-                <li>Using account deletion features in your dashboard</li>
-                <li>Providing written notice of termination</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">8.2 Termination by Company</h3>
-              <p>We may terminate or suspend your account for:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Violation of these Terms</li>
-                <li>Non-payment of fees</li>
-                <li>Fraudulent or illegal activity</li>
-                <li>Abuse of our services or systems</li>
-                <li>Threats to other users or our staff</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">8.3 Effect of Termination</h3>
-              <p>Upon termination:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Your access to services will be revoked</li>
-                <li>Outstanding payments remain due</li>
-                <li>Data retention policies apply</li>
-                <li>Provisions that survive termination remain in effect</li>
-              </ul>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4 flex items-center">
-                <Globe className="w-6 h-6 mr-2 text-indigo-400" />
-                9. Governing Law and Dispute Resolution
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">9.1 Governing Law</h3>
-              <p>These Terms are governed by the laws of the State of Wyoming, United States, without regard to conflict of law principles.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">9.2 Jurisdiction</h3>
-              <p>Any legal disputes shall be resolved exclusively in the state or federal courts located in Wyoming, and you consent to the personal jurisdiction of such courts.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">9.3 Dispute Resolution Process</h3>
-              <p>Before initiating legal proceedings, parties agree to:</p>
-              <ul className="list-disc pl-6 mb-4">
-                <li>Attempt good faith negotiations for 30 days</li>
-                <li>Consider mediation through a mutually agreed mediator</li>
-                <li>Document all communications and attempts at resolution</li>
-                <li>Preserve relevant evidence and documentation</li>
-              </ul>
-
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">9.4 Class Action Waiver</h3>
-              <p>You agree that any disputes will be resolved individually and waive the right to participate in class action lawsuits or class-wide arbitration.</p>
-            </section>
-
-            <section className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                10. Miscellaneous Provisions
-              </h2>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">10.1 Entire Agreement</h3>
-              <p>These Terms, together with our Privacy Policy and Refund Policy, constitute the entire agreement between you and LitxTech LLC.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">10.2 Severability</h3>
-              <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will remain in full force and effect.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">10.3 Force Majeure</h3>
-              <p>We shall not be liable for delays or failures due to circumstances beyond our reasonable control, including natural disasters, war, terrorism, or government actions.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">10.4 Assignment</h3>
-              <p>You may not assign these Terms without our written consent. We may assign these Terms in connection with a merger, acquisition, or sale of assets.</p>
-              
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">10.5 Contact Information</h3>
-              <p>For questions about these Terms, contact us:</p>
-              
-              <div className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg">
-                <p><strong>LitxTech LLC</strong></p>
-                <p>15442 Ventura Blvd., STE 201-1834</p>
-                <p>Sherman Oaks, California 91403, USA</p>
-                <p><strong>Email:</strong> legal@litxtech.com</p>
-                <p><strong>Phone:</strong> +1 (307) 271-5151</p>
-                <p><strong>D-U-N-S®:</strong> 144849529</p>
+          {/* Section C */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-lg font-bold mr-4">C</span>
+              Permitted Use
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>Our Service is intended for creating, deploying, and managing web and mobile applications, AI-powered tools, and integrations provided by LitxTech.</p>
+              <div className="bg-red-50 border-l-4 border-red-400 p-4">
+                <h3 className="font-semibold text-red-800 mb-2">You may not:</h3>
+                <ul className="list-disc list-inside space-y-1 text-red-700">
+                  <li>Host or share illegal, defamatory, or infringing content.</li>
+                  <li>Attempt to reverse-engineer, scrape, or replicate our systems.</li>
+                  <li>Overload the Service through excessive or automated requests.</li>
+                  <li>Circumvent payment, quota, or authentication systems.</li>
+                  <li>Use LitxTech services to train unrelated AI models or perform cryptocurrency mining.</li>
+                </ul>
               </div>
-            </section>
-
-            <div className="mt-8 p-6 bg-green-50 dark:bg-green-900/20 rounded-lg border-l-4 border-green-400">
-              <p className="text-sm text-gray-600 dark:text-gray-300">
-                <strong>Legal Notice:</strong> These Terms of Service comply with Wyoming state law, 
-                the Uniform Commercial Code (UCC), and applicable federal regulations. 
-                For specific legal advice regarding these terms, please consult with a qualified attorney.
-              </p>
+              <p className="font-semibold text-red-600">Violation may result in account suspension without refund.</p>
             </div>
-          </div>
+          </section>
+
+          {/* Section D */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-lg font-bold mr-4">D</span>
+              Content Ownership
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>You retain ownership of content you create using LitxTech products.</p>
+              <p>By submitting or deploying content, you grant LitxTech a limited license to host, display, and process that content to provide and improve the Service.</p>
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-4">
+                <p className="font-semibold text-blue-800">LitxTech retains all rights to its software, code, design, trademarks, and documentation.</p>
+                <p className="text-blue-700">You may not copy or redistribute any part of the platform without written consent.</p>
+              </div>
+            </div>
+          </section>
+
+          {/* Section E */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-lg font-bold mr-4">E</span>
+              Privacy and Data Handling
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <div className="flex items-center space-x-2 mb-3">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span className="font-semibold text-green-700">GDPR Compliant</span>
+              </div>
+              <div className="flex items-center space-x-2 mb-3">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span className="font-semibold text-green-700">CCPA Compliant</span>
+              </div>
+              <div className="flex items-center space-x-2 mb-3">
+                <CheckCircle className="h-5 w-5 text-green-500" />
+                <span className="font-semibold text-green-700">KVKK Compliant</span>
+              </div>
+              <p>LitxTech complies with GDPR, CCPA, and KVKK where applicable.</p>
+              <p>We collect only data required to operate and secure the Service—authentication, billing, and usage analytics.</p>
+              <p className="font-semibold text-green-600">We never sell user data.</p>
+              <p>For details, see our <a href="/privacy-policy" className="text-blue-600 hover:text-blue-800 underline">Privacy Policy</a>.</p>
+            </div>
+          </section>
+
+          {/* Section F */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-lg font-bold mr-4">F</span>
+              Payments and Subscriptions
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>All purchases and subscriptions are processed securely through Stripe.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-green-800 mb-2">Subscription Renewal:</h3>
+                  <p className="text-green-700">Plans renew automatically unless canceled before renewal.</p>
+                </div>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                  <h3 className="font-semibold text-blue-800 mb-2">Pricing:</h3>
+                  <p className="text-blue-700">Prices are shown in USD and may vary by region or plan tier.</p>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                <h3 className="font-semibold text-yellow-800 mb-2">Refund Policy:</h3>
+                <ul className="list-disc list-inside space-y-1 text-yellow-700">
+                  <li>Full refunds apply only before project creation or product activation.</li>
+                  <li>Once a digital service or software has been accessed, refunds are invalid.</li>
+                  <li>All refunds are handled via Stripe within 5–10 business days.</li>
+                  <li>For refund requests, contact <a href="mailto:support@litxtech.com" className="text-blue-600 hover:text-blue-800 underline">support@litxtech.com</a></li>
+                </ul>
+              </div>
+
+              <p>Users are responsible for applicable local taxes or VAT unless explicitly included.</p>
+            </div>
+          </section>
+
+          {/* Section G */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-lg font-bold mr-4">G</span>
+              Service Availability
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>LitxTech aims for <span className="font-bold text-green-600">99.9% uptime</span> but provides the Service "as is" and "as available."</p>
+              <p>Planned maintenance and external provider issues (Supabase, Vercel, Stripe, DeepSeek, etc.) may affect availability.</p>
+            </div>
+          </section>
+
+          {/* Section H */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-red-100 text-red-800 px-3 py-1 rounded-full text-lg font-bold mr-4">H</span>
+              Termination
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>You may terminate your account anytime via your dashboard or by contacting support.</p>
+              <div className="bg-red-50 border-l-4 border-red-400 p-4">
+                <h3 className="font-semibold text-red-800 mb-2">LitxTech may suspend or close accounts that:</h3>
+                <ul className="list-disc list-inside space-y-1 text-red-700">
+                  <li>Violate these Terms,</li>
+                  <li>Remain unpaid, or</li>
+                  <li>Threaten platform security or reputation.</li>
+                </ul>
+              </div>
+              <p className="font-semibold text-red-600">No refunds are issued for accounts terminated due to violations.</p>
+            </div>
+          </section>
+
+          {/* Section I */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-lg font-bold mr-4">I</span>
+              Limitation of Liability
+            </h2>
+            <div className="prose max-w-none text-gray-700 space-y-3">
+              <p>To the maximum extent permitted by law, LitxTech LLC shall not be liable for:</p>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Data loss,</li>
+                <li>Indirect or consequential damages, or</li>
+                <li>Loss of revenue, opportunity, or goodwill.</li>
+              </ul>
+              <p className="font-semibold text-orange-600">Your use of the Service is entirely at your own risk.</p>
+            </div>
+          </section>
+
+          {/* Section J */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-teal-100 text-teal-800 px-3 py-1 rounded-full text-lg font-bold mr-4">J</span>
+              Indemnification
+            </h2>
+            <div className="prose max-w-none text-gray-700">
+              <p>You agree to defend, indemnify, and hold harmless LitxTech LLC, its affiliates, and officers from any claims or damages arising from your use of the Service or violation of these Terms.</p>
+            </div>
+          </section>
+
+          {/* Section K */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-cyan-100 text-cyan-800 px-3 py-1 rounded-full text-lg font-bold mr-4">K</span>
+              Jurisdiction
+            </h2>
+            <div className="prose max-w-none text-gray-700">
+              <p>These Terms are governed by the laws of the State of Wyoming, USA.</p>
+              <p>Any dispute shall be resolved exclusively in the courts of Wyoming, United States.</p>
+            </div>
+          </section>
+
+          {/* Section L */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-violet-100 text-violet-800 px-3 py-1 rounded-full text-lg font-bold mr-4">L</span>
+              Modifications
+            </h2>
+            <div className="prose max-w-none text-gray-700">
+              <p>LitxTech reserves the right to modify these Terms at any time.</p>
+              <p>Updates will be posted at <a href="https://www.litxtech.com/terms" className="text-blue-600 hover:text-blue-800 underline">www.litxtech.com/terms</a>, and continued use constitutes acceptance of the new version.</p>
+            </div>
+          </section>
+
+          {/* Section M */}
+          <section className="space-y-4">
+            <h2 className="text-2xl font-bold text-gray-900 flex items-center">
+              <span className="bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-lg font-bold mr-4">M</span>
+              Contact
+            </h2>
+            <div className="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 rounded-lg p-6">
+              <h3 className="font-bold text-gray-900 mb-4">For any questions or legal notices:</h3>
+              <div className="space-y-3">
+                <div className="flex items-center space-x-3">
+                  <Shield className="h-5 w-5 text-blue-600" />
+                  <span className="font-semibold text-gray-900">LitxTech LLC</span>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Phone className="h-5 w-5 text-green-600" />
+                  <a href="tel:+13072715151" className="text-gray-700 hover:text-blue-600">+1 307 271 5151</a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Mail className="h-5 w-5 text-purple-600" />
+                  <a href="mailto:support@litxtech.com" className="text-gray-700 hover:text-blue-600">support@litxtech.com</a>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <Globe className="h-5 w-5 text-indigo-600" />
+                  <a href="https://www.litxtech.com" className="text-gray-700 hover:text-blue-600">www.litxtech.com</a>
+                </div>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
     </div>
