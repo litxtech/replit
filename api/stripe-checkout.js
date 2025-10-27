@@ -1,0 +1,193 @@
+// Vercel Serverless Function for Stripe Checkout
+// This will be deployed to Vercel and work with www.litxtech.com
+
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
+// Stripe Products Configuration
+const STRIPE_PRODUCTS = {
+  starter: {
+    name: 'STARTER Package',
+    description: 'Perfect for individuals and small businesses.',
+    price: 99000, // $990 in cents
+    priceId: process.env.STRIPE_STARTER_PRICE_ID || 'price_starter_990'
+  },
+  professional: {
+    name: 'PROFESSIONAL Package', 
+    description: 'Best for growing startups needing automation.',
+    price: 249000, // $2490 in cents
+    priceId: process.env.STRIPE_PROFESSIONAL_PRICE_ID || 'price_professional_2490'
+  },
+  enterprise: {
+    name: 'ENTERPRISE Package',
+    description: 'For SaaS products and scalable business platforms.', 
+    price: 499000, // $4990 in cents
+    priceId: process.env.STRIPE_ENTERPRISE_PRICE_ID || 'price_enterprise_4990'
+  },
+  'ai-lite': {
+    name: 'AI LITE Package',
+    description: 'Entry-level AI integration for websites or apps.',
+    price: 149000, // $1490 in cents
+    priceId: process.env.STRIPE_AI_LITE_PRICE_ID || 'price_ai_lite_1490'
+  },
+  'ai-pro': {
+    name: 'AI PRO Package',
+    description: 'Advanced automation & data-driven AI.',
+    price: 349000, // $3490 in cents
+    priceId: process.env.STRIPE_AI_PRO_PRICE_ID || 'price_ai_pro_3490'
+  },
+  'ai-enterprise': {
+    name: 'AI ENTERPRISE Package',
+    description: 'For large-scale AI-driven businesses.',
+    price: 899000, // $8990 in cents
+    priceId: process.env.STRIPE_AI_ENTERPRISE_PRICE_ID || 'price_ai_enterprise_8990'
+  },
+  'smart-hotel': {
+    name: 'SMART HOTEL Package',
+    description: 'For hotels, villas, and B&Bs.',
+    price: 299000, // $2990 in cents
+    priceId: process.env.STRIPE_SMART_HOTEL_PRICE_ID || 'price_smart_hotel_2990'
+  },
+  'restaurant-pro': {
+    name: 'RESTAURANT PRO Package',
+    description: 'For restaurants, cafés, and bars.',
+    price: 179000, // $1790 in cents
+    priceId: process.env.STRIPE_RESTAURANT_PRO_PRICE_ID || 'price_restaurant_pro_1790'
+  },
+  'travel-agency-hub': {
+    name: 'TRAVEL & AGENCY HUB Package',
+    description: 'For tourism agencies and transfer services.',
+    price: 379000, // $3790 in cents
+    priceId: process.env.STRIPE_TRAVEL_AGENCY_HUB_PRICE_ID || 'price_travel_agency_hub_3790'
+  },
+  'corporate-site': {
+    name: 'CORPORATE SITE Package',
+    description: 'For professional companies needing authority online.',
+    price: 159000, // $1590 in cents
+    priceId: process.env.STRIPE_CORPORATE_SITE_PRICE_ID || 'price_corporate_site_1590'
+  },
+  'erp-crm-suite': {
+    name: 'ERP / CRM SUITE Package',
+    description: 'Internal management software.',
+    price: 549000, // $5490 in cents
+    priceId: process.env.STRIPE_ERP_CRM_SUITE_PRICE_ID || 'price_erp_crm_suite_5490'
+  },
+  'ecommerce-ultra': {
+    name: 'ECOMMERCE ULTRA Package',
+    description: 'For online stores & product platforms.',
+    price: 399000, // $3990 in cents
+    priceId: process.env.STRIPE_ECOMMERCE_ULTRA_PRICE_ID || 'price_ecommerce_ultra_3990'
+  },
+  'brand-launch-kit': {
+    name: 'BRAND LAUNCH KIT Package',
+    description: 'For new businesses.',
+    price: 129000, // $1290 in cents
+    priceId: process.env.STRIPE_BRAND_LAUNCH_KIT_PRICE_ID || 'price_brand_launch_kit_1290'
+  },
+  'sales-automation-pro': {
+    name: 'SALES AUTOMATION PRO Package',
+    description: 'Boost conversions with smart tools.',
+    price: 299000, // $2990 in cents
+    priceId: process.env.STRIPE_SALES_AUTOMATION_PRO_PRICE_ID || 'price_sales_automation_pro_2990'
+  },
+  'full-digital-suite': {
+    name: 'FULL DIGITAL SUITE Package',
+    description: 'For marketing agencies or corporate teams.',
+    price: 599000, // $5990 in cents
+    priceId: process.env.STRIPE_FULL_DIGITAL_SUITE_PRICE_ID || 'price_full_digital_suite_5990'
+  },
+  'custom-software': {
+    name: 'CUSTOM SOFTWARE DEVELOPMENT Package',
+    description: 'Tailored solutions for corporations & startups.',
+    price: 999000, // $9990 in cents
+    priceId: process.env.STRIPE_CUSTOM_SOFTWARE_PRICE_ID || 'price_custom_software_9990'
+  },
+  'annual-maintenance': {
+    name: 'ANNUAL MAINTENANCE PLAN Package',
+    description: 'Yearly maintenance and support.',
+    price: 120000, // $1200 in cents
+    priceId: process.env.STRIPE_ANNUAL_MAINTENANCE_PRICE_ID || 'price_annual_maintenance_1200'
+  },
+  'ui-ux-design': {
+    name: 'UI/UX DESIGN SUITE Package',
+    description: 'Full design system and components.',
+    price: 159000, // $1590 in cents
+    priceId: process.env.STRIPE_UI_UX_DESIGN_PRICE_ID || 'price_ui_ux_design_1590'
+  }
+}
+
+module.exports = async (req, res) => {
+  // Enable CORS
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type')
+
+  if (req.method === 'OPTIONS') {
+    res.status(200).end()
+    return
+  }
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  try {
+    const { packageId, packageName, packagePrice } = req.body
+
+    if (!packageId || !STRIPE_PRODUCTS[packageId]) {
+      return res.status(400).json({ error: 'Invalid package ID' })
+    }
+
+    const product = STRIPE_PRODUCTS[packageId]
+
+    // Create Stripe Checkout Session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              description: product.description,
+            },
+            unit_amount: product.price,
+          },
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/cancel`,
+      metadata: {
+        packageId,
+        packageName: product.name,
+        packagePrice: product.price.toString(),
+      },
+      custom_fields: [
+        {
+          key: 'company_name',
+          label: {
+            type: 'custom',
+            custom: 'Company Name',
+          },
+          type: 'text',
+          optional: true,
+        },
+        {
+          key: 'phone',
+          label: {
+            type: 'custom', 
+            custom: 'Phone Number',
+          },
+          type: 'text',
+          optional: true,
+        },
+      ],
+    })
+
+    res.json({ url: session.url })
+  } catch (error) {
+    console.error('Stripe checkout error:', error)
+    res.status(500).json({ error: error.message || 'Checkout creation failed' })
+  }
+}
