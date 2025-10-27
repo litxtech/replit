@@ -19,6 +19,8 @@ import { CommercialAgreement } from './pages/CommercialAgreement'
 import { Subprocessors } from './pages/Subprocessors'
 import { BlogManagement } from './pages/BlogManagement'
 import { AdminLogin } from './pages/AdminLogin'
+import { SuccessPage } from './pages/SuccessPage'
+import { CancelPage } from './pages/CancelPage'
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
         <Route path="/subprocessors" element={<Subprocessors />} />
         <Route path="/admin/blog" element={<BlogManagement />} />
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/success" element={<SuccessPage />} />
+        <Route path="/cancel" element={<CancelPage />} />
       </Routes>
     </div>
   )

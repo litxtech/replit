@@ -1,10 +1,60 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, CheckCircle, Globe, Phone, Mail, ChevronDown } from 'lucide-react'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown } from 'lucide-react'
+import { PackageCard } from '../components/PackageCard'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
+
+  // Paket tanımları
+  const packages = [
+    {
+      id: 'lite',
+      name: 'LITE',
+      description: 'Basit web site (kurumsal / portföy)',
+      price: 199,
+      features: [
+        '1 sayfa, mobil uyumlu',
+        'Teslim 3 gün',
+        'Temel SEO optimizasyonu',
+        'SSL sertifikası'
+      ],
+      color: 'text-blue-400',
+      stripePriceId: 'price_lite_199'
+    },
+    {
+      id: 'pro',
+      name: 'PRO',
+      description: 'Otomasyonlu SaaS / API entegrasyonlu site',
+      price: 499,
+      features: [
+        '3 sayfa + Dashboard',
+        'Hosting dahil',
+        'API entegrasyonu',
+        'Admin paneli',
+        '30 gün destek'
+      ],
+      color: 'text-purple-400',
+      popular: true,
+      stripePriceId: 'price_pro_499'
+    },
+    {
+      id: 'ultra',
+      name: 'ULTRA',
+      description: 'Tam sistem + kullanıcı yönetimi + ödeme entegrasyonu',
+      price: 999,
+      features: [
+        'Admin paneli',
+        'Stripe entegrasyonu',
+        'Mail sistemi',
+        'Supabase veritabanı',
+        '90 gün destek'
+      ],
+      color: 'text-pink-400',
+      stripePriceId: 'price_ultra_999'
+    }
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -264,120 +314,9 @@ export function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* LITE Package */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">LITE</h3>
-                <p className="text-gray-300 mb-4">Basit web site (kurumsal / portföy)</p>
-                <div className="text-4xl font-bold text-blue-400 mb-2">$199</div>
-                <p className="text-gray-400">Tek seferlik ödeme</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">1 sayfa, mobil uyumlu</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Teslim 3 gün</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Temel SEO optimizasyonu</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">SSL sertifikası</span>
-                </li>
-              </ul>
-              <Link 
-                to="/packages" 
-                className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-300 text-center block"
-              >
-                Get Started
-              </Link>
-            </div>
-
-            {/* PRO Package */}
-            <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 backdrop-blur-md border-2 border-blue-400/50 rounded-2xl p-8 hover:from-blue-500/30 hover:to-purple-500/30 transition-all duration-300 group relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold">
-                  Most Popular
-                </span>
-              </div>
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">PRO</h3>
-                <p className="text-gray-300 mb-4">Otomasyonlu SaaS / API entegrasyonlu site</p>
-                <div className="text-4xl font-bold text-purple-400 mb-2">$499</div>
-                <p className="text-gray-400">Tek seferlik ödeme</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">3 sayfa + Dashboard</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Hosting dahil</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">API entegrasyonu</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Admin paneli</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">30 gün destek</span>
-                </li>
-              </ul>
-              <Link 
-                to="/packages" 
-                className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-3 rounded-xl font-semibold hover:from-purple-700 hover:to-purple-800 transition-all duration-300 text-center block"
-              >
-                Get Started
-              </Link>
-            </div>
-
-            {/* ULTRA Package */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2">ULTRA</h3>
-                <p className="text-gray-300 mb-4">Tam sistem + kullanıcı yönetimi + ödeme entegrasyonu</p>
-                <div className="text-4xl font-bold text-pink-400 mb-2">$999</div>
-                <p className="text-gray-400">Tek seferlik ödeme</p>
-              </div>
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Admin paneli</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Stripe entegrasyonu</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Mail sistemi</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Supabase veritabanı</span>
-                </li>
-                <li className="flex items-center space-x-3">
-                  <CheckCircle className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">90 gün destek</span>
-                </li>
-              </ul>
-              <Link 
-                to="/packages" 
-                className="w-full bg-gradient-to-r from-pink-600 to-pink-700 text-white py-3 rounded-xl font-semibold hover:from-pink-700 hover:to-pink-800 transition-all duration-300 text-center block"
-              >
-                Get Started
-              </Link>
-            </div>
+            {packages.map((pkg) => (
+              <PackageCard key={pkg.id} pkg={pkg} />
+            ))}
           </div>
         </div>
       </section>
