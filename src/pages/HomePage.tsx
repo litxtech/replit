@@ -2,59 +2,12 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
+import { PACKAGE_CATEGORIES } from '../data/packages'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showDemo, setShowDemo] = useState(false)
-
-  // Paket tanımları
-  const packages = [
-    {
-      id: 'lite',
-      name: 'LITE',
-      description: 'Basit web site (kurumsal / portföy)',
-      price: 199,
-      features: [
-        '1 sayfa, mobil uyumlu',
-        'Teslim 3 gün',
-        'Temel SEO optimizasyonu',
-        'SSL sertifikası'
-      ],
-      color: 'text-blue-400',
-      stripePriceId: 'price_lite_199'
-    },
-    {
-      id: 'pro',
-      name: 'PRO',
-      description: 'Otomasyonlu SaaS / API entegrasyonlu site',
-      price: 499,
-      features: [
-        '3 sayfa + Dashboard',
-        'Hosting dahil',
-        'API entegrasyonu',
-        'Admin paneli',
-        '30 gün destek'
-      ],
-      color: 'text-purple-400',
-      popular: true,
-      stripePriceId: 'price_pro_499'
-    },
-    {
-      id: 'ultra',
-      name: 'ULTRA',
-      description: 'Tam sistem + kullanıcı yönetimi + ödeme entegrasyonu',
-      price: 999,
-      features: [
-        'Admin paneli',
-        'Stripe entegrasyonu',
-        'Mail sistemi',
-        'Supabase veritabanı',
-        '90 gün destek'
-      ],
-      color: 'text-pink-400',
-      stripePriceId: 'price_ultra_999'
-    }
-  ]
+  const [selectedCategory, setSelectedCategory] = useState('webSaaS')
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -306,17 +259,46 @@ export function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Choose Your <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Package</span>
+              Choose Your <span className="bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Solution</span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              Flexible pricing plans designed to meet your business needs and budget.
+              Professional packages designed for every business need and budget.
             </p>
           </div>
 
+          {/* Category Tabs */}
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
+            {Object.entries(PACKAGE_CATEGORIES).map(([key, category]) => (
+              <button
+                key={key}
+                onClick={() => setSelectedCategory(key)}
+                className={`px-6 py-3 rounded-lg font-semibold transition-all duration-300 ${
+                  selectedCategory === key
+                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                    : 'bg-white/10 backdrop-blur-md border border-white/20 text-gray-300 hover:bg-white/20'
+                }`}
+              >
+                {category.title}
+              </button>
+            ))}
+          </div>
+
+          {/* Selected Category Packages */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {packages.map((pkg) => (
+            {PACKAGE_CATEGORIES[selectedCategory as keyof typeof PACKAGE_CATEGORIES].packages.map((pkg) => (
               <PackageCard key={pkg.id} pkg={pkg} />
             ))}
+          </div>
+
+          {/* View All Packages Button */}
+          <div className="text-center mt-12">
+            <Link
+              to="/packages"
+              className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300"
+            >
+              <span>View All Packages</span>
+              <ArrowRight className="w-5 h-5" />
+            </Link>
           </div>
         </div>
       </section>

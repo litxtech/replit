@@ -24,7 +24,7 @@ app.post('/api/stripe/checkout', async (req, res) => {
     const mockSessionId = `cs_test_${Date.now()}`
     
     res.json({ 
-      url: `http://localhost:5173/success?session_id=${mockSessionId}`,
+      url: `http://localhost:5173/success?session_id=${mockSessionId}&package=${packageName}&price=${packagePrice}`,
       sessionId: mockSessionId
     })
   } catch (error) {
