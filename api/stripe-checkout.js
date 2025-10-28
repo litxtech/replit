@@ -10,91 +10,91 @@ const STRIPE_PRODUCTS = {
   'starter-website': {
     name: 'Starter Website',
     description: 'Perfect for individuals and small businesses.',
-    price: 99000, // $990 in cents
+    price: 990, // $990
     priceId: process.env.STRIPE_STARTER_WEBSITE_PRICE_ID
   },
   'professional-website-suite': {
     name: 'Professional Website Suite', 
     description: 'Best for growing startups needing automation.',
-    price: 249000, // $2490 in cents
+    price: 2490, // $2490
     priceId: process.env.STRIPE_PROFESSIONAL_WEBSITE_SUITE_PRICE_ID
   },
   'enterprise-saas-platform': {
     name: 'Enterprise SaaS Platform',
     description: 'For SaaS products and scalable business platforms.', 
-    price: 499000, // $4990 in cents
+    price: 4990, // $4990
     priceId: process.env.STRIPE_ENTERPRISE_SAAS_PLATFORM_PRICE_ID
   },
   'ai-lite': {
     name: 'AI Lite',
     description: 'Entry-level AI integration for websites or apps.',
-    price: 149000, // $1490 in cents
+    price: 1490, // $1490
     priceId: process.env.STRIPE_AI_LITE_PRICE_ID
   },
   'ai-pro': {
     name: 'AI Pro',
     description: 'Advanced automation & data-driven AI.',
-    price: 349000, // $3490 in cents
+    price: 3490, // $3490
     priceId: process.env.STRIPE_AI_PRO_PRICE_ID
   },
   'ai-enterprise': {
     name: 'AI Enterprise',
     description: 'For large-scale AI-driven businesses.',
-    price: 899000, // $8990 in cents
+    price: 8990, // $8990
     priceId: process.env.STRIPE_AI_ENTERPRISE_PRICE_ID
   },
   'smart-hotel-suite': {
     name: 'Smart Hotel Suite',
     description: 'For hotels, villas, and B&Bs.',
-    price: 299000, // $2990 in cents
+    price: 2990, // $2990
     priceId: process.env.STRIPE_SMART_HOTEL_SUITE_PRICE_ID
   },
   'restaurant-pro': {
     name: 'Restaurant Pro',
     description: 'For restaurants, cafés, and bars.',
-    price: 179000, // $1790 in cents
+    price: 1790, // $1790
     priceId: process.env.STRIPE_RESTAURANT_PRO_PRICE_ID
   },
   'travel-agency-hub': {
     name: 'Travel & Agency Hub',
     description: 'For tourism agencies and transfer services.',
-    price: 379000, // $3790 in cents
+    price: 3790, // $3790
     priceId: process.env.STRIPE_TRAVEL_AGENCY_HUB_PRICE_ID
   },
   'corporate-site': {
     name: 'Corporate Site',
     description: 'For professional companies needing authority online.',
-    price: 159000, // $1590 in cents
+    price: 1590, // $1590
     priceId: process.env.STRIPE_CORPORATE_SITE_PRICE_ID
   },
   'erp-crm-suite': {
     name: 'ERP / CRM Suite',
     description: 'Internal management software.',
-    price: 549000, // $5490 in cents
+    price: 5490, // $5490
     priceId: process.env.STRIPE_ERP_CRM_SUITE_PRICE_ID
   },
   'ecommerce-ultra': {
     name: 'E-Commerce Ultra',
     description: 'For online stores & product platforms.',
-    price: 399000, // $3990 in cents
+    price: 3990, // $3990
     priceId: process.env.STRIPE_ECOMMERCE_ULTRA_PRICE_ID
   },
   'full-digital-suite': {
     name: 'Full Digital Suite',
     description: 'For marketing agencies or corporate teams.',
-    price: 599000, // $5990 in cents
+    price: 5990, // $5990
     priceId: process.env.STRIPE_FULL_DIGITAL_SUITE_PRICE_ID
   },
   'custom-enterprise-solutions': {
     name: 'Custom Enterprise Solutions',
     description: 'Tailored solutions for corporations & startups.',
-    price: 999000, // $9990 in cents
+    price: 9990, // $9990
     priceId: process.env.STRIPE_CUSTOM_ENTERPRISE_SOLUTIONS_PRICE_ID
   },
   'ui-ux-design-suite': {
     name: 'UI/UX Design Suite',
     description: 'Full design system and components.',
-    price: 159000, // $1590 in cents
+    price: 1590, // $1590
     priceId: process.env.STRIPE_UI_UX_DESIGN_SUITE_PRICE_ID
   }
 }
