@@ -116,13 +116,17 @@ export default async (req, res) => {
 
     const product = STRIPE_PRODUCTS[packageId]
 
+    console.log('Product found:', product)
+    console.log('Price ID:', product.priceId)
+
     // Stripe'dan gerçek fiyatı çek
     let stripePrice
     try {
       stripePrice = await stripe.prices.retrieve(product.priceId)
+      console.log('Stripe price retrieved:', stripePrice)
     } catch (priceError) {
       console.error('Error fetching Stripe price:', priceError)
-      return res.status(400).json({ error: 'Invalid Stripe price ID' })
+      return res.status(400).json({ error: 'Invalid Stripe price ID: ' + product.priceId })
     }
 
     // Create real Stripe Checkout Session
