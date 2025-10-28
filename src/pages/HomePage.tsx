@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
+import { FloatingCodeElements, AnimatedCodeBlock, TechStackShowcase, AnimatedStats } from '../components/AnimatedElements'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -15,17 +17,28 @@ export function HomePage() {
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
       
+      {/* Floating Code Elements */}
+      <FloatingCodeElements />
+      
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
+        {[...Array(30)].map((_, i) => (
+          <motion.div
             key={i}
-            className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-pulse"
-            style={{
+            className="absolute w-2 h-2 bg-blue-400/30 rounded-full"
+            initial={{ 
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`
+              opacity: 0
+            }}
+            animate={{ 
+              opacity: [0, 1, 0],
+              scale: [0, 1, 0]
+            }}
+            transition={{
+              duration: 3 + Math.random() * 4,
+              repeat: Infinity,
+              delay: Math.random() * 5
             }}
           />
         ))}
@@ -113,61 +126,133 @@ export function HomePage() {
 
       {/* Hero Section */}
       <section className="relative z-10 pt-20 pb-32">
-        <div className="max-w-7xl mx-auto px-6 text-center">
-          <div className="space-y-8">
-            {/* Main Heading */}
-            <div className="space-y-6">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-tight">
-                <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                  Smart Software
-                </span>
-                <br />
-                <span className="text-white">Solutions for a</span>
-                <br />
-                <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                  Fast World
-                </span>
-              </h1>
-              <p className="text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed font-light">
-                Custom systems, automation tools, and cloud apps — all powered by LitxTech.
-                <br />
-                <span className="text-lg text-gray-400">Transform your business with AI-driven solutions.</span>
-              </p>
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Text Content */}
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="space-y-6"
+              >
+                <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium">
+                  <Code className="w-4 h-4 mr-2" />
+                  AI-Powered Software Development
+                </div>
+                
+                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                  <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    Build Amazing
+                  </span>
+                  <br />
+                  <span className="text-white">Software</span>
+                  <br />
+                  <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                    Solutions
+                  </span>
+                </h1>
+                
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  From web applications to AI-powered systems, we create cutting-edge software 
+                  that transforms businesses and drives innovation.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+                className="flex flex-col sm:flex-row gap-4"
+              >
+                <Link
+                  to="/packages"
+                  className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+                >
+                  <Rocket className="w-5 h-5" />
+                  <span>View Packages</span>
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                
+                <button
+                  onClick={() => setShowDemo(true)}
+                  className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2"
+                >
+                  <Play className="w-5 h-5" />
+                  <span>Watch Demo</span>
+                </button>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="pt-8"
+              >
+                <AnimatedStats />
+              </motion.div>
             </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
-              <Link 
-                to="/packages" 
-                className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center space-x-2"
-              >
-                <span>View Packages</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <button 
-                onClick={() => setShowDemo(!showDemo)}
-                className="group border-2 border-white/30 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 backdrop-blur-sm flex items-center space-x-2"
-              >
-                <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
-                <span>Watch Demo</span>
-              </button>
-            </div>
+            {/* Right Side - Code Animation */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="relative"
+            >
+              <div className="relative">
+                {/* Floating Tech Icons */}
+                <motion.div
+                  className="absolute -top-4 -left-4 w-16 h-16 bg-blue-500/20 rounded-xl flex items-center justify-center backdrop-blur-sm border border-blue-500/30"
+                  animate={{ 
+                    y: [0, -10, 0],
+                    rotate: [0, 5, 0]
+                  }}
+                  transition={{ 
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <Cpu className="w-8 h-8 text-blue-400" />
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -top-8 -right-8 w-12 h-12 bg-purple-500/20 rounded-xl flex items-center justify-center backdrop-blur-sm border border-purple-500/30"
+                  animate={{ 
+                    y: [0, 10, 0],
+                    rotate: [0, -5, 0]
+                  }}
+                  transition={{ 
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                >
+                  <Database className="w-6 h-6 text-purple-400" />
+                </motion.div>
+                
+                <motion.div
+                  className="absolute -bottom-4 -right-4 w-14 h-14 bg-pink-500/20 rounded-xl flex items-center justify-center backdrop-blur-sm border border-pink-500/30"
+                  animate={{ 
+                    y: [0, -8, 0],
+                    rotate: [0, 3, 0]
+                  }}
+                  transition={{ 
+                    duration: 3.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 2
+                  }}
+                >
+                  <Cloud className="w-7 h-7 text-pink-400" />
+                </motion.div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-16">
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">500+</div>
-                <div className="text-gray-300 font-medium">Projects Delivered</div>
+                <AnimatedCodeBlock />
               </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-purple-400 mb-2">99.9%</div>
-                <div className="text-gray-300 font-medium">Uptime Guarantee</div>
-              </div>
-              <div className="text-center">
-                <div className="text-4xl md:text-5xl font-bold text-pink-400 mb-2">24/7</div>
-                <div className="text-gray-300 font-medium">Support Available</div>
-              </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
