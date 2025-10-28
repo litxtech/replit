@@ -34,16 +34,21 @@ export async function createCheckoutSession(priceId: string, packageName: string
         body: JSON.stringify({
           packageId,
           packageName,
-          packagePrice,
+          packagePrice: packagePrice, // Frontend'den gelen fiyat (sadece referans için)
         }),
       })
 
       if (response.ok) {
         const data = await response.json()
+        console.log('Checkout response:', data) // Debug için
         return data
+      } else {
+        const errorData = await response.json()
+        console.error('API Error:', errorData)
+        throw new Error(errorData.error || 'API request failed')
       }
     } catch (error) {
-      console.log('Production API failed, trying localhost...')
+      console.log('Production API failed, trying localhost...', error)
     }
 
     // Fallback to localhost

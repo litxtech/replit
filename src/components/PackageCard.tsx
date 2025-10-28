@@ -37,11 +37,19 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
     setError('')
 
     try {
+      console.log('Starting checkout with:', {
+        stripePriceId: pkg.stripePriceId,
+        packageName: pkg.name,
+        packagePrice: pkg.price
+      })
+
       const result = await createCheckoutSession(
         pkg.stripePriceId,
         pkg.name,
         pkg.price
       )
+
+      console.log('Checkout result:', result)
 
       if (result.url) {
         // Checkout'a yönlendir
@@ -50,6 +58,7 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
         throw new Error('Checkout URL oluşturulamadı')
       }
     } catch (err: any) {
+      console.error('Checkout error:', err)
       setError(err.message || 'Ödeme işlemi başlatılamadı')
     } finally {
       setIsLoading(false)
@@ -97,6 +106,19 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
               ))}
             </ul>
           </div>
+
+        {/* Error Display */}
+        {error && (
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+            <div className="flex items-start space-x-2">
+              <div className="text-red-600 text-lg">❌</div>
+              <div className="text-sm">
+                <h4 className="font-semibold text-red-800 mb-1">Error:</h4>
+                <p className="text-red-700">{error}</p>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Server Status */}
         <div className="mb-4">
