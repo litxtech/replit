@@ -5,115 +5,97 @@ import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-// Real Stripe Products - 18 packages
+// Real Stripe Products - 15 packages with new Price IDs
 const STRIPE_PRODUCTS = {
-  'starter-web': {
-    name: 'STARTER Package',
+  'starter-website': {
+    name: 'Starter Website',
     description: 'Perfect for individuals and small businesses.',
     price: 99000, // $990 in cents
-    productId: 'prod_TJcc3OTPPk4Uf9' // Your Stripe Product ID
+    priceId: process.env.STRIPE_STARTER_WEBSITE_PRICE_ID
   },
-  'professional-web': {
-    name: 'PROFESSIONAL Package', 
+  'professional-website-suite': {
+    name: 'Professional Website Suite', 
     description: 'Best for growing startups needing automation.',
     price: 249000, // $2490 in cents
-    productId: 'prod_TJcbY7ejfso2Yq' // Your Stripe Product ID
+    priceId: process.env.STRIPE_PROFESSIONAL_WEBSITE_SUITE_PRICE_ID
   },
-  'enterprise-web': {
-    name: 'ENTERPRISE Package',
+  'enterprise-saas-platform': {
+    name: 'Enterprise SaaS Platform',
     description: 'For SaaS products and scalable business platforms.', 
     price: 499000, // $4990 in cents
-    productId: 'prod_TJcac84nb1EnsO' // Your Stripe Product ID
+    priceId: process.env.STRIPE_ENTERPRISE_SAAS_PLATFORM_PRICE_ID
   },
   'ai-lite': {
-    name: 'AI LITE Package',
+    name: 'AI Lite',
     description: 'Entry-level AI integration for websites or apps.',
     price: 149000, // $1490 in cents
     priceId: process.env.STRIPE_AI_LITE_PRICE_ID
   },
   'ai-pro': {
-    name: 'AI PRO Package',
+    name: 'AI Pro',
     description: 'Advanced automation & data-driven AI.',
     price: 349000, // $3490 in cents
     priceId: process.env.STRIPE_AI_PRO_PRICE_ID
   },
   'ai-enterprise': {
-    name: 'AI ENTERPRISE Package',
+    name: 'AI Enterprise',
     description: 'For large-scale AI-driven businesses.',
     price: 899000, // $8990 in cents
     priceId: process.env.STRIPE_AI_ENTERPRISE_PRICE_ID
   },
-  'smart-hotel': {
-    name: 'SMART HOTEL Package',
+  'smart-hotel-suite': {
+    name: 'Smart Hotel Suite',
     description: 'For hotels, villas, and B&Bs.',
     price: 299000, // $2990 in cents
-    priceId: process.env.STRIPE_SMART_HOTEL_PRICE_ID
+    priceId: process.env.STRIPE_SMART_HOTEL_SUITE_PRICE_ID
   },
   'restaurant-pro': {
-    name: 'RESTAURANT PRO Package',
+    name: 'Restaurant Pro',
     description: 'For restaurants, cafés, and bars.',
     price: 179000, // $1790 in cents
     priceId: process.env.STRIPE_RESTAURANT_PRO_PRICE_ID
   },
   'travel-agency-hub': {
-    name: 'TRAVEL & AGENCY HUB Package',
+    name: 'Travel & Agency Hub',
     description: 'For tourism agencies and transfer services.',
     price: 379000, // $3790 in cents
     priceId: process.env.STRIPE_TRAVEL_AGENCY_HUB_PRICE_ID
   },
   'corporate-site': {
-    name: 'CORPORATE SITE Package',
+    name: 'Corporate Site',
     description: 'For professional companies needing authority online.',
     price: 159000, // $1590 in cents
     priceId: process.env.STRIPE_CORPORATE_SITE_PRICE_ID
   },
   'erp-crm-suite': {
-    name: 'ERP / CRM SUITE Package',
+    name: 'ERP / CRM Suite',
     description: 'Internal management software.',
     price: 549000, // $5490 in cents
     priceId: process.env.STRIPE_ERP_CRM_SUITE_PRICE_ID
   },
   'ecommerce-ultra': {
-    name: 'ECOMMERCE ULTRA Package',
+    name: 'E-Commerce Ultra',
     description: 'For online stores & product platforms.',
     price: 399000, // $3990 in cents
     priceId: process.env.STRIPE_ECOMMERCE_ULTRA_PRICE_ID
   },
-  'brand-launch-kit': {
-    name: 'BRAND LAUNCH KIT Package',
-    description: 'For new businesses.',
-    price: 129000, // $1290 in cents
-    priceId: process.env.STRIPE_BRAND_LAUNCH_KIT_PRICE_ID
-  },
-  'sales-automation-pro': {
-    name: 'SALES AUTOMATION PRO Package',
-    description: 'Boost conversions with smart tools.',
-    price: 299000, // $2990 in cents
-    priceId: process.env.STRIPE_SALES_AUTOMATION_PRO_PRICE_ID
-  },
   'full-digital-suite': {
-    name: 'FULL DIGITAL SUITE Package',
+    name: 'Full Digital Suite',
     description: 'For marketing agencies or corporate teams.',
     price: 599000, // $5990 in cents
     priceId: process.env.STRIPE_FULL_DIGITAL_SUITE_PRICE_ID
   },
-  'custom-software-development': {
-    name: 'CUSTOM SOFTWARE DEVELOPMENT Package',
+  'custom-enterprise-solutions': {
+    name: 'Custom Enterprise Solutions',
     description: 'Tailored solutions for corporations & startups.',
     price: 999000, // $9990 in cents
-    priceId: process.env.STRIPE_CUSTOM_SOFTWARE_PRICE_ID
-  },
-  'annual-maintenance-plan': {
-    name: 'ANNUAL MAINTENANCE PLAN Package',
-    description: 'Yearly maintenance and support.',
-    price: 120000, // $1200 in cents
-    priceId: process.env.STRIPE_ANNUAL_MAINTENANCE_PRICE_ID
+    priceId: process.env.STRIPE_CUSTOM_ENTERPRISE_SOLUTIONS_PRICE_ID
   },
   'ui-ux-design-suite': {
-    name: 'UI/UX DESIGN SUITE Package',
+    name: 'UI/UX Design Suite',
     description: 'Full design system and components.',
     price: 159000, // $1590 in cents
-    priceId: process.env.STRIPE_UI_UX_DESIGN_PRICE_ID
+    priceId: process.env.STRIPE_UI_UX_DESIGN_SUITE_PRICE_ID
   }
 }
 

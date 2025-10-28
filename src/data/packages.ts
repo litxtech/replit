@@ -22,8 +22,8 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
     description: "Modern web uygulamaları ve SaaS platformları",
     packages: [
       {
-        id: 'starter',
-        name: 'STARTER',
+        id: 'starter-website',
+        name: 'Starter Website',
         price: 990,
         description: 'Perfect for individuals and small businesses.',
         features: [
@@ -36,11 +36,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Hosting setup'
         ],
         color: 'text-blue-400',
-        stripePriceId: 'price_starter_990'
+        stripePriceId: 'price_starter_website'
       },
       {
-        id: 'professional',
-        name: 'PROFESSIONAL',
+        id: 'professional-website-suite',
+        name: 'Professional Website Suite',
         price: 2490,
         description: 'Best for growing startups needing automation.',
         features: [
@@ -56,11 +56,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
         ],
         color: 'text-purple-400',
         popular: true,
-        stripePriceId: 'price_professional_2490'
+        stripePriceId: 'price_professional_website_suite'
       },
       {
-        id: 'enterprise',
-        name: 'ENTERPRISE',
+        id: 'enterprise-saas-platform',
+        name: 'Enterprise SaaS Platform',
         price: 4990,
         description: 'For SaaS products and scalable business platforms.',
         features: [
@@ -76,7 +76,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '15-day delivery'
         ],
         color: 'text-pink-400',
-        stripePriceId: 'price_enterprise_4990'
+        stripePriceId: 'price_enterprise_saas_platform'
       }
     ]
   },
@@ -86,7 +86,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
     packages: [
       {
         id: 'ai-lite',
-        name: 'AI LITE',
+        name: 'AI Lite',
         price: 1490,
         description: 'Entry-level AI integration for websites or apps.',
         features: [
@@ -97,11 +97,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '5-day delivery'
         ],
         color: 'text-green-400',
-        stripePriceId: 'price_ai_lite_1490'
+        stripePriceId: 'price_ai_lite'
       },
       {
         id: 'ai-pro',
-        name: 'AI PRO',
+        name: 'AI Pro',
         price: 3490,
         description: 'Advanced automation & data-driven AI.',
         features: [
@@ -113,11 +113,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '10-day delivery'
         ],
         color: 'text-yellow-400',
-        stripePriceId: 'price_ai_pro_3490'
+        stripePriceId: 'price_ai_pro'
       },
       {
         id: 'ai-enterprise',
-        name: 'AI ENTERPRISE',
+        name: 'AI Enterprise',
         price: 8990,
         description: 'For large-scale AI-driven businesses.',
         features: [
@@ -130,7 +130,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '20-day delivery'
         ],
         color: 'text-red-400',
-        stripePriceId: 'price_ai_enterprise_8990'
+        stripePriceId: 'price_ai_enterprise'
       }
     ]
   },
@@ -139,8 +139,8 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
     description: "Otel, restoran ve turizm çözümleri",
     packages: [
       {
-        id: 'smart-hotel',
-        name: 'SMART HOTEL',
+        id: 'smart-hotel-suite',
+        name: 'Smart Hotel Suite',
         price: 2990,
         description: 'For hotels, villas, and B&Bs.',
         features: [
@@ -153,11 +153,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'SEO optimization'
         ],
         color: 'text-indigo-400',
-        stripePriceId: 'price_smart_hotel_2990'
+        stripePriceId: 'price_smart_hotel_suite'
       },
       {
         id: 'restaurant-pro',
-        name: 'RESTAURANT PRO',
+        name: 'Restaurant Pro',
         price: 1790,
         description: 'For restaurants, cafés, and bars.',
         features: [
@@ -169,11 +169,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Customer loyalty module'
         ],
         color: 'text-orange-400',
-        stripePriceId: 'price_restaurant_pro_1790'
+        stripePriceId: 'price_restaurant_pro'
       },
       {
         id: 'travel-agency-hub',
-        name: 'TRAVEL & AGENCY HUB',
+        name: 'Travel & Agency Hub',
         price: 3790,
         description: 'For tourism agencies and transfer services.',
         features: [
@@ -184,7 +184,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'CRM integration'
         ],
         color: 'text-teal-400',
-        stripePriceId: 'price_travel_agency_hub_3790'
+        stripePriceId: 'price_travel_agency_hub'
       }
     ]
   },
@@ -194,7 +194,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
     packages: [
       {
         id: 'corporate-site',
-        name: 'CORPORATE SITE',
+        name: 'Corporate Site',
         price: 1590,
         description: 'For professional companies needing authority online.',
         features: [
@@ -206,11 +206,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Analytics setup'
         ],
         color: 'text-gray-400',
-        stripePriceId: 'price_corporate_site_1590'
+        stripePriceId: 'price_corporate_site'
       },
       {
         id: 'erp-crm-suite',
-        name: 'ERP / CRM SUITE',
+        name: 'ERP / CRM Suite',
         price: 5490,
         description: 'Internal management software.',
         features: [
@@ -223,11 +223,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Cloud backup'
         ],
         color: 'text-cyan-400',
-        stripePriceId: 'price_erp_crm_suite_5490'
+        stripePriceId: 'price_erp_crm_suite'
       },
       {
         id: 'ecommerce-ultra',
-        name: 'ECOMMERCE ULTRA',
+        name: 'E-Commerce Ultra',
         price: 3990,
         description: 'For online stores & product platforms.',
         features: [
@@ -239,47 +239,17 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'AI product recommendations'
         ],
         color: 'text-emerald-400',
-        stripePriceId: 'price_ecommerce_ultra_3990'
+        stripePriceId: 'price_ecommerce_ultra'
       }
     ]
   },
-  marketing: {
-    title: "Marketing & Branding Tools",
-    description: "Pazarlama ve marka yönetimi araçları",
+  custom: {
+    title: "Custom Enterprise Solutions",
+    description: "Özel kurumsal çözümler",
     packages: [
       {
-        id: 'brand-launch-kit',
-        name: 'BRAND LAUNCH KIT',
-        price: 1290,
-        description: 'For new businesses.',
-        features: [
-          'Logo & color identity',
-          'Basic website (1-page)',
-          'Landing page copywriting (AI-assisted)',
-          'SEO meta setup',
-          'Google Analytics'
-        ],
-        color: 'text-violet-400',
-        stripePriceId: 'price_brand_launch_kit_1290'
-      },
-      {
-        id: 'sales-automation-pro',
-        name: 'SALES AUTOMATION PRO',
-        price: 2990,
-        description: 'Boost conversions with smart tools.',
-        features: [
-          'Email automation system',
-          'AI-based lead qualification',
-          'Stripe + CRM connection',
-          'Analytics dashboard',
-          '1-month support'
-        ],
-        color: 'text-rose-400',
-        stripePriceId: 'price_sales_automation_pro_2990'
-      },
-      {
         id: 'full-digital-suite',
-        name: 'FULL DIGITAL SUITE',
+        name: 'Full Digital Suite',
         price: 5990,
         description: 'For marketing agencies or corporate teams.',
         features: [
@@ -290,17 +260,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Dedicated strategy dashboard'
         ],
         color: 'text-amber-400',
-        stripePriceId: 'price_full_digital_suite_5990'
-      }
-    ]
-  },
-  custom: {
-    title: "Custom Enterprise Solutions",
-    description: "Özel kurumsal çözümler",
-    packages: [
+        stripePriceId: 'price_full_digital_suite'
+      },
       {
-        id: 'custom-software',
-        name: 'CUSTOM SOFTWARE DEVELOPMENT',
+        id: 'custom-enterprise-solutions',
+        name: 'Custom Enterprise Solutions',
         price: 9990,
         description: 'Tailored solutions for corporations & startups.',
         features: [
@@ -312,25 +276,11 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Source code ownership guaranteed'
         ],
         color: 'text-slate-400',
-        stripePriceId: 'price_custom_software_9990'
+        stripePriceId: 'price_custom_enterprise_solutions'
       },
       {
-        id: 'annual-maintenance',
-        name: 'ANNUAL MAINTENANCE PLAN',
-        price: 1200,
-        description: 'Yearly maintenance and support.',
-        features: [
-          'Monthly backups',
-          'Security & patch updates',
-          'Performance optimization',
-          'Technical support priority'
-        ],
-        color: 'text-zinc-400',
-        stripePriceId: 'price_annual_maintenance_1200'
-      },
-      {
-        id: 'ui-ux-design',
-        name: 'UI/UX DESIGN SUITE',
+        id: 'ui-ux-design-suite',
+        name: 'UI/UX Design Suite',
         price: 1590,
         description: 'Full design system and components.',
         features: [
@@ -340,7 +290,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Brand alignment review'
         ],
         color: 'text-stone-400',
-        stripePriceId: 'price_ui_ux_design_1590'
+        stripePriceId: 'price_ui_ux_design_suite'
       }
     ]
   }
