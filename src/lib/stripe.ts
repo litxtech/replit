@@ -6,23 +6,28 @@ const LOCALHOST_URL = 'http://localhost:3001'
 
 export async function createCheckoutSession(priceId: string, packageName: string, packagePrice: number) {
   try {
-    // Map price ID to package ID
+    // Map Product ID to package ID
     let packageId = 'starter-website'
-    if (priceId.includes('starter-website')) packageId = 'starter-website'
-    if (priceId.includes('professional-website-suite')) packageId = 'professional-website-suite'
-    if (priceId.includes('enterprise-saas-platform')) packageId = 'enterprise-saas-platform'
-    if (priceId.includes('ai-lite')) packageId = 'ai-lite'
-    if (priceId.includes('ai-pro')) packageId = 'ai-pro'
-    if (priceId.includes('ai-enterprise')) packageId = 'ai-enterprise'
-    if (priceId.includes('smart-hotel-suite')) packageId = 'smart-hotel-suite'
-    if (priceId.includes('restaurant-pro')) packageId = 'restaurant-pro'
-    if (priceId.includes('travel-agency-hub')) packageId = 'travel-agency-hub'
-    if (priceId.includes('corporate-site')) packageId = 'corporate-site'
-    if (priceId.includes('erp-crm-suite')) packageId = 'erp-crm-suite'
-    if (priceId.includes('ecommerce-ultra')) packageId = 'ecommerce-ultra'
-    if (priceId.includes('full-digital-suite')) packageId = 'full-digital-suite'
-    if (priceId.includes('custom-enterprise-solutions')) packageId = 'custom-enterprise-solutions'
-    if (priceId.includes('ui-ux-design-suite')) packageId = 'ui-ux-design-suite'
+    
+    // Map Product IDs to package IDs
+    if (priceId === 'prod_TJx1tMK4kjAKYw') packageId = 'starter-website'
+    if (priceId === 'prod_TJx2DQI2ya2TRE') packageId = 'professional-website-suite'
+    if (priceId === 'prod_TJx3685vaECdcB') packageId = 'enterprise-saas-platform'
+    if (priceId === 'prod_TJx4FeOKSgVjsY') packageId = 'ai-lite'
+    if (priceId === 'prod_TJx7xGb2pBFQsA') packageId = 'ai-pro'
+    if (priceId === 'prod_TJx85dkj0qblrw') packageId = 'ai-enterprise'
+    if (priceId === 'prod_TJx8NFA5ektMlM') packageId = 'smart-hotel-suite'
+    if (priceId === 'prod_TJx9mc9WGeeTS5') packageId = 'restaurant-pro'
+    if (priceId === 'prod_TJxAosCL7gRfYQ') packageId = 'travel-agency-hub'
+    if (priceId === 'prod_TJxAg8uJVRzthM') packageId = 'erp-crm-suite'
+    if (priceId === 'prod_TJxBIgZuYnIadp') packageId = 'ecommerce-ultra'
+    if (priceId === 'prod_TJcc3OTPPk4Uf9') packageId = 'custom-enterprise-solutions'
+    if (priceId === 'prod_TJcac84nb1EnsO') packageId = 'ui-ux-design-suite'
+    if (priceId === 'prod_TJxpyXo2HM4hkT') packageId = 'annual-maintenance-plan'
+    if (priceId === 'prod_TJxoeD8wdnwC9c') packageId = 'custom-software-development'
+    if (priceId === 'prod_TJcbY7ejfso2Yq') packageId = 'digital-suite'
+
+    console.log('Mapped Product ID to package ID:', { priceId, packageId })
 
     // Try production API first
     try {
