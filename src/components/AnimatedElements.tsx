@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
+import { useTranslation } from '../contexts/LanguageContext'
 
 // Floating Code Elements Component
 export function FloatingCodeElements() {
@@ -185,11 +186,13 @@ export function TechStackShowcase() {
 
 // Animated Stats Component
 export function AnimatedStats() {
+  const t = useTranslation()
+  
   const stats = [
-    { number: '500+', label: 'Projects Delivered', icon: '🚀' },
-    { number: '50+', label: 'Happy Clients', icon: '😊' },
-    { number: '24/7', label: 'Support', icon: '🛠️' },
-    { number: '99%', label: 'Success Rate', icon: '✅' }
+    { number: '500+', label: t.stats.projectsDelivered, icon: '🚀' },
+    { number: '50+', label: t.stats.happyClients, icon: '😊' },
+    { number: '24/7', label: t.stats.support, icon: '🛠️' },
+    { number: '99%', label: t.stats.successRate, icon: '✅' }
   ]
 
   return (

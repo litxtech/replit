@@ -5,10 +5,13 @@ import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRig
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
 import { FloatingCodeElements, AnimatedCodeBlock, AnimatedStats } from '../components/AnimatedElements'
+import { LanguageSwitcher, LanguageSwitcherCompact } from '../components/LanguageSwitcher'
+import { useTranslation } from '../contexts/LanguageContext'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('webSaaS')
+  const t = useTranslation()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
@@ -61,11 +64,11 @@ export function HomePage() {
             
             {/* Desktop Menu */}
             <div className="hidden lg:flex items-center space-x-8">
-              <Link to="/" className="text-white hover:text-blue-400 transition-colors font-medium">🏠 Home</Link>
-              <Link to="/about" className="text-white hover:text-blue-400 transition-colors font-medium">🧍‍♂️ About</Link>
+              <Link to="/" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.home}</Link>
+              <Link to="/about" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.about}</Link>
               <div className="relative group">
                 <button className="text-white hover:text-blue-400 transition-colors font-medium flex items-center space-x-1">
-                  <span>🧩 Solutions</span>
+                  <span>{t.nav.solutions}</span>
                   <ChevronDown className="w-4 h-4" />
                 </button>
                 <div className="absolute top-full left-0 mt-2 w-64 bg-white/95 backdrop-blur-md rounded-xl shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 p-4">
@@ -77,21 +80,17 @@ export function HomePage() {
                   </div>
                 </div>
               </div>
-              <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">💰 Pricing</Link>
-              <Link to="/blog" className="text-white hover:text-blue-400 transition-colors font-medium">📰 Blog</Link>
-              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">📞 Contact</Link>
+              <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.pricing}</Link>
+              <Link to="/blog" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.blog}</Link>
+              <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.contact}</Link>
             </div>
 
             {/* Right Side */}
             <div className="hidden lg:flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <button className="text-white hover:text-blue-400 transition-colors text-sm">TR</button>
-                <span className="text-gray-400">|</span>
-                <button className="text-gray-400 hover:text-white transition-colors text-sm">EN</button>
-              </div>
-              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">🔑 Login</Link>
+              <LanguageSwitcher />
+              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.login}</Link>
               <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
-                🚀 Get Quote
+                {t.nav.getQuote}
               </Link>
             </div>
 
@@ -108,14 +107,17 @@ export function HomePage() {
           {isMenuOpen && (
             <div className="lg:hidden mt-4 pb-4 border-t border-white/20 pt-4">
               <div className="space-y-4">
-                <Link to="/" className="block text-white hover:text-blue-400 transition-colors">🏠 Home</Link>
-                <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">🧍‍♂️ About</Link>
-                <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">💰 Pricing</Link>
-                <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">📰 Blog</Link>
-                <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">📞 Contact</Link>
+                <Link to="/" className="block text-white hover:text-blue-400 transition-colors">{t.nav.home}</Link>
+                <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">{t.nav.about}</Link>
+                <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">{t.nav.pricing}</Link>
+                <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">{t.nav.blog}</Link>
+                <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">{t.nav.contact}</Link>
                 <div className="pt-4 border-t border-white/20">
-                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">🔑 Login</Link>
-                  <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">🚀 Get Quote</Link>
+                  <div className="flex justify-center mb-4">
+                    <LanguageSwitcherCompact />
+                  </div>
+                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">{t.nav.login}</Link>
+                  <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">{t.nav.getQuote}</Link>
                 </div>
               </div>
             </div>
@@ -137,24 +139,23 @@ export function HomePage() {
               >
                 <div className="inline-flex items-center px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm font-medium">
                   <Code className="w-4 h-4 mr-2" />
-                  AI-Powered Software Development
+                  {t.hero.badge}
                 </div>
                 
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-                    Build Amazing
+                    {t.hero.title1}
                   </span>
                   <br />
-                  <span className="text-white">Software</span>
+                  <span className="text-white">{t.hero.title2}</span>
                   <br />
                   <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                    Solutions
+                    {t.hero.title3}
                   </span>
                 </h1>
                 
                 <p className="text-xl text-gray-300 leading-relaxed">
-                  From web applications to AI-powered systems, we create cutting-edge software 
-                  that transforms businesses and drives innovation.
+                  {t.hero.description}
                 </p>
               </motion.div>
 
@@ -169,7 +170,7 @@ export function HomePage() {
                   className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
                 >
                   <Rocket className="w-5 h-5" />
-                  <span>View Packages</span>
+                  <span>{t.hero.viewPackages}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 
@@ -178,7 +179,7 @@ export function HomePage() {
                   className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <Play className="w-5 h-5" />
-                  <span>Watch Demo</span>
+                  <span>{t.hero.watchDemo}</span>
                 </button>
               </motion.div>
 
