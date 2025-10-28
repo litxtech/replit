@@ -10,4 +10,22 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  server: {
+    headers: {
+      // Security headers for admin routes
+      'X-Frame-Options': 'DENY',
+      'X-Content-Type-Options': 'nosniff',
+      'Referrer-Policy': 'strict-origin-when-cross-origin',
+    }
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          admin: ['./src/pages/AdminPage.tsx', './src/pages/AdminLogin.tsx']
+        }
+      }
+    }
+  }
 })
