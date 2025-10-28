@@ -21,7 +21,7 @@ interface CheckoutModalProps {
 
 export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const [, setError] = useState('')
+  const [error, setError] = useState('')
   const [serverStatus, setServerStatus] = useState<'checking' | 'online' | 'offline'>('checking')
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 
 // Floating Code Elements Component
@@ -46,6 +46,8 @@ export function FloatingCodeElements() {
     }
 
     function animate() {
+      if (!ctx || !canvas) return
+      
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       
       particles.forEach(particle => {
@@ -73,6 +75,7 @@ export function FloatingCodeElements() {
     animate()
 
     const handleResize = () => {
+      if (!canvas) return
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }

@@ -4,11 +4,10 @@ import { motion } from 'framer-motion'
 import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
-import { FloatingCodeElements, AnimatedCodeBlock, TechStackShowcase, AnimatedStats } from '../components/AnimatedElements'
+import { FloatingCodeElements, AnimatedCodeBlock, AnimatedStats } from '../components/AnimatedElements'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [showDemo, setShowDemo] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('webSaaS')
 
   return (
@@ -175,7 +174,7 @@ export function HomePage() {
                 </Link>
                 
                 <button
-                  onClick={() => setShowDemo(true)}
+                  onClick={() => window.open('https://www.litxtech.com/demo', '_blank')}
                   className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2"
                 >
                   <Play className="w-5 h-5" />
