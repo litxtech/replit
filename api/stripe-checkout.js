@@ -119,14 +119,36 @@ export default async (req, res) => {
     console.log('Product found:', product)
     console.log('Price ID:', product.priceId)
 
-    // Stripe'dan gerçek fiyatı çek
+    // Check if priceId is a Product ID (starts with prod_) and get the first price
     let stripePrice
-    try {
-      stripePrice = await stripe.prices.retrieve(product.priceId)
-      console.log('Stripe price retrieved:', stripePrice)
-    } catch (priceError) {
-      console.error('Error fetching Stripe price:', priceError)
-      return res.status(400).json({ error: 'Invalid Stripe price ID: ' + product.priceId })
+    if (product.priceId && product.priceId.startsWith('prod_')) {
+      console.log('Product ID detected, fetching prices...')
+      try {
+        const prices = await stripe.prices.list({
+          product: product.priceId,
+          active: true,
+          limit: 1
+        })
+        
+        if (prices.data.length === 0) {
+          return res.status(400).json({ error: 'No active prices found for product: ' + product.priceId })
+        }
+        
+        stripePrice = prices.data[0]
+        console.log('Found price:', stripePrice.id)
+      } catch (priceError) {
+        console.error('Error fetching prices for product:', priceError)
+        return res.status(400).json({ error: 'Error fetching prices for product: ' + product.priceId })
+      }
+    } else {
+      // Direct price ID
+      try {
+        stripePrice = await stripe.prices.retrieve(product.priceId)
+        console.log('Stripe price retrieved:', stripePrice)
+      } catch (priceError) {
+        console.error('Error fetching Stripe price:', priceError)
+        return res.status(400).json({ error: 'Invalid Stripe price ID: ' + product.priceId })
+      }
     }
 
     // Create real Stripe Checkout Session
@@ -134,7 +156,7 @@ export default async (req, res) => {
       payment_method_types: ['card'],
       line_items: [
         {
-          price: product.priceId, // Stripe'dan gelen gerçek Price ID kullan
+          price: stripePrice.id, // Gerçek Price ID kullan
           quantity: 1,
         },
       ],
