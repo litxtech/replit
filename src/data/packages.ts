@@ -290,7 +290,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Brand alignment review'
         ],
         color: 'text-stone-400',
-        stripePriceId: 'prod_TJxoeD8wdnwC9c'
+        stripePriceId: 'prod_TJcac84nb1EnsO'
       }
     ]
   }

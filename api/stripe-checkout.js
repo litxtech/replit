@@ -5,7 +5,7 @@ import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-// Real Stripe Products - 18 packages with Product IDs
+// Real Stripe Products - 18 packages with actual Product IDs
 const STRIPE_PRODUCTS = {
   'starter-website': {
     name: 'Starter Website',
@@ -50,7 +50,7 @@ const STRIPE_PRODUCTS = {
   'travel-agency-hub': {
     name: 'Travel & Agency Hub',
     description: 'For tourism agencies and transfer services.',
-    priceId: 'prod_TJx926DW3tbdCW'
+    priceId: 'prod_TJxAosCL7gRfYQ'
   },
   'corporate-site': {
     name: 'Corporate Site',
@@ -70,31 +70,31 @@ const STRIPE_PRODUCTS = {
   'full-digital-suite': {
     name: 'Full Digital Suite',
     description: 'Complete digital transformation package.',
-    priceId: 'prod_TJxnjj8LtU8LOU'
+    priceId: 'prod_TJxBIgZuYnIadp'
   },
   'custom-enterprise-solutions': {
     name: 'Custom Enterprise Solutions',
     description: 'Tailored solutions for large enterprises.',
-    priceId: 'prod_TJxos0g0KRwb5e'
+    priceId: 'prod_TJcc3OTPPk4Uf9'
   },
   'ui-ux-design-suite': {
     name: 'UI/UX Design Suite',
     description: 'Professional design and user experience services.',
-    priceId: 'prod_TJxoeD8wdnwC9c'
+    priceId: 'prod_TJcac84nb1EnsO'
   },
-  'mobile-app-development': {
-    name: 'Mobile App Development',
-    description: 'Native and cross-platform mobile applications.',
+  'annual-maintenance-plan': {
+    name: 'Annual Maintenance Plan',
+    description: 'Yearly maintenance and support package.',
     priceId: 'prod_TJxpyXo2HM4hkT'
   },
-  'web-application': {
-    name: 'Web Application',
-    description: 'Custom web applications and platforms.',
-    priceId: 'prod_TJcc3OTPPk4Uf9'
+  'custom-software-development': {
+    name: 'Custom Software Development',
+    description: 'Bespoke software solutions tailored to your needs.',
+    priceId: 'prod_TJxoeD8wdnwC9c'
   },
-  'api-integration': {
-    name: 'API Integration',
-    description: 'Third-party API integrations and automation.',
+  'digital-suite': {
+    name: 'Digital Suite',
+    description: 'Comprehensive digital transformation package.',
     priceId: 'prod_TJcbY7ejfso2Yq'
   }
 }
