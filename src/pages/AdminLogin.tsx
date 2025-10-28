@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { 
   Shield, 
@@ -18,13 +18,26 @@ export function AdminLogin() {
   const [password, setPassword] = useState('')
   // const [isMenuOpen, setIsMenuOpen] = useState(false)
 
+  // Check authentication on component mount
+  useEffect(() => {
+    const authStatus = localStorage.getItem('admin_authenticated')
+    const adminEmail = localStorage.getItem('admin_email')
+    if (authStatus === 'true' && adminEmail === 'admin@litxtech.com') {
+      setIsAuthenticated(true)
+      setEmail(adminEmail)
+    }
+  }, [])
+
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
-    // Basit authentication (production'da gerçek auth kullanın)
-    if (email === 'admin@litxtech.com' && password === 'admin123') {
+    // Secure authentication with proper password
+    if (email === 'admin@litxtech.com' && password === 'bavul2017?') {
       setIsAuthenticated(true)
+      // Store authentication in localStorage
+      localStorage.setItem('admin_authenticated', 'true')
+      localStorage.setItem('admin_email', email)
     } else {
-      alert('Geçersiz kullanıcı adı veya şifre')
+      alert('Invalid username or password')
     }
   }
 
@@ -32,6 +45,9 @@ export function AdminLogin() {
     setIsAuthenticated(false)
     setEmail('')
     setPassword('')
+    // Clear authentication from localStorage
+    localStorage.removeItem('admin_authenticated')
+    localStorage.removeItem('admin_email')
   }
 
   if (!isAuthenticated) {
@@ -81,7 +97,7 @@ export function AdminLogin() {
 
           <div className="mt-6 text-center">
             <p className="text-gray-400 text-sm">
-              Demo için: admin@litxtech.com / admin123
+              Admin credentials: admin@litxtech.com / bavul2017?
             </p>
           </div>
         </div>

@@ -32,6 +32,17 @@ export default function AdminDashboard() {
     aiRequests: 4567
   })
 
+  const handleEditPolicy = (policyType: string) => {
+    alert(`Editing ${policyType} - This will open the policy editor`)
+    // TODO: Implement policy editor
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('admin_authenticated')
+    localStorage.removeItem('admin_email')
+    window.location.href = '/admin/login'
+  }
+
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: BarChart3, color: 'text-blue-500' },
     { id: 'users', label: 'Kullanıcı Yönetimi', icon: Users, color: 'text-green-500' },
@@ -161,7 +172,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">GDPR, CCPA, KVKK uyumlu gizlilik politikası</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v3.2 - 8 Ağu 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Privacy Policy')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
 
@@ -171,7 +187,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">Wyoming yasalarına uygun hizmet şartları</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v2.1 - 8 Ağu 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Terms of Service')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
 
@@ -181,7 +202,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">35 alt işlemci ve veri işleme ortakları</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v1.0 - 1 Eyl 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Subprocessors')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
 
@@ -191,7 +217,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">İade ve iptal politikaları</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v1.5 - 15 Ağu 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Refund Policy')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
 
@@ -201,7 +232,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">Çerez kullanımı ve takip politikaları</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v1.2 - 20 Ağu 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Cookie Policy')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
 
@@ -211,7 +247,12 @@ export default function AdminDashboard() {
                   <p className="text-sm text-gray-600 mb-4">Veri güvenliği ve şifreleme politikaları</p>
                   <div className="flex justify-between items-center">
                     <span className="text-sm text-gray-500">v2.0 - 25 Ağu 2025</span>
-                    <button className="text-blue-600 hover:text-blue-800 text-sm">Düzenle</button>
+                    <button 
+                      onClick={() => handleEditPolicy('Data Security')}
+                      className="text-blue-600 hover:text-blue-800 text-sm"
+                    >
+                      Düzenle
+                    </button>
                   </div>
                 </div>
               </div>
@@ -317,7 +358,10 @@ export default function AdminDashboard() {
         </nav>
 
         <div className="absolute bottom-0 w-full p-4 border-t border-gray-200">
-          <button className="w-full flex items-center px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center px-3 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+          >
             <LogOut className="h-5 w-5 mr-3" />
             Çıkış Yap
           </button>

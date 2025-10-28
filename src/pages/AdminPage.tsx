@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AdminDashboard from '../components/AdminDashboard'
 import { ContentManagementSystem } from '../components/ContentManagementSystem'
 import { BlogManagement } from './BlogManagement'
 
 export function AdminPage() {
   const [activeSection, setActiveSection] = useState<'dashboard' | 'cms' | 'blog'>('dashboard')
+  const navigate = useNavigate()
+
+  // Authentication guard
+  useEffect(() => {
+    const authStatus = localStorage.getItem('admin_authenticated')
+    const adminEmail = localStorage.getItem('admin_email')
+    
+    if (authStatus !== 'true' || adminEmail !== 'admin@litxtech.com') {
+      navigate('/admin/login')
+    }
+  }, [navigate])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
