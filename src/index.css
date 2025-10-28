@@ -2,6 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.animate-gradient {
+  background: linear-gradient(270deg, #5c00ff, #a600ff);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.animate-breathe {
+  animation: breathe 2s ease-in-out infinite;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

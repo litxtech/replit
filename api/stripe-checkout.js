@@ -209,7 +209,9 @@ export default async (req, res) => {
     res.json({ 
       url: session.url,
       price: stripePrice.unit_amount / 100, // Gerçek fiyatı da döndür
-      currency: stripePrice.currency
+      currency: stripePrice.currency,
+      packageName: product.name,
+      packageId: packageId
     })
   } catch (error) {
     console.error('Stripe checkout error:', error)

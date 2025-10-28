@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
-import { FloatingCodeElements, AnimatedCodeBlock, AnimatedStats } from '../components/AnimatedElements'
+import { FloatingCodeElements, AnimatedCodeBlock, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
 import { LanguageSwitcher, LanguageSwitcherCompact } from '../components/LanguageSwitcher'
 import { useTranslation } from '../contexts/LanguageContext'
 
@@ -14,13 +14,16 @@ export function HomePage() {
   const t = useTranslation()
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden animate-gradient">
       {/* Animated Background */}
       <div className="absolute inset-0 bg-[url('/grid.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
       <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10"></div>
       
       {/* Floating Code Elements */}
       <FloatingCodeElements />
+      
+      {/* Background Code Particles */}
+      <BackgroundCodeParticles />
       
       {/* Floating particles */}
       <div className="absolute inset-0 overflow-hidden">
@@ -142,17 +145,19 @@ export function HomePage() {
                   {t.hero.badge}
                 </div>
                 
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+                <BreathingTitle>
                   <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
                     {t.hero.title1}
                   </span>
-                  <br />
-                  <span className="text-white">{t.hero.title2}</span>
-                  <br />
-                  <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
-                    {t.hero.title3}
-                  </span>
-                </h1>
+                </BreathingTitle>
+                <br />
+                <span className="text-white">{t.hero.title2}</span>
+                <br />
+                <span className="bg-gradient-to-r from-pink-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  {t.hero.title3}
+                </span>
+              </h1>
                 
                 <p className="text-xl text-gray-300 leading-relaxed">
                   {t.hero.description}
@@ -165,14 +170,15 @@ export function HomePage() {
                 transition={{ delay: 0.3, duration: 0.8 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <Link
-                  to="/packages"
-                  className="group bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
-                >
-                  <Rocket className="w-5 h-5" />
-                  <span>{t.hero.viewPackages}</span>
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </Link>
+              <GlowButton
+                as={Link}
+                to="/packages"
+                className="flex items-center justify-center space-x-2 shadow-lg hover:shadow-xl"
+              >
+                <Rocket className="w-5 h-5" />
+                <span>{t.hero.viewPackages}</span>
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </GlowButton>
                 
                 <button
                   onClick={() => window.open('https://www.litxtech.com/demo', '_blank')}
@@ -250,7 +256,7 @@ export function HomePage() {
                   <Cloud className="w-7 h-7 text-pink-400" />
                 </motion.div>
 
-                <AnimatedCodeBlock />
+                <HeroCodeFlow />
               </div>
             </motion.div>
           </div>
@@ -271,37 +277,53 @@ export function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <motion.div 
+              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group"
+              whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <motion.div 
+                className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                whileHover={{ rotate: 8 }}
+              >
                 <Rocket className="w-8 h-8 text-white" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl font-bold text-white mb-4">Lightning Fast</h3>
               <p className="text-gray-300 leading-relaxed">
                 Deploy your applications in minutes, not months. Our optimized infrastructure ensures maximum performance.
               </p>
-            </div>
+            </motion.div>
 
-            {/* Feature 2 */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                <Bot className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-2xl font-bold text-white mb-4">AI-Powered</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Leverage advanced AI and machine learning to automate processes and gain intelligent insights.
-              </p>
-            </div>
+            {/* Feature 2 - AI Interaction */}
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <AIInteraction />
+            </motion.div>
 
             {/* Feature 3 */}
-            <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
-              <div className="w-16 h-16 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+            <motion.div 
+              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group"
+              whileHover={{ scale: 1.03, boxShadow: "0 20px 40px rgba(0,0,0,0.3)" }}
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <motion.div 
+                className="w-16 h-16 bg-gradient-to-r from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform"
+                whileHover={{ rotate: 8 }}
+              >
                 <Shield className="w-8 h-8 text-white" />
-              </div>
+              </motion.div>
               <h3 className="text-2xl font-bold text-white mb-4">Enterprise Security</h3>
               <p className="text-gray-300 leading-relaxed">
                 Bank-level security with GDPR, CCPA, and KVKK compliance. Your data is always protected.
               </p>
-            </div>
+            </motion.div>
 
             {/* Feature 4 */}
             <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 hover:bg-white/15 transition-all duration-300 group">
@@ -390,7 +412,11 @@ export function HomePage() {
 
       {/* Footer */}
       <footer className="relative z-10 bg-white/5 backdrop-blur-md border-t border-white/20 mt-20">
-        <div className="max-w-7xl mx-auto px-6 py-12">
+        {/* Matrix Code Rain */}
+        <MatrixCodeRain />
+        
+        <div className="relative z-10">
+          <div className="max-w-7xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Company Info */}
             <div className="space-y-4">

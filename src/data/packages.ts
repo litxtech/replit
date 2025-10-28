@@ -24,7 +24,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'starter-website',
         name: 'Starter Website',
-        price: 990,
+        price: 99, // $99 - Stripe'da gerçek fiyat
         description: 'Perfect for individuals and small businesses.',
         features: [
           '1 responsive landing page',
@@ -41,7 +41,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'professional-website-suite',
         name: 'Professional Website Suite',
-        price: 2490,
+        price: 249, // $249 - Stripe'da gerçek fiyat
         description: 'Best for growing startups needing automation.',
         features: [
           'Up to 5 dynamic pages',
@@ -61,7 +61,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'enterprise-saas-platform',
         name: 'Enterprise SaaS Platform',
-        price: 4990,
+        price: 499, // $499 - Stripe'da gerçek fiyat
         description: 'For SaaS products and scalable business platforms.',
         features: [
           'Unlimited pages',
@@ -87,7 +87,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'ai-lite',
         name: 'AI Lite',
-        price: 1490,
+        price: 149, // $149 - Stripe'da gerçek fiyat
         description: 'Entry-level AI integration for websites or apps.',
         features: [
           'Chatbot setup (OpenAI or DeepSeek)',
@@ -102,7 +102,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'ai-pro',
         name: 'AI Pro',
-        price: 3490,
+        price: 349, // $349 - Stripe'da gerçek fiyat
         description: 'Advanced automation & data-driven AI.',
         features: [
           'Multi-agent system setup',
@@ -118,7 +118,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'ai-enterprise',
         name: 'AI Enterprise',
-        price: 8990,
+        price: 899, // $899 - Stripe'da gerçek fiyat
         description: 'For large-scale AI-driven businesses.',
         features: [
           'Private AI model training',
@@ -141,7 +141,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'smart-hotel-suite',
         name: 'Smart Hotel Suite',
-        price: 2990,
+        price: 299, // $299 - Stripe'da gerçek fiyat
         description: 'For hotels, villas, and B&Bs.',
         features: [
           'Dynamic room booking system',
@@ -158,7 +158,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'restaurant-pro',
         name: 'Restaurant Pro',
-        price: 1790,
+        price: 179, // $179 - Stripe'da gerçek fiyat
         description: 'For restaurants, cafés, and bars.',
         features: [
           'Menu + order system',
@@ -174,7 +174,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'travel-agency-hub',
         name: 'Travel & Agency Hub',
-        price: 3790,
+        price: 379, // $379 - Stripe'da gerçek fiyat
         description: 'For tourism agencies and transfer services.',
         features: [
           'Destination management system',
@@ -195,7 +195,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'corporate-site',
         name: 'Corporate Site',
-        price: 1590,
+        price: 159, // $159 - Stripe'da gerçek fiyat
         description: 'For professional companies needing authority online.',
         features: [
           'Corporate design system',
@@ -281,7 +281,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
       {
         id: 'ui-ux-design-suite',
         name: 'UI/UX Design Suite',
-        price: 1590,
+        price: 159, // $159 - Stripe'da gerçek fiyat
         description: 'Full design system and components.',
         features: [
           'Full design system (Figma + Tailwind)',
