@@ -36,7 +36,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Hosting setup'
         ],
         color: 'text-blue-400',
-        stripePriceId: 'price_starter_website'
+        stripePriceId: 'prod_TJx1tMK4kjAKYw'
       },
       {
         id: 'professional-website-suite',
@@ -56,7 +56,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
         ],
         color: 'text-purple-400',
         popular: true,
-        stripePriceId: 'price_professional_website_suite'
+        stripePriceId: 'prod_TJx2DQI2ya2TRE'
       },
       {
         id: 'enterprise-saas-platform',
@@ -76,7 +76,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '15-day delivery'
         ],
         color: 'text-pink-400',
-        stripePriceId: 'price_enterprise_saas_platform'
+        stripePriceId: 'prod_TJx3685vaECdcB'
       }
     ]
   },
@@ -97,7 +97,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '5-day delivery'
         ],
         color: 'text-green-400',
-        stripePriceId: 'price_ai_lite'
+        stripePriceId: 'prod_TJx4FeOKSgVjsY'
       },
       {
         id: 'ai-pro',
@@ -113,7 +113,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '10-day delivery'
         ],
         color: 'text-yellow-400',
-        stripePriceId: 'price_ai_pro'
+        stripePriceId: 'prod_TJx7xGb2pBFQsA'
       },
       {
         id: 'ai-enterprise',
@@ -130,7 +130,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           '20-day delivery'
         ],
         color: 'text-red-400',
-        stripePriceId: 'price_ai_enterprise'
+        stripePriceId: 'prod_TJx85dkj0qblrw'
       }
     ]
   },
@@ -153,7 +153,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'SEO optimization'
         ],
         color: 'text-indigo-400',
-        stripePriceId: 'price_smart_hotel_suite'
+        stripePriceId: 'prod_TJx8NFA5ektMlM'
       },
       {
         id: 'restaurant-pro',
@@ -169,7 +169,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Customer loyalty module'
         ],
         color: 'text-orange-400',
-        stripePriceId: 'price_restaurant_pro'
+        stripePriceId: 'prod_TJx9mc9WGeeTS5'
       },
       {
         id: 'travel-agency-hub',
@@ -184,7 +184,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'CRM integration'
         ],
         color: 'text-teal-400',
-        stripePriceId: 'price_travel_agency_hub'
+        stripePriceId: 'prod_TJx926DW3tbdCW'
       }
     ]
   },
@@ -206,7 +206,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Analytics setup'
         ],
         color: 'text-gray-400',
-        stripePriceId: 'price_corporate_site'
+        stripePriceId: 'prod_TJxAosCL7gRfYQ'
       },
       {
         id: 'erp-crm-suite',
@@ -223,7 +223,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Cloud backup'
         ],
         color: 'text-cyan-400',
-        stripePriceId: 'price_erp_crm_suite'
+        stripePriceId: 'prod_TJxAg8uJVRzthM'
       },
       {
         id: 'ecommerce-ultra',
@@ -239,7 +239,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'AI product recommendations'
         ],
         color: 'text-emerald-400',
-        stripePriceId: 'price_ecommerce_ultra'
+        stripePriceId: 'prod_TJxBIgZuYnIadp'
       }
     ]
   },
@@ -260,7 +260,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Dedicated strategy dashboard'
         ],
         color: 'text-amber-400',
-        stripePriceId: 'price_full_digital_suite'
+        stripePriceId: 'prod_TJxnjj8LtU8LOU'
       },
       {
         id: 'custom-enterprise-solutions',
@@ -276,7 +276,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Source code ownership guaranteed'
         ],
         color: 'text-slate-400',
-        stripePriceId: 'price_custom_enterprise_solutions'
+        stripePriceId: 'prod_TJxos0g0KRwb5e'
       },
       {
         id: 'ui-ux-design-suite',
@@ -290,7 +290,7 @@ export const PACKAGE_CATEGORIES: Record<string, PackageCategory> = {
           'Brand alignment review'
         ],
         color: 'text-stone-400',
-        stripePriceId: 'price_ui_ux_design_suite'
+        stripePriceId: 'prod_TJxoeD8wdnwC9c'
       }
     ]
   }

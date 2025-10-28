@@ -5,82 +5,97 @@ import Stripe from 'stripe'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-// Real Stripe Products - 15 packages with new Price IDs
+// Real Stripe Products - 18 packages with Product IDs
 const STRIPE_PRODUCTS = {
   'starter-website': {
     name: 'Starter Website',
     description: 'Perfect for individuals and small businesses.',
-    priceId: process.env.STRIPE_STARTER_WEBSITE_PRICE_ID
+    priceId: 'prod_TJx1tMK4kjAKYw'
   },
   'professional-website-suite': {
     name: 'Professional Website Suite', 
     description: 'Best for growing startups needing automation.',
-    priceId: process.env.STRIPE_PROFESSIONAL_WEBSITE_SUITE_PRICE_ID
+    priceId: 'prod_TJx2DQI2ya2TRE'
   },
   'enterprise-saas-platform': {
     name: 'Enterprise SaaS Platform',
     description: 'For SaaS products and scalable business platforms.', 
-    priceId: process.env.STRIPE_ENTERPRISE_SAAS_PLATFORM_PRICE_ID
+    priceId: 'prod_TJx3685vaECdcB'
   },
   'ai-lite': {
     name: 'AI Lite',
     description: 'Entry-level AI integration for websites or apps.',
-    priceId: process.env.STRIPE_AI_LITE_PRICE_ID
+    priceId: 'prod_TJx4FeOKSgVjsY'
   },
   'ai-pro': {
     name: 'AI Pro',
     description: 'Advanced automation & data-driven AI.',
-    priceId: process.env.STRIPE_AI_PRO_PRICE_ID
+    priceId: 'prod_TJx7xGb2pBFQsA'
   },
   'ai-enterprise': {
     name: 'AI Enterprise',
     description: 'For large-scale AI-driven businesses.',
-    priceId: process.env.STRIPE_AI_ENTERPRISE_PRICE_ID
+    priceId: 'prod_TJx85dkj0qblrw'
   },
   'smart-hotel-suite': {
     name: 'Smart Hotel Suite',
     description: 'For hotels, villas, and B&Bs.',
-    priceId: process.env.STRIPE_SMART_HOTEL_SUITE_PRICE_ID
+    priceId: 'prod_TJx8NFA5ektMlM'
   },
   'restaurant-pro': {
     name: 'Restaurant Pro',
     description: 'For restaurants, cafés, and bars.',
-    priceId: process.env.STRIPE_RESTAURANT_PRO_PRICE_ID
+    priceId: 'prod_TJx9mc9WGeeTS5'
   },
   'travel-agency-hub': {
     name: 'Travel & Agency Hub',
     description: 'For tourism agencies and transfer services.',
-    priceId: process.env.STRIPE_TRAVEL_AGENCY_HUB_PRICE_ID
+    priceId: 'prod_TJx926DW3tbdCW'
   },
   'corporate-site': {
     name: 'Corporate Site',
     description: 'For professional companies needing authority online.',
-    priceId: process.env.STRIPE_CORPORATE_SITE_PRICE_ID
+    priceId: 'prod_TJxAosCL7gRfYQ'
   },
   'erp-crm-suite': {
     name: 'ERP / CRM Suite',
-    description: 'Internal management software.',
-    priceId: process.env.STRIPE_ERP_CRM_SUITE_PRICE_ID
+    description: 'For businesses needing comprehensive management systems.',
+    priceId: 'prod_TJxAg8uJVRzthM'
   },
   'ecommerce-ultra': {
     name: 'E-Commerce Ultra',
-    description: 'For online stores & product platforms.',
-    priceId: process.env.STRIPE_ECOMMERCE_ULTRA_PRICE_ID
+    description: 'For online stores and marketplaces.',
+    priceId: 'prod_TJxBIgZuYnIadp'
   },
   'full-digital-suite': {
     name: 'Full Digital Suite',
-    description: 'For marketing agencies or corporate teams.',
-    priceId: process.env.STRIPE_FULL_DIGITAL_SUITE_PRICE_ID
+    description: 'Complete digital transformation package.',
+    priceId: 'prod_TJxnjj8LtU8LOU'
   },
   'custom-enterprise-solutions': {
     name: 'Custom Enterprise Solutions',
-    description: 'Tailored solutions for corporations & startups.',
-    priceId: process.env.STRIPE_CUSTOM_ENTERPRISE_SOLUTIONS_PRICE_ID
+    description: 'Tailored solutions for large enterprises.',
+    priceId: 'prod_TJxos0g0KRwb5e'
   },
   'ui-ux-design-suite': {
     name: 'UI/UX Design Suite',
-    description: 'Full design system and components.',
-    priceId: process.env.STRIPE_UI_UX_DESIGN_SUITE_PRICE_ID
+    description: 'Professional design and user experience services.',
+    priceId: 'prod_TJxoeD8wdnwC9c'
+  },
+  'mobile-app-development': {
+    name: 'Mobile App Development',
+    description: 'Native and cross-platform mobile applications.',
+    priceId: 'prod_TJxpyXo2HM4hkT'
+  },
+  'web-application': {
+    name: 'Web Application',
+    description: 'Custom web applications and platforms.',
+    priceId: 'prod_TJcc3OTPPk4Uf9'
+  },
+  'api-integration': {
+    name: 'API Integration',
+    description: 'Third-party API integrations and automation.',
+    priceId: 'prod_TJcbY7ejfso2Yq'
   }
 }
 
@@ -167,7 +182,7 @@ export default async (req, res) => {
         packageId,
         packageName: product.name,
         packagePrice: (stripePrice.unit_amount / 100).toString(), // Stripe'dan gelen gerçek fiyat
-        stripePriceId: product.priceId
+        stripePriceId: stripePrice.id
       },
       custom_fields: [
         {
