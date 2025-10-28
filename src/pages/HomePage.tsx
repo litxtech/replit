@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Menu, X, Zap, Rocket, Shield, Star, Users, Bot, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
-import { FloatingCodeElements, AnimatedCodeBlock, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
+import { FloatingCodeElements, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
 import { LanguageSwitcher, LanguageSwitcherCompact } from '../components/LanguageSwitcher'
 import { useTranslation } from '../contexts/LanguageContext'
 
@@ -484,6 +484,7 @@ export function HomePage() {
               <span className="text-blue-400 ml-1">Powered by DeepSeek AI • Hosted on Vercel • Database: Supabase</span>
             </p>
           </div>
+        </div>
         </div>
       </footer>
     </div>
