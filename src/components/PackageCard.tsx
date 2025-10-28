@@ -123,6 +123,31 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
           </div>
         </div>
 
+        {/* Non-Refund Policy Notice */}
+        <div className="mb-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <div className="flex items-start space-x-2">
+            <div className="text-amber-600 text-lg">⚠️</div>
+            <div className="text-sm">
+              <h4 className="font-semibold text-amber-800 mb-2">Important Notice:</h4>
+              <p className="text-amber-700 mb-2">
+                By completing this payment, you acknowledge that LitxTech LLC will begin providing custom software and digital service development immediately after purchase.
+              </p>
+              <p className="text-amber-700 mb-2">
+                Since this is a custom digital service, all sales are final and non-refundable once development has started.
+              </p>
+              <p className="text-amber-700 mb-2">
+                Please review your selected package and details carefully before confirming your order.
+              </p>
+              <p className="text-amber-700">
+                For questions or clarification before purchasing, you can reach us at{' '}
+                <a href="mailto:support@litxtech.com" className="text-blue-600 hover:text-blue-800 underline">
+                  support@litxtech.com
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+
           {/* Checkout Button */}
           <button
             onClick={handleCheckout}

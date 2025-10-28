@@ -1,7 +1,9 @@
 // Vercel Serverless Function - Real Stripe Integration
 // This will work on www.litxtech.com
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+import Stripe from 'stripe'
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 // Real Stripe Products - 18 packages
 const STRIPE_PRODUCTS = {
@@ -9,19 +11,19 @@ const STRIPE_PRODUCTS = {
     name: 'STARTER Package',
     description: 'Perfect for individuals and small businesses.',
     price: 99000, // $990 in cents
-    priceId: process.env.STRIPE_STARTER_PRICE_ID
+    productId: 'prod_TJcc3OTPPk4Uf9' // Your Stripe Product ID
   },
   'professional-web': {
     name: 'PROFESSIONAL Package', 
     description: 'Best for growing startups needing automation.',
     price: 249000, // $2490 in cents
-    priceId: process.env.STRIPE_PROFESSIONAL_PRICE_ID
+    productId: 'prod_TJcbY7ejfso2Yq' // Your Stripe Product ID
   },
   'enterprise-web': {
     name: 'ENTERPRISE Package',
     description: 'For SaaS products and scalable business platforms.', 
     price: 499000, // $4990 in cents
-    priceId: process.env.STRIPE_ENTERPRISE_PRICE_ID
+    productId: 'prod_TJcac84nb1EnsO' // Your Stripe Product ID
   },
   'ai-lite': {
     name: 'AI LITE Package',
@@ -115,7 +117,7 @@ const STRIPE_PRODUCTS = {
   }
 }
 
-module.exports = async (req, res) => {
+export default async (req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
