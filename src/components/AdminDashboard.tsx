@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState } from 'react'
 import { 
   BarChart3, 
@@ -33,14 +35,17 @@ export default function AdminDashboard() {
   })
 
   const handleEditPolicy = (policyType: string) => {
-    alert(`Editing ${policyType} - This will open the policy editor`)
-    // TODO: Implement policy editor
+    console.log(`Editing ${policyType}`)
+    // TODO: Implement policy editor modal
+    alert(`Policy editor for ${policyType} will be implemented soon`)
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_authenticated')
-    localStorage.removeItem('admin_email')
-    window.location.href = '/admin/login'
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('admin_authenticated')
+      localStorage.removeItem('admin_email')
+      window.location.href = '/admin/login'
+    }
   }
 
   const menuItems = [

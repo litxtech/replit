@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AdminDashboard from '../components/AdminDashboard'
@@ -10,11 +12,13 @@ export function AdminPage() {
 
   // Authentication guard
   useEffect(() => {
-    const authStatus = localStorage.getItem('admin_authenticated')
-    const adminEmail = localStorage.getItem('admin_email')
-    
-    if (authStatus !== 'true' || adminEmail !== 'admin@litxtech.com') {
-      navigate('/admin/login')
+    if (typeof window !== 'undefined') {
+      const authStatus = localStorage.getItem('admin_authenticated')
+      const adminEmail = localStorage.getItem('admin_email')
+      
+      if (authStatus !== 'true' || adminEmail !== 'admin@litxtech.com') {
+        navigate('/admin/login')
+      }
     }
   }, [navigate])
 

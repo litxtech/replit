@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { 
@@ -20,11 +22,13 @@ export function AdminLogin() {
 
   // Check authentication on component mount
   useEffect(() => {
-    const authStatus = localStorage.getItem('admin_authenticated')
-    const adminEmail = localStorage.getItem('admin_email')
-    if (authStatus === 'true' && adminEmail === 'admin@litxtech.com') {
-      setIsAuthenticated(true)
-      setEmail(adminEmail)
+    if (typeof window !== 'undefined') {
+      const authStatus = localStorage.getItem('admin_authenticated')
+      const adminEmail = localStorage.getItem('admin_email')
+      if (authStatus === 'true' && adminEmail === 'admin@litxtech.com') {
+        setIsAuthenticated(true)
+        setEmail(adminEmail)
+      }
     }
   }, [])
 
@@ -34,8 +38,10 @@ export function AdminLogin() {
     if (email === 'admin@litxtech.com' && password === 'bavul2017?') {
       setIsAuthenticated(true)
       // Store authentication in localStorage
-      localStorage.setItem('admin_authenticated', 'true')
-      localStorage.setItem('admin_email', email)
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('admin_authenticated', 'true')
+        localStorage.setItem('admin_email', email)
+      }
     } else {
       alert('Invalid username or password')
     }
@@ -46,8 +52,10 @@ export function AdminLogin() {
     setEmail('')
     setPassword('')
     // Clear authentication from localStorage
-    localStorage.removeItem('admin_authenticated')
-    localStorage.removeItem('admin_email')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('admin_authenticated')
+      localStorage.removeItem('admin_email')
+    }
   }
 
   if (!isAuthenticated) {
@@ -70,7 +78,8 @@ export function AdminLogin() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="admin@litxtech.com"
+                placeholder="Enter your email"
+                autoComplete="username"
                 required
               />
             </div>
@@ -82,7 +91,8 @@ export function AdminLogin() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="••••••••"
+                placeholder="Enter your password"
+                autoComplete="current-password"
                 required
               />
             </div>
@@ -97,7 +107,7 @@ export function AdminLogin() {
 
           <div className="mt-6 text-center">
             <p className="text-gray-400 text-sm">
-              Admin credentials: admin@litxtech.com / bavul2017?
+              Contact support for admin access
             </p>
           </div>
         </div>
