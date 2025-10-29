@@ -9,6 +9,54 @@ if (!supabaseUrl || !supabaseAnonKey) {
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
+// General user authentication helpers (public site)
+export const userAuth = {
+  async signUpWithEmail(email: string, password: string) {
+    const { data, error } = await supabase.auth.signUp({ email, password })
+    if (error) throw error
+    return data
+  },
+
+  async signInWithEmail(email: string, password: string) {
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password })
+    if (error) throw error
+    return data
+  },
+
+  async signInWithMagicLink(email: string) {
+    const { data, error } = await supabase.auth.signInWithOtp({ email })
+    if (error) throw error
+    return data
+  },
+
+  async signInWithProvider(provider: 'google' | 'twitch') {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: {
+        redirectTo: `${window.location.origin}/auth/callback`
+      }
+    })
+    if (error) throw error
+    return data
+  },
+
+  async signOut() {
+    const { error } = await supabase.auth.signOut()
+    if (error) throw error
+  },
+
+  async getUser() {
+    const { data, error } = await supabase.auth.getUser()
+    if (error) throw error
+    return data.user
+  },
+
+  onAuthStateChange(callback: (event: string) => void) {
+    const { data } = supabase.auth.onAuthStateChange((event) => callback(event))
+    return data.subscription
+  }
+}
+
 // Admin authentication fonksiyonları
 export const adminAuth = {
   async login(email: string, password: string) {

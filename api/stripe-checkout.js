@@ -142,14 +142,20 @@ export default async (req, res) => {
         const prices = await stripe.prices.list({
           product: product.priceId,
           active: true,
-          limit: 1
+          limit: 100
         })
         
         if (prices.data.length === 0) {
           return res.status(400).json({ error: 'No active prices found for product: ' + product.priceId })
         }
         
-        stripePrice = prices.data[0]
+        // Try to match by lookup_key or metadata.packageId first
+        let matched = prices.data.find(p => p.lookup_key === packageId)
+        if (!matched) {
+          matched = prices.data.find(p => (p.metadata && p.metadata.packageId === packageId))
+        }
+
+        stripePrice = matched || prices.data[0]
         console.log('Found price:', stripePrice.id)
       } catch (priceError) {
         console.error('Error fetching prices for product:', priceError)
