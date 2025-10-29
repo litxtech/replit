@@ -10,8 +10,12 @@ export function AuthCallback() {
       // Supabase will set session via URL hash automatically on this route
       // Just wait a tick and redirect
       await new Promise((r) => setTimeout(r, 500))
+      if (!supabase) {
+        navigate('/auth')
+        return
+      }
       const { data } = await supabase.auth.getUser()
-      if (data.user) {
+      if (data && data.user) {
         navigate('/')
       } else {
         navigate('/auth')

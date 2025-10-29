@@ -1,35 +1,48 @@
-import { createClient } from '@supabase/supabase-js'
+import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables')
+// Do not throw during module init to avoid white screen if envs are missing in prod.
+// Instead, fail lazily when an auth method is actually invoked.
+let supabase: SupabaseClient | null = null
+if (supabaseUrl && supabaseAnonKey) {
+  supabase = createClient(supabaseUrl, supabaseAnonKey)
 }
+export { supabase }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+function requireClient(): SupabaseClient {
+  if (!supabase) {
+    throw new Error('Auth not configured')
+  }
+  return supabase
+}
 
 // General user authentication helpers (public site)
 export const userAuth = {
   async signUpWithEmail(email: string, password: string) {
+    if (!supabase) throw new Error('Auth not configured')
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) throw error
     return data
   },
 
   async signInWithEmail(email: string, password: string) {
+    if (!supabase) throw new Error('Auth not configured')
     const { data, error } = await supabase.auth.signInWithPassword({ email, password })
     if (error) throw error
     return data
   },
 
   async signInWithMagicLink(email: string) {
+    if (!supabase) throw new Error('Auth not configured')
     const { data, error } = await supabase.auth.signInWithOtp({ email })
     if (error) throw error
     return data
   },
 
   async signInWithProvider(provider: 'google' | 'twitch') {
+    if (!supabase) throw new Error('Auth not configured')
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
@@ -41,17 +54,20 @@ export const userAuth = {
   },
 
   async signOut() {
+    if (!supabase) return
     const { error } = await supabase.auth.signOut()
     if (error) throw error
   },
 
   async getUser() {
+    if (!supabase) return null
     const { data, error } = await supabase.auth.getUser()
     if (error) throw error
     return data.user
   },
 
   onAuthStateChange(callback: (event: string) => void) {
+    if (!supabase) return { unsubscribe: () => {} } as any
     const { data } = supabase.auth.onAuthStateChange((event) => callback(event))
     return data.subscription
   }
@@ -61,8 +77,9 @@ export const userAuth = {
 export const adminAuth = {
   async login(email: string, password: string) {
     try {
+      const client = requireClient()
       // Şifre hash'ini kontrol et
-      const { data, error } = await supabase
+      const { data, error } = await client
         .from('admin_users')
         .select('*')
         .eq('email', email)
@@ -86,7 +103,7 @@ export const adminAuth = {
       const expiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000) // 24 saat
 
       // Session kaydet
-      const { error: sessionError } = await supabase
+      const { error: sessionError } = await client
         .from('admin_sessions')
         .insert({
           admin_user_id: data.id,
@@ -118,10 +135,11 @@ export const adminAuth = {
 
   async logout() {
     try {
+      const client = supabase
       const sessionToken = localStorage.getItem('admin_session_token')
       
-      if (sessionToken) {
-        await supabase
+      if (client && sessionToken) {
+        await client
           .from('admin_sessions')
           .delete()
           .eq('session_token', sessionToken)
@@ -136,13 +154,14 @@ export const adminAuth = {
 
   async validateSession() {
     try {
+      const client = requireClient()
       const sessionToken = localStorage.getItem('admin_session_token')
       
       if (!sessionToken) {
         return null
       }
 
-      const { data, error } = await supabase
+      const { data, error } = await client
         .rpc('validate_admin_session', { token: sessionToken })
 
       if (error || !data || data.length === 0) {
@@ -176,7 +195,8 @@ export const adminAuth = {
 export const adminData = {
   async getDashboardStats() {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('admin_dashboard_stats')
         .select('*')
         .single()
@@ -191,7 +211,8 @@ export const adminData = {
 
   async getCustomerOrders(limit = 10) {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('customer_orders')
         .select('*')
         .order('created_at', { ascending: false })
@@ -207,7 +228,8 @@ export const adminData = {
 
   async getContactMessages(limit = 10) {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('contact_messages')
         .select('*')
         .order('created_at', { ascending: false })
@@ -223,7 +245,8 @@ export const adminData = {
 
   async getBlogPosts(limit = 10) {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('blog_posts')
         .select('*')
         .order('created_at', { ascending: false })
@@ -239,7 +262,8 @@ export const adminData = {
 
   async updateSiteSetting(key: string, value: any) {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('site_settings')
         .update({ value })
         .eq('key', key)
@@ -254,7 +278,8 @@ export const adminData = {
 
   async getSiteSettings() {
     try {
-      const { data, error } = await supabase
+      const client = requireClient()
+      const { data, error } = await client
         .from('site_settings')
         .select('*')
 
