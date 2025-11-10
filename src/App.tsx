@@ -18,6 +18,7 @@ import { RefundPolicy } from './pages/RefundPolicy'
 import { DataSecurityPolicy } from './pages/DataSecurityPolicy'
 import { CommercialAgreement } from './pages/CommercialAgreement'
 import { Subprocessors } from './pages/Subprocessors'
+import { AccountDeletionPolicy } from './pages/AccountDeletionPolicy'
 import { BlogManagement } from './pages/BlogManagement'
 import { AdminLogin } from './pages/AdminLogin'
 import { SuccessPage } from './pages/SuccessPage'
@@ -46,6 +47,7 @@ function App() {
           <Route path="/data-security-policy" element={<DataSecurityPolicy />} />
           <Route path="/commercial-agreement" element={<CommercialAgreement />} />
           <Route path="/subprocessors" element={<Subprocessors />} />
+          <Route path="/account-deletion-policy" element={<AccountDeletionPolicy />} />
           <Route path="/admin/blog" element={<BlogManagement />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/success" element={<SuccessPage />} />

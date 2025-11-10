@@ -455,6 +455,7 @@ export function HomePage() {
                 <Link to="/terms-of-service" className="block text-gray-300 hover:text-blue-400 transition-colors">Terms of Service</Link>
                 <Link to="/commercial-agreement" className="block text-gray-300 hover:text-blue-400 transition-colors">Commercial Agreement</Link>
                 <Link to="/subprocessors" className="block text-gray-300 hover:text-blue-400 transition-colors">Subprocessors</Link>
+                <Link to="/account-deletion-policy" className="block text-gray-300 hover:text-blue-400 transition-colors">Account Deletion Policy</Link>
               </div>
             </div>
 
