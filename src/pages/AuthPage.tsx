@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { userAuth } from '../lib/supabase'
 
 export function AuthPage() {
@@ -96,6 +97,12 @@ export function AuthPage() {
             <button disabled={loading} onClick={handleMagicLink} className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 transition-colors disabled:opacity-60">
               Send Magic Link
             </button>
+            <Link 
+              to="/auth/reset-password" 
+              className="block text-center text-sm text-blue-600 hover:text-blue-700 hover:underline"
+            >
+              Şifremi Unuttum
+            </Link>
             {message && (
               <div className="text-sm text-center text-gray-600">{message}</div>
             )}

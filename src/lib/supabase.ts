@@ -70,6 +70,24 @@ export const userAuth = {
     if (!supabase) return { unsubscribe: () => {} } as any
     const { data } = supabase.auth.onAuthStateChange((event) => callback(event))
     return data.subscription
+  },
+
+  async resetPassword(email: string) {
+    if (!supabase) throw new Error('Auth not configured')
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/auth/reset-password`
+    })
+    if (error) throw error
+    return data
+  },
+
+  async updatePassword(newPassword: string) {
+    if (!supabase) throw new Error('Auth not configured')
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword
+    })
+    if (error) throw error
+    return data
   }
 }
 
