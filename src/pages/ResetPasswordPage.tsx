@@ -15,35 +15,76 @@ export function ResetPasswordPage() {
 
   // URL hash'inde token varsa (Supabase şifre sıfırlama linki) update sayfasına geç
   useEffect(() => {
+    if (!supabase) return
+
+    let mounted = true
+
     const checkForRecoveryToken = async () => {
-      if (!supabase) return
-      
       // URL hash'ini kontrol et (Supabase token'ları hash'te gönderir)
-      const hashParams = new URLSearchParams(window.location.hash.substring(1))
-      const accessToken = hashParams.get('access_token')
+      const hash = window.location.hash.substring(1)
+      if (!hash) return
+
+      const hashParams = new URLSearchParams(hash)
       const type = hashParams.get('type')
+      const accessToken = hashParams.get('access_token')
       
-      // Query parametrelerini de kontrol et
-      const urlParams = new URLSearchParams(window.location.search)
-      const token = urlParams.get('token') || accessToken
-      const recoveryType = urlParams.get('type') || type
-      
-      if (token || (recoveryType === 'recovery' && accessToken)) {
-        // Supabase otomatik olarak session'ı ayarlar, biraz bekle
-        await new Promise((r) => setTimeout(r, 500))
-        
-        // Kullanıcının oturum açmış olup olmadığını kontrol et
-        const { data: { user } } = await supabase.auth.getUser()
-        if (user) {
-          setStep('update')
-        } else {
-          setMessage('Geçersiz veya süresi dolmuş şifre sıfırlama bağlantısı')
-          setMessageType('error')
+      // Eğer hash'te recovery token varsa
+      if (type === 'recovery' && accessToken) {
+        try {
+          // Supabase otomatik olarak hash'teki token'ları işler
+          // Biraz bekle ki Supabase session'ı ayarlasın
+          await new Promise((r) => setTimeout(r, 100))
+          
+          // Session'ı kontrol et
+          const { data: { session }, error: sessionError } = await supabase.auth.getSession()
+          
+          if (mounted) {
+            if (session && !sessionError) {
+              setStep('update')
+              // Hash'i temizle (güvenlik için)
+              window.history.replaceState(null, '', window.location.pathname)
+            } else {
+              console.error('Session error:', sessionError)
+              setMessage('Geçersiz veya süresi dolmuş şifre sıfırlama bağlantısı')
+              setMessageType('error')
+            }
+          }
+        } catch (error) {
+          console.error('Recovery token check error:', error)
+          if (mounted) {
+            setMessage('Şifre sıfırlama bağlantısı işlenirken bir hata oluştu')
+            setMessageType('error')
+          }
         }
       }
     }
     
+    // Auth state değişikliklerini dinle
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!mounted) return
+      
+      console.log('Auth state change:', event, session ? 'has session' : 'no session')
+      
+      if (event === 'PASSWORD_RECOVERY' && session) {
+        setStep('update')
+        window.history.replaceState(null, '', window.location.pathname)
+      } else if (event === 'SIGNED_IN' && session) {
+        // Eğer recovery token ile giriş yapıldıysa
+        const hash = window.location.hash
+        if (hash.includes('type=recovery')) {
+          setStep('update')
+          window.history.replaceState(null, '', window.location.pathname)
+        }
+      }
+    })
+    
+    // İlk kontrolü yap
     checkForRecoveryToken()
+    
+    return () => {
+      mounted = false
+      subscription.unsubscribe()
+    }
   }, [])
 
   const handleRequestReset = async (e: React.FormEvent) => {
@@ -56,6 +97,7 @@ export function ResetPasswordPage() {
       if (!email) {
         setMessage('Lütfen e-posta adresinizi girin')
         setMessageType('error')
+        setLoading(false)
         return
       }
 
@@ -63,7 +105,8 @@ export function ResetPasswordPage() {
       setMessage('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi. Lütfen e-postanızı kontrol edin.')
       setMessageType('success')
     } catch (e: any) {
-      setMessage(e.message || 'Şifre sıfırlama isteği gönderilemedi')
+      console.error('Password reset error:', e)
+      setMessage(e.message || 'Şifre sıfırlama isteği gönderilemedi. Lütfen tekrar deneyin.')
       setMessageType('error')
     } finally {
       setLoading(false)
@@ -103,7 +146,8 @@ export function ResetPasswordPage() {
         navigate('/auth')
       }, 2000)
     } catch (e: any) {
-      setMessage(e.message || 'Şifre güncellenemedi')
+      console.error('Password update error:', e)
+      setMessage(e.message || 'Şifre güncellenemedi. Lütfen tekrar deneyin.')
       setMessageType('error')
     } finally {
       setLoading(false)
