@@ -25,6 +25,8 @@ import { AdminLogin } from './pages/AdminLogin'
 import { SuccessPage } from './pages/SuccessPage'
 import { CancelPage } from './pages/CancelPage'
 import { ResetPasswordPage } from './pages/ResetPasswordPage'
+import { EmailConfirmPage } from './pages/EmailConfirmPage'
+import { OnboardingPage } from './pages/OnboardingPage'
 
 function App() {
   return (
@@ -37,12 +39,14 @@ function App() {
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
+          <Route path="/auth/confirm" element={<EmailConfirmPage />} />
+          <Route path="/auth/onboarding" element={<OnboardingPage />} />
+          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/ai-builder" element={<AIBuilder />} />
           <Route path="/investment" element={<Investment />} />
           <Route path="/packages" element={<Packages />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/legal" element={<LegalDocumentPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-service" element={<TermsOfService />} />

@@ -22,7 +22,13 @@ function requireClient(): SupabaseClient {
 export const userAuth = {
   async signUpWithEmail(email: string, password: string) {
     if (!supabase) throw new Error('Auth not configured')
-    const { data, error } = await supabase.auth.signUp({ email, password })
+    const { data, error } = await supabase.auth.signUp({ 
+      email, 
+      password,
+      options: {
+        emailRedirectTo: `${window.location.origin}/auth/confirm`
+      }
+    })
     if (error) throw error
     return data
   },

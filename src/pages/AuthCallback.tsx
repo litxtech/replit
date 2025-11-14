@@ -1,37 +1,102 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { Loader2 } from 'lucide-react'
 
 export function AuthCallback() {
   const navigate = useNavigate()
 
   useEffect(() => {
     const handle = async () => {
-      // Supabase will set session via URL hash automatically on this route
-      // Just wait a tick and redirect
-      await new Promise((r) => setTimeout(r, 500))
       if (!supabase) {
         navigate('/auth')
         return
       }
-      const { data } = await supabase.auth.getUser()
-      if (data && data.user) {
-        navigate('/')
-      } else {
+
+      // Supabase will set session via URL hash automatically on this route
+      await new Promise((r) => setTimeout(r, 500))
+
+      try {
+        const { data: { user }, error } = await supabase.auth.getUser()
+        
+        if (error || !user) {
+          navigate('/auth')
+          return
+        }
+
+        // URL hash'ini kontrol et
+        const hash = window.location.hash
+        const hashParams = new URLSearchParams(hash.substring(1))
+        const type = hashParams.get('type')
+
+        // Eğer email confirmation ise
+        if (type === 'signup' || type === 'email') {
+          // Onboarding'e yönlendir (eğer tamamlanmamışsa)
+          if (!user.user_metadata?.onboarding_completed) {
+            navigate('/auth/onboarding')
+          } else {
+            navigate('/')
+          }
+        } 
+        // Eğer password recovery ise
+        else if (type === 'recovery') {
+          navigate('/auth/reset-password')
+        }
+        // Normal giriş
+        else {
+          // Onboarding tamamlanmamışsa onboarding'e yönlendir
+          if (!user.user_metadata?.onboarding_completed) {
+            navigate('/auth/onboarding')
+          } else {
+            navigate('/')
+          }
+        }
+      } catch (error) {
+        console.error('Auth callback error:', error)
         navigate('/auth')
       }
     }
+    
     handle()
+
+    // Auth state değişikliklerini dinle
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        const hash = window.location.hash
+        const hashParams = new URLSearchParams(hash.substring(1))
+        const type = hashParams.get('type')
+
+        if (type === 'signup' || type === 'email') {
+          if (!session.user.user_metadata?.onboarding_completed) {
+            navigate('/auth/onboarding')
+          } else {
+            navigate('/')
+          }
+        } else if (type === 'recovery') {
+          navigate('/auth/reset-password')
+        } else {
+          if (!session.user.user_metadata?.onboarding_completed) {
+            navigate('/auth/onboarding')
+          } else {
+            navigate('/')
+          }
+        }
+      }
+    })
+
+    return () => {
+      subscription.unsubscribe()
+    }
   }, [navigate])
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-sm p-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">Authentication</h1>
-        <p className="text-gray-700 mb-6">
-          Processing your authentication request...
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center">
+      <div className="max-w-md w-full bg-white/10 backdrop-blur-lg rounded-2xl shadow-2xl p-8 border border-white/20 text-center">
+        <Loader2 className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
+        <h1 className="text-3xl font-bold text-white mb-2">Kimlik Doğrulanıyor</h1>
+        <p className="text-gray-300">
+          İşleminiz gerçekleştiriliyor, lütfen bekleyin...
         </p>
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
       </div>
     </div>
   )
