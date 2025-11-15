@@ -1,5 +1,5 @@
-// Vercel Serverless Function - Donation System
-// Coffee donation for students
+// Vercel Serverless Function - MyTrabzon Donation System
+// Support packages: 89, 139, 339 TL
 
 import Stripe from 'stripe'
 
@@ -20,8 +20,9 @@ export default async (req, res) => {
     return res.json({ 
       status: 'OK', 
       timestamp: new Date().toISOString(),
-      message: 'Donation API is ready',
-      amounts: [3, 5, 10]
+      message: 'MyTrabzon Donation API is ready',
+      packages: [89, 139, 339],
+      currency: 'TRY'
     })
   }
 
@@ -30,13 +31,13 @@ export default async (req, res) => {
   }
 
   try {
-    const { amount, donorName, type } = req.body
+    const { amount, donorName, type, currency = 'TRY' } = req.body
 
     if (!amount || amount < 1) {
       return res.status(400).json({ error: 'Geçersiz bağış miktarı' })
     }
 
-    // Amount'u cent'e çevir
+    // Amount'u kuruş'a çevir (TRY için)
     const amountInCents = Math.round(amount * 100)
 
     // Create Stripe Checkout Session for donation
@@ -45,10 +46,10 @@ export default async (req, res) => {
       line_items: [
         {
           price_data: {
-            currency: 'usd',
+            currency: currency.toLowerCase(),
             product_data: {
-              name: 'Öğrenciye Kahve Bağışı',
-              description: `Toplanan bağış öğrenciye bir kahve ısmarla - ${donorName || 'Anonim'}`,
+              name: 'MyTrabzon Destek Paketi',
+              description: `MyTrabzon uygulamasına destek - ${donorName || 'Anonim'}`,
               images: [],
             },
             unit_amount: amountInCents,
@@ -60,19 +61,20 @@ export default async (req, res) => {
       success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/success?session_id={CHECKOUT_SESSION_ID}&type=donation`,
       cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/donation`,
       metadata: {
-        type: type || 'coffee-donation',
+        type: type || 'mytrabzon-support',
         donorName: donorName || 'Anonim',
         amount: amount.toString(),
+        currency: currency,
       },
       payment_intent_data: {
-        description: `Öğrenciye kahve bağışı - $${amount}`,
+        description: `MyTrabzon destek paketi - ${amount} ${currency}`,
       },
     })
 
     res.json({ 
       url: session.url,
       amount: amount,
-      currency: 'usd',
+      currency: currency,
       sessionId: session.id
     })
   } catch (error) {

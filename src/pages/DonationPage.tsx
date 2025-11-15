@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import { Coffee, Heart, Sparkles, CheckCircle, Loader2 } from 'lucide-react'
+import { Coffee, Heart, Sparkles, CheckCircle, Loader2, Users, MapPin, Code } from 'lucide-react'
 
-const DONATION_AMOUNTS = [
-  { amount: 3, label: '$3', description: 'Bir fincan kahve' },
-  { amount: 5, label: '$5', description: 'İki fincan kahve' },
-  { amount: 10, label: '$10', description: 'Üç fincan kahve' },
+const SUPPORT_PACKAGES = [
+  { amount: 89, label: '89 ₺', description: 'Temel Destek Paketi', icon: Heart },
+  { amount: 139, label: '139 ₺', description: 'Standart Destek Paketi', icon: Users },
+  { amount: 339, label: '339 ₺', description: 'Premium Destek Paketi', icon: Sparkles },
 ]
 
 export function DonationPage() {
@@ -32,7 +32,8 @@ export function DonationPage() {
         body: JSON.stringify({
           amount,
           donorName: donorName || 'Anonim',
-          type: 'coffee-donation'
+          type: 'mytrabzon-support',
+          currency: 'TRY'
         }),
       })
 
@@ -71,14 +72,48 @@ export function DonationPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <div className="inline-flex items-center justify-center w-20 h-20 bg-purple-600 rounded-full mb-6">
-            <Coffee className="w-10 h-10 text-white" />
+            <Heart className="w-10 h-10 text-white" />
           </div>
           <h1 className="text-5xl font-bold text-white mb-4">
-            Toplanan Bağış Öğrenciye Bir Kahve Ismarla
+            MyTrabzon – Destek & Bağış
           </h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Öğrencilere destek olmak için küçük bir bağış yapın. Her bağış, bir öğrencinin gününü güzelleştirir.
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            MyTrabzon, üniversite öğrencilerini bir araya getiren; etkinlikler, topluluk organizasyonları, 
+            sosyal buluşmalar ve şehir içi yaşamı kolaylaştıran bir mobil uygulamadır.
           </p>
+        </div>
+
+        {/* Description Box */}
+        <div className="bg-blue-500/20 border border-blue-500/30 rounded-xl p-6 mb-8">
+          <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <Sparkles className="w-6 h-6" />
+            Bağışlar Nereye Gidiyor?
+          </h2>
+          <div className="space-y-3 text-gray-200">
+            <p className="flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+              <span>Üniversiteliler için kahvaltı etkinlikleri</span>
+            </p>
+            <p className="flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+              <span>Sosyal buluşmalar, topluluk aktivite giderleri</span>
+            </p>
+            <p className="flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+              <span>Kültür-gezi ve doğa turları organizasyon desteği</span>
+            </p>
+            <p className="flex items-start gap-3">
+              <CheckCircle className="w-5 h-5 text-green-400 mt-0.5 flex-shrink-0" />
+              <span>MyTrabzon uygulamasının geliştirilmesi, güvenlik ve altyapı masrafları</span>
+            </p>
+          </div>
+          <div className="mt-4 p-4 bg-yellow-500/20 border border-yellow-500/30 rounded-lg">
+            <p className="text-yellow-200 text-sm">
+              <strong>Önemli:</strong> Bağış yapmak zorunlu değildir, herhangi bir uygulama özelliğini açmak için gerekli değildir 
+              ve kullanıcıya özel bir avantaj sağlamaz. Bağışlar tamamen isteğe bağlıdır. 
+              Bu sistem ticari satış, ürün/servis satışı veya üyelik modeli değildir.
+            </p>
+          </div>
         </div>
 
         {/* Donation Form */}
@@ -99,64 +134,70 @@ export function DonationPage() {
               />
             </div>
 
-            {/* Preset Amounts */}
+            {/* Support Packages */}
             <div>
               <label className="block text-sm font-medium text-gray-300 mb-4">
-                Bağış Miktarı Seçin
+                Destek Paketi Seçin
               </label>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {DONATION_AMOUNTS.map((donation) => (
-                  <button
-                    key={donation.amount}
-                    type="button"
-                    onClick={() => {
-                      setSelectedAmount(donation.amount)
-                      setCustomAmount('')
-                    }}
-                    className={`relative p-6 rounded-xl border-2 transition-all duration-200 ${
-                      selectedAmount === donation.amount
-                        ? 'border-purple-500 bg-purple-500/20 scale-105'
-                        : 'border-white/20 bg-white/5 hover:border-white/40 hover:bg-white/10'
-                    }`}
-                  >
-                    <div className="text-center">
-                      <div className="text-3xl font-bold text-white mb-2">
-                        {donation.label}
-                      </div>
-                      <div className="text-sm text-gray-300">
-                        {donation.description}
-                      </div>
-                      {selectedAmount === donation.amount && (
-                        <div className="absolute top-2 right-2">
-                          <CheckCircle className="w-6 h-6 text-purple-400" />
+                {SUPPORT_PACKAGES.map((pkg) => {
+                  const Icon = pkg.icon
+                  return (
+                    <button
+                      key={pkg.amount}
+                      type="button"
+                      onClick={() => {
+                        setSelectedAmount(pkg.amount)
+                        setCustomAmount('')
+                      }}
+                      className={`relative p-6 rounded-xl border-2 transition-all duration-200 ${
+                        selectedAmount === pkg.amount
+                          ? 'border-purple-500 bg-purple-500/20 scale-105'
+                          : 'border-white/20 bg-white/5 hover:border-white/40 hover:bg-white/10'
+                      }`}
+                    >
+                      <div className="text-center">
+                        <Icon className={`w-8 h-8 mx-auto mb-3 ${
+                          selectedAmount === pkg.amount ? 'text-purple-400' : 'text-gray-400'
+                        }`} />
+                        <div className="text-3xl font-bold text-white mb-2">
+                          {pkg.label}
                         </div>
-                      )}
-                    </div>
-                  </button>
-                ))}
+                        <div className="text-sm text-gray-300">
+                          {pkg.description}
+                        </div>
+                        {selectedAmount === pkg.amount && (
+                          <div className="absolute top-2 right-2">
+                            <CheckCircle className="w-6 h-6 text-purple-400" />
+                          </div>
+                        )}
+                      </div>
+                    </button>
+                  )
+                })}
               </div>
             </div>
 
             {/* Custom Amount */}
             <div>
               <label htmlFor="customAmount" className="block text-sm font-medium text-gray-300 mb-2">
-                Veya Özel Miktar Girin ($)
+                Veya Özel Miktar Girin (₺)
               </label>
               <div className="relative">
                 <span className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 text-xl">
-                  $
+                  ₺
                 </span>
                 <input
                   id="customAmount"
                   type="number"
                   min="1"
-                  step="0.01"
+                  step="1"
                   value={customAmount}
                   onChange={(e) => {
                     setCustomAmount(e.target.value)
                     setSelectedAmount(null)
                   }}
-                  placeholder="0.00"
+                  placeholder="0"
                   className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 />
               </div>
@@ -183,7 +224,7 @@ export function DonationPage() {
               ) : (
                 <>
                   <Heart className="w-6 h-6" />
-                  Bağış Yap
+                  Destek Ol
                 </>
               )}
             </button>
@@ -201,16 +242,16 @@ export function DonationPage() {
           </div>
           <div className="bg-white/5 rounded-xl p-6 border border-white/10 text-center">
             <Heart className="w-8 h-8 text-pink-400 mx-auto mb-3" />
-            <h3 className="text-white font-semibold mb-2">%100 Şeffaf</h3>
+            <h3 className="text-white font-semibold mb-2">Destekçi Rozeti</h3>
             <p className="text-gray-400 text-sm">
-              Tüm bağışlar doğrudan öğrencilere ulaşır
+              Bağış yapanlara özel "Destekçi" etiketi
             </p>
           </div>
           <div className="bg-white/5 rounded-xl p-6 border border-white/10 text-center">
-            <Coffee className="w-8 h-8 text-amber-400 mx-auto mb-3" />
-            <h3 className="text-white font-semibold mb-2">Anında Etki</h3>
+            <Users className="w-8 h-8 text-blue-400 mx-auto mb-3" />
+            <h3 className="text-white font-semibold mb-2">Topluluk Desteği</h3>
             <p className="text-gray-400 text-sm">
-              Bağışınız hemen kullanıma hazır
+              Öğrenci topluluğuna katkıda bulunun
             </p>
           </div>
         </div>
@@ -218,4 +259,3 @@ export function DonationPage() {
     </div>
   )
 }
-

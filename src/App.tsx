@@ -28,6 +28,7 @@ import { ResetPasswordPage } from './pages/ResetPasswordPage'
 import { EmailConfirmPage } from './pages/EmailConfirmPage'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { DonationPage } from './pages/DonationPage'
+import { ProfilePage } from './pages/ProfilePage'
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route path="/donation" element={<DonationPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/auth/reset-password" element={<ResetPasswordPage />} />
           <Route path="/auth/confirm" element={<EmailConfirmPage />} />

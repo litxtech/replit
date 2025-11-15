@@ -128,9 +128,17 @@ app.post('/api/stripe/webhook', express.raw({ type: 'application/json' }), async
         const session = event.data.object as Stripe.Checkout.Session
         console.log('Payment successful:', session.id)
         
-        // TODO: Send confirmation email, update database, etc.
-        // await sendConfirmationEmail(session.customer_email)
-        // await updateOrderStatus(session.metadata.packageId, 'completed')
+        // Eğer bağış ise, destekçi etiketi ekle
+        if (session.metadata?.type === 'mytrabzon-support') {
+          // Bu işlem Vercel serverless function'da yapılacak
+          // api/stripe-webhook-donation.js dosyasına bakın
+          console.log('Donation payment completed:', session.id)
+        } else {
+          // Normal paket satışı
+          // TODO: Send confirmation email, update database, etc.
+          // await sendConfirmationEmail(session.customer_email)
+          // await updateOrderStatus(session.metadata.packageId, 'completed')
+        }
         
         break
       }
