@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Menu, X, Zap, Rocket, Shield, Star, Users, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud } from 'lucide-react'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud, Heart, Coffee } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
 import { FloatingCodeElements, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
@@ -85,12 +85,20 @@ export function HomePage() {
               </div>
               <Link to="/packages" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.pricing}</Link>
               <Link to="/blog" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.blog}</Link>
+              <Link to="/donation" className="text-white hover:text-pink-400 transition-colors font-medium flex items-center gap-1">
+                <Heart className="w-4 h-4" />
+                {t.donation.support}
+              </Link>
               <Link to="/contact" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.contact}</Link>
             </div>
 
             {/* Right Side */}
             <div className="hidden lg:flex items-center space-x-4">
               <LanguageSwitcher />
+              <Link to="/donation" className="text-white hover:text-pink-400 transition-colors font-medium flex items-center gap-1">
+                <Heart className="w-4 h-4" />
+                {t.donation.support}
+              </Link>
               <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.login}</Link>
               <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                 {t.nav.getQuote}
@@ -114,6 +122,10 @@ export function HomePage() {
                 <Link to="/about" className="block text-white hover:text-blue-400 transition-colors">{t.nav.about}</Link>
                 <Link to="/packages" className="block text-white hover:text-blue-400 transition-colors">{t.nav.pricing}</Link>
                 <Link to="/blog" className="block text-white hover:text-blue-400 transition-colors">{t.nav.blog}</Link>
+                <Link to="/donation" className="block text-white hover:text-pink-400 transition-colors flex items-center gap-1">
+                  <Heart className="w-4 h-4" />
+                  {t.donation.support}
+                </Link>
                 <Link to="/contact" className="block text-white hover:text-blue-400 transition-colors">{t.nav.contact}</Link>
                 <div className="pt-4 border-t border-white/20">
                   <div className="flex justify-center mb-4">
@@ -407,6 +419,126 @@ export function HomePage() {
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Donation/Support Section */}
+      <section className="relative z-10 py-20 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="bg-gradient-to-r from-pink-500/20 via-purple-500/20 to-indigo-500/20 backdrop-blur-lg rounded-3xl p-12 border border-white/20 shadow-2xl"
+          >
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              {/* Left Side - Content */}
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-pink-500/20 border border-pink-500/30 rounded-full text-pink-300 text-sm font-medium mb-4">
+                  <Heart className="w-4 h-4" />
+                  MyTrabzon {t.donation.support} & Bağış
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold text-white leading-tight">
+                  {t.donation.title}
+                  <br />
+                  <span className="bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+                    {t.donation.subtitle}
+                  </span>
+                </h2>
+                
+                <p className="text-xl text-gray-300 leading-relaxed">
+                  {t.donation.description}
+                </p>
+
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Coffee className="w-5 h-5 text-amber-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">{t.donation.breakfast}</p>
+                      <p className="text-gray-400 text-sm">{t.donation.breakfastDesc}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Users className="w-5 h-5 text-blue-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">{t.donation.tours}</p>
+                      <p className="text-gray-400 text-sm">{t.donation.toursDesc}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <Code className="w-5 h-5 text-purple-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-medium">{t.donation.development}</p>
+                      <p className="text-gray-400 text-sm">{t.donation.developmentDesc}</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                  <Link
+                    to="/donation"
+                    className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-pink-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:from-pink-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  >
+                    <Heart className="w-5 h-5" />
+                    <span>{t.donation.supportButton}</span>
+                    <ArrowRight className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    to="/donation"
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/20 transition-all duration-300"
+                  >
+                    <span>{t.donation.packagesFrom}</span>
+                  </Link>
+                </div>
+
+                <p className="text-sm text-gray-400 pt-2">
+                  {t.donation.optional}
+                </p>
+              </div>
+
+              {/* Right Side - Visual */}
+              <div className="relative">
+                <div className="grid grid-cols-3 gap-4">
+                  {[
+                    { amount: 89, label: t.donation.basic || 'Temel' },
+                    { amount: 139, label: t.donation.standard || 'Standart' },
+                    { amount: 339, label: t.donation.premium || 'Premium' }
+                  ].map((pkg, index) => (
+                    <motion.div
+                      key={pkg.amount}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      className="bg-white/10 backdrop-blur-md rounded-2xl p-6 border border-white/20 text-center hover:bg-white/15 transition-all cursor-pointer"
+                    >
+                      <div className="text-3xl font-bold text-white mb-2">{pkg.amount} ₺</div>
+                      <div className="text-sm text-gray-300">{pkg.label}</div>
+                      <Heart className="w-6 h-6 text-pink-400 mx-auto mt-3" />
+                    </motion.div>
+                  ))}
+                </div>
+                <div className="mt-6 bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 bg-pink-500/20 rounded-full flex items-center justify-center">
+                      <Heart className="w-5 h-5 text-pink-400" />
+                    </div>
+                    <div>
+                      <p className="text-white font-semibold">{t.donation.badgeTitle}</p>
+                      <p className="text-gray-400 text-sm">{t.donation.badgeDesc}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-300 text-sm">
+                    {t.language === 'tr' 
+                      ? 'Bağış yaptığınızda profil sayfanızda "Destekçi" etiketi görünür. İsterseniz bu etiketi gizleyebilirsiniz.'
+                      : 'When you make a donation, a "Supporter" badge appears on your profile page. You can hide this badge if you wish.'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 

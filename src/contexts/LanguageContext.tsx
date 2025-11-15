@@ -68,6 +68,28 @@ export interface Translations {
     cancel: string
     confirm: string
   }
+  
+  // Donation/Support
+  donation: {
+    support: string
+    title: string
+    subtitle: string
+    description: string
+    breakfast: string
+    breakfastDesc: string
+    tours: string
+    toursDesc: string
+    development: string
+    developmentDesc: string
+    supportButton: string
+    packagesFrom: string
+    optional: string
+    badgeTitle: string
+    badgeDesc: string
+    basic: string
+    standard: string
+    premium: string
+  }
 }
 
 // Translation data
@@ -123,6 +145,26 @@ const translations: Record<Language, Translations> = {
       success: 'Success',
       cancel: 'Cancel',
       confirm: 'Confirm'
+    },
+    donation: {
+      support: 'Support',
+      title: 'Support the',
+      subtitle: 'Student Community',
+      description: 'MyTrabzon is a mobile application that brings university students together; facilitating events, community organizations, social gatherings, and city life.',
+      breakfast: 'Breakfast events for university students',
+      breakfastDesc: 'Social gatherings and community activity expenses',
+      tours: 'Culture-travel and nature tours',
+      toursDesc: 'Organization support and event expenses',
+      development: 'Application development',
+      developmentDesc: 'Security and infrastructure costs',
+      supportButton: 'Support',
+      packagesFrom: 'Packages Starting from',
+      optional: '💡 Donations are not mandatory. All support is completely voluntary.',
+      badgeTitle: 'Supporter Badge',
+      badgeDesc: 'Special badge for donors',
+      basic: 'Basic',
+      standard: 'Standard',
+      premium: 'Premium'
     }
   },
   tr: {
@@ -176,6 +218,26 @@ const translations: Record<Language, Translations> = {
       success: 'Başarılı',
       cancel: 'İptal',
       confirm: 'Onayla'
+    },
+    donation: {
+      support: 'Destek',
+      title: 'Öğrenci Topluluğuna',
+      subtitle: 'Destek Olun',
+      description: 'MyTrabzon, üniversite öğrencilerini bir araya getiren; etkinlikler, topluluk organizasyonları, sosyal buluşmalar ve şehir içi yaşamı kolaylaştıran bir mobil uygulamadır.',
+      breakfast: 'Üniversiteliler için kahvaltı etkinlikleri',
+      breakfastDesc: 'Sosyal buluşmalar ve topluluk aktivite giderleri',
+      tours: 'Kültür-gezi ve doğa turları',
+      toursDesc: 'Organizasyon desteği ve etkinlik giderleri',
+      development: 'Uygulama geliştirme',
+      developmentDesc: 'Güvenlik ve altyapı masrafları',
+      supportButton: 'Destek Ol',
+      packagesFrom: '89 ₺\'den Başlayan Paketler',
+      optional: '💡 Bağış yapmak zorunlu değildir. Tüm destekler tamamen isteğe bağlıdır.',
+      badgeTitle: 'Destekçi Rozeti',
+      badgeDesc: 'Bağış yapanlara özel etiket',
+      basic: 'Temel',
+      standard: 'Standart',
+      premium: 'Premium'
     }
   }
 }
