@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { userAuth } from '../lib/supabase'
-import { Mail, Lock, LogIn, UserPlus, Sparkles, ArrowRight, Google, Twitch } from 'lucide-react'
+import { Mail, Lock, LogIn, UserPlus, Sparkles, ArrowRight, Google, Twitter } from 'lucide-react'
 
 export function AuthPage() {
   const navigate = useNavigate()
@@ -13,16 +13,17 @@ export function AuthPage() {
   const [message, setMessage] = useState('')
   const [messageType, setMessageType] = useState<'success' | 'error' | ''>('')
 
-  const handleProvider = async (provider: 'google' | 'twitch') => {
+  const handleProvider = async (provider: 'google' | 'twitter' | 'twitch') => {
     try {
       setLoading(true)
       setMessage('')
       setMessageType('')
       await userAuth.signInWithProvider(provider)
+      // OAuth redirect olacak, bu yüzden loading state'i burada kalacak
     } catch (e: any) {
-      setMessage(e.message || 'Giriş başarısız oldu')
+      console.error('OAuth error:', e)
+      setMessage(e.message || 'Giriş başarısız oldu. Lütfen tekrar deneyin.')
       setMessageType('error')
-    } finally {
       setLoading(false)
     }
   }

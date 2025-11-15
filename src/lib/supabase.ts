@@ -47,7 +47,7 @@ export const userAuth = {
     return data
   },
 
-  async signInWithProvider(provider: 'google' | 'twitch') {
+  async signInWithProvider(provider: 'google' | 'twitter' | 'twitch') {
     if (!supabase) throw new Error('Auth not configured')
     
     // Deep link veya web için redirect URL belirle
@@ -64,7 +64,11 @@ export const userAuth = {
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo
+        redirectTo,
+        queryParams: {
+          access_type: 'offline',
+          prompt: 'consent',
+        }
       }
     })
     if (error) throw error
