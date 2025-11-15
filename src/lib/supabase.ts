@@ -8,6 +8,13 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 let supabase: SupabaseClient | null = null
 if (supabaseUrl && supabaseAnonKey) {
   supabase = createClient(supabaseUrl, supabaseAnonKey)
+} else {
+  // Development'ta console'a uyarı ver
+  if (import.meta.env.DEV) {
+    console.warn('Supabase environment variables are missing!')
+    console.warn('VITE_SUPABASE_URL:', supabaseUrl ? '✓ Set' : '✗ Missing')
+    console.warn('VITE_SUPABASE_ANON_KEY:', supabaseAnonKey ? '✓ Set' : '✗ Missing')
+  }
 }
 export { supabase }
 
@@ -48,7 +55,15 @@ export const userAuth = {
   },
 
   async signInWithProvider(provider: 'google' | 'twitter' | 'twitch') {
-    if (!supabase) throw new Error('Auth not configured')
+    if (!supabase) {
+      const errorMsg = 'Auth not configured. Please check your Supabase environment variables (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY).'
+      console.error(errorMsg)
+      console.error('Current env values:', {
+        VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL ? 'Set' : 'Missing',
+        VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing'
+      })
+      throw new Error(errorMsg)
+    }
     
     // Deep link veya web için redirect URL belirle
     let redirectTo = `${window.location.origin}/auth/callback`
@@ -61,18 +76,26 @@ export const userAuth = {
       redirectTo = `${window.location.origin}/auth/callback`
     }
     
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: {
-        redirectTo,
-        queryParams: {
-          access_type: 'offline',
-          prompt: 'consent',
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo,
+          queryParams: {
+            access_type: 'offline',
+            prompt: 'consent',
+          }
         }
+      })
+      if (error) {
+        console.error('OAuth sign in error:', error)
+        throw error
       }
-    })
-    if (error) throw error
-    return data
+      return data
+    } catch (err: any) {
+      console.error('OAuth provider error:', err)
+      throw err
+    }
   },
 
   async signOut() {

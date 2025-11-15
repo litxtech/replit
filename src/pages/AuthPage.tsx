@@ -18,11 +18,29 @@ export function AuthPage() {
       setLoading(true)
       setMessage('')
       setMessageType('')
+      
+      // Supabase yapılandırmasını kontrol et
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
+      
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error('Supabase yapılandırması eksik. Lütfen yöneticiye başvurun.')
+      }
+      
       await userAuth.signInWithProvider(provider)
       // OAuth redirect olacak, bu yüzden loading state'i burada kalacak
     } catch (e: any) {
       console.error('OAuth error:', e)
-      setMessage(e.message || 'Giriş başarısız oldu. Lütfen tekrar deneyin.')
+      let errorMessage = e.message || 'Giriş başarısız oldu. Lütfen tekrar deneyin.'
+      
+      // Daha kullanıcı dostu hata mesajları
+      if (errorMessage.includes('Auth not configured')) {
+        errorMessage = 'Kimlik doğrulama yapılandırması eksik. Lütfen daha sonra tekrar deneyin veya yöneticiye başvurun.'
+      } else if (errorMessage.includes('Supabase')) {
+        errorMessage = 'Sistem yapılandırması eksik. Lütfen yöneticiye başvurun.'
+      }
+      
+      setMessage(errorMessage)
       setMessageType('error')
       setLoading(false)
     }
