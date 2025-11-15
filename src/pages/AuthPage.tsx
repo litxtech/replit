@@ -177,11 +177,11 @@ export function AuthPage() {
           </button>
           <button
             disabled={loading}
-            onClick={() => handleProvider('twitch')}
+            onClick={() => handleProvider('twitter')}
             className="w-full bg-white/10 hover:bg-white/20 text-white py-3 px-4 rounded-lg font-semibold transition-all duration-200 disabled:opacity-60 disabled:cursor-not-allowed border border-white/20 flex items-center justify-center gap-2"
           >
-            <Twitch className="w-5 h-5" />
-            Twitch ile {mode === 'signin' ? 'Giriş Yap' : 'Kayıt Ol'}
+            <Twitter className="w-5 h-5" />
+            X (Twitter) ile {mode === 'signin' ? 'Giriş Yap' : 'Kayıt Ol'}
           </button>
         </div>
 
