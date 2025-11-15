@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Coffee, Heart, Sparkles, CheckCircle, Loader2, Users, MapPin, Code } from 'lucide-react'
+import { Heart, Sparkles, CheckCircle, Loader2, Users } from 'lucide-react'
 
 const SUPPORT_PACKAGES = [
   { amount: 89, label: '89 ₺', description: 'Temel Destek Paketi', icon: Heart },

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Heart, MapPin, X, Eye, EyeOff } from 'lucide-react'
+import { Heart, MapPin, Eye, EyeOff } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 
 interface Badge {
@@ -24,6 +24,11 @@ export function UserBadge({ userId, showToggle = false, size = 'md' }: UserBadge
     if (!userId || !supabase) return
 
     const fetchBadges = async () => {
+      if (!supabase) {
+        setLoading(false)
+        return
+      }
+      
       try {
         const { data, error } = await supabase
           .from('user_badges')

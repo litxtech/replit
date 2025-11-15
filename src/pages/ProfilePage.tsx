@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase, userAuth } from '../lib/supabase'
-import { User, Mail, Settings, Heart, Eye, EyeOff, LogOut, ArrowLeft, MapPin } from 'lucide-react'
-import { UserBadge } from '../components/UserBadge'
+import { User, Mail, Heart, Eye, EyeOff, LogOut, ArrowLeft, MapPin } from 'lucide-react'
 
 export function ProfilePage() {
   const navigate = useNavigate()

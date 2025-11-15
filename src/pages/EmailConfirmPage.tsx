@@ -98,6 +98,8 @@ export function EmailConfirmPage() {
       return
     }
 
+    if (!supabase) return
+    
     try {
       // Email confirmation yeniden gönderme
       const { error } = await supabase.auth.resend({

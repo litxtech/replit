@@ -36,6 +36,7 @@ export function ResetPasswordPage() {
           await new Promise((r) => setTimeout(r, 100))
           
           // Session'ı kontrol et
+          if (!supabase) return
           const { data: { session }, error: sessionError } = await supabase.auth.getSession()
           
           if (mounted) {

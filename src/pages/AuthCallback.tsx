@@ -75,6 +75,8 @@ export function AuthCallback() {
     handle()
 
     // Auth state değişikliklerini dinle
+    if (!supabase) return
+    
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
         const hash = window.location.hash

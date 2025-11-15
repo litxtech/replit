@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { supabase, userAuth } from '../lib/supabase'
+import { supabase } from '../lib/supabase'
 import { User, Mail, CheckCircle, ArrowRight, Loader2 } from 'lucide-react'
 
 export function OnboardingPage() {
@@ -50,6 +50,8 @@ export function OnboardingPage() {
       return
     }
 
+    if (!supabase) return
+    
     try {
       setSaving(true)
       
