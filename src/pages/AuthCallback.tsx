@@ -13,6 +13,21 @@ export function AuthCallback() {
         return
       }
 
+      // Deep link veya web URL kontrolü
+      const currentUrl = window.location.href
+      const isDeepLink = currentUrl.startsWith('mytrabzon://') || currentUrl.startsWith('litxtech://')
+      
+      // Deep link için özel işleme
+      if (isDeepLink) {
+        console.log('Deep link detected:', currentUrl)
+        // Deep link'ten hash parametrelerini al
+        const urlParts = currentUrl.split('#')
+        if (urlParts.length > 1) {
+          // Hash'i window.location.hash'a set et (Supabase için)
+          window.location.hash = urlParts[1]
+        }
+      }
+
       // Supabase will set session via URL hash automatically on this route
       await new Promise((r) => setTimeout(r, 500))
 

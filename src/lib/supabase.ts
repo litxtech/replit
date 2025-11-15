@@ -49,10 +49,22 @@ export const userAuth = {
 
   async signInWithProvider(provider: 'google' | 'twitch') {
     if (!supabase) throw new Error('Auth not configured')
+    
+    // Deep link veya web için redirect URL belirle
+    let redirectTo = `${window.location.origin}/auth/callback`
+    
+    // Eğer mobile app içindeyse deep link kullan
+    if (window.location.protocol === 'mytrabzon:' || window.location.protocol === 'litxtech:') {
+      redirectTo = `${window.location.protocol}//auth/callback`
+    } else {
+      // Web için origin kullan
+      redirectTo = `${window.location.origin}/auth/callback`
+    }
+    
     const { data, error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: `${window.location.origin}/auth/callback`
+        redirectTo
       }
     })
     if (error) throw error

@@ -44,6 +44,10 @@ litxtech://auth/callback
 litxtech://auth/reset-password
 litxtech://auth/confirm
 litxtech://auth/onboarding
+mytrabzon://auth/callback
+mytrabzon://auth/reset-password
+mytrabzon://auth/confirm
+mytrabzon://auth/onboarding
 ```
 
 **Önemli:** Her URL'yi ayrı satırda ekleyin ve **Save** butonuna tıklayın.
