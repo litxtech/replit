@@ -1,15 +1,20 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { CheckCircle, ArrowRight, Home, Mail } from 'lucide-react'
+import { CheckCircle, ArrowRight, Home, Mail, Coffee, Heart } from 'lucide-react'
 
 export function SuccessPage() {
   const [sessionId, setSessionId] = useState('')
+  const [type, setType] = useState('')
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search)
     const id = urlParams.get('session_id')
+    const donationType = urlParams.get('type')
     if (id) {
       setSessionId(id)
+    }
+    if (donationType) {
+      setType(donationType)
     }
   }, [])
 
