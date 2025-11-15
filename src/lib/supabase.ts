@@ -57,13 +57,24 @@ export const userAuth = {
   async signInWithProvider(provider: 'google' | 'twitter' | 'twitch') {
     if (!supabase) {
       const errorMsg = 'Auth not configured. Please check your Supabase environment variables (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY).'
-      console.error(errorMsg)
-      console.error('Current env values:', {
-        VITE_SUPABASE_URL: import.meta.env.VITE_SUPABASE_URL ? 'Set' : 'Missing',
-        VITE_SUPABASE_ANON_KEY: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Set' : 'Missing'
-      })
+      console.error('❌ OAuth Error:', errorMsg)
+      console.error('')
+      console.error('📋 Environment Variables Status:')
+      console.error('  VITE_SUPABASE_URL:', import.meta.env.VITE_SUPABASE_URL ? '✓ Set' : '✗ Missing')
+      console.error('  VITE_SUPABASE_ANON_KEY:', import.meta.env.VITE_SUPABASE_ANON_KEY ? '✓ Set' : '✗ Missing')
+      console.error('')
+      console.error('🔧 Quick Fix:')
+      console.error('  1. Create .env file in project root')
+      console.error('  2. Add: VITE_SUPABASE_URL=https://xxxxx.supabase.co')
+      console.error('  3. Add: VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...')
+      console.error('  4. Restart development server')
+      console.error('')
+      console.error('📖 See OAUTH_TROUBLESHOOTING.md for detailed guide')
       throw new Error(errorMsg)
     }
+    
+    console.log('✓ Supabase client initialized')
+    console.log('✓ Starting OAuth for provider:', provider)
     
     // Deep link veya web için redirect URL belirle
     let redirectTo = `${window.location.origin}/auth/callback`

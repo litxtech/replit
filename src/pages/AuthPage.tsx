@@ -24,8 +24,21 @@ export function AuthPage() {
       const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY
       
       if (!supabaseUrl || !supabaseKey) {
-        throw new Error('Supabase yapılandırması eksik. Lütfen yöneticiye başvurun.')
+        console.error('❌ Supabase Environment Variables Missing:')
+        console.error('VITE_SUPABASE_URL:', supabaseUrl ? '✓ Set' : '✗ Missing')
+        console.error('VITE_SUPABASE_ANON_KEY:', supabaseKey ? '✓ Set' : '✗ Missing')
+        console.error('')
+        console.error('📝 Çözüm:')
+        console.error('1. Proje kök dizininde .env dosyası oluşturun')
+        console.error('2. VITE_SUPABASE_URL ve VITE_SUPABASE_ANON_KEY ekleyin')
+        console.error('3. Development server\'ı yeniden başlatın')
+        console.error('')
+        console.error('Detaylı rehber: OAUTH_TROUBLESHOOTING.md dosyasına bakın')
+        throw new Error('Supabase yapılandırması eksik. Lütfen .env dosyasını kontrol edin ve development server\'ı yeniden başlatın.')
       }
+      
+      console.log('✓ Supabase environment variables OK')
+      console.log('✓ Starting OAuth flow for:', provider)
       
       await userAuth.signInWithProvider(provider)
       // OAuth redirect olacak, bu yüzden loading state'i burada kalacak
