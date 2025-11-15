@@ -6,12 +6,13 @@ import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
 import { FloatingCodeElements, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
 import { LanguageSwitcher, LanguageSwitcherCompact } from '../components/LanguageSwitcher'
-import { useTranslation } from '../contexts/LanguageContext'
+import { useTranslation, useLanguage } from '../contexts/LanguageContext'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('webSaaS')
   const t = useTranslation()
+  const { language } = useLanguage()
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden animate-gradient">
@@ -531,7 +532,7 @@ export function HomePage() {
                     </div>
                   </div>
                   <p className="text-gray-300 text-sm">
-                    {t.language === 'tr' 
+                    {language === 'tr' 
                       ? 'Bağış yaptığınızda profil sayfanızda "Destekçi" etiketi görünür. İsterseniz bu etiketi gizleyebilirsiniz.'
                       : 'When you make a donation, a "Supporter" badge appears on your profile page. You can hide this badge if you wish.'}
                   </p>
