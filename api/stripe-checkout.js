@@ -132,9 +132,18 @@ export default async (req, res) => {
     const product = STRIPE_PRODUCTS[packageId]
 
     console.log('Product found:', product)
+    console.log('Frontend price:', packagePrice)
     console.log('Price ID:', product.priceId)
 
-    // Check if priceId is a Product ID (starts with prod_) and get the first price
+    // Frontend'den gelen fiyatı kullan (bağış sistemi gibi)
+    // packagePrice dolar cinsinden geliyor, cent'e çevir
+    const amountInCents = Math.round((packagePrice || 0) * 100)
+
+    if (!packagePrice || packagePrice <= 0) {
+      return res.status(400).json({ error: 'Invalid package price' })
+    }
+
+    // Check if priceId is a Product ID (starts with prod_) and try to find matching price
     let stripePrice
     if (product.priceId && product.priceId.startsWith('prod_')) {
       console.log('Product ID detected, fetching prices...')
@@ -146,38 +155,70 @@ export default async (req, res) => {
         })
         
         if (prices.data.length === 0) {
-          return res.status(400).json({ error: 'No active prices found for product: ' + product.priceId })
+          // Eğer price bulunamazsa, dynamic price oluştur
+          console.log('No prices found, creating dynamic price...')
+        } else {
+          // Frontend'den gelen fiyata en yakın price'ı bul
+          const targetAmount = amountInCents
+          const matched = prices.data.find(p => {
+            const priceAmount = p.unit_amount || 0
+            // 1 dolar toleransla eşleş
+            return Math.abs(priceAmount - targetAmount) <= 100
+          })
+          
+          if (matched) {
+            stripePrice = matched
+            console.log('Found matching price:', stripePrice.id, 'Amount:', stripePrice.unit_amount)
+          } else {
+            // Eşleşen price yoksa, dynamic price oluştur
+            console.log('No matching price found, creating dynamic price...')
+          }
         }
-        
-        // Try to match by lookup_key or metadata.packageId first
-        let matched = prices.data.find(p => p.lookup_key === packageId)
-        if (!matched) {
-          matched = prices.data.find(p => (p.metadata && p.metadata.packageId === packageId))
-        }
-
-        stripePrice = matched || prices.data[0]
-        console.log('Found price:', stripePrice.id)
       } catch (priceError) {
         console.error('Error fetching prices for product:', priceError)
-        return res.status(400).json({ error: 'Error fetching prices for product: ' + product.priceId })
+        // Hata durumunda dynamic price oluştur
       }
     } else {
-      // Direct price ID
+      // Direct price ID - kontrol et
       try {
         stripePrice = await stripe.prices.retrieve(product.priceId)
-        console.log('Stripe price retrieved:', stripePrice)
+        console.log('Stripe price retrieved:', stripePrice.id, 'Amount:', stripePrice.unit_amount)
+        
+        // Eğer Stripe'daki fiyat frontend'den gelen fiyatla eşleşmiyorsa, dynamic price kullan
+        if (stripePrice.unit_amount !== amountInCents) {
+          console.log('Price mismatch! Stripe:', stripePrice.unit_amount, 'Frontend:', amountInCents)
+          console.log('Using dynamic price instead...')
+          stripePrice = null // Dynamic price oluştur
+        }
       } catch (priceError) {
         console.error('Error fetching Stripe price:', priceError)
-        return res.status(400).json({ error: 'Invalid Stripe price ID: ' + product.priceId })
+        // Hata durumunda dynamic price oluştur
+        stripePrice = null
       }
     }
 
-    // Create real Stripe Checkout Session
+    // Eğer uygun price bulunamadıysa, dynamic price oluştur (bağış sistemi gibi)
+    if (!stripePrice) {
+      console.log('Creating dynamic price for amount:', amountInCents, 'cents ($' + packagePrice + ')')
+    }
+
+    // Create Stripe Checkout Session
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
-        {
-          price: stripePrice.id, // Gerçek Price ID kullan
+        stripePrice ? {
+          price: stripePrice.id, // Eğer uygun price varsa kullan
+          quantity: 1,
+        } : {
+          // Dynamic price oluştur (bağış sistemi gibi)
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: product.name,
+              description: product.description,
+            },
+            unit_amount: amountInCents, // Frontend'den gelen fiyat
+          },
           quantity: 1,
         },
       ],
@@ -187,8 +228,9 @@ export default async (req, res) => {
       metadata: {
         packageId,
         packageName: product.name,
-        packagePrice: (stripePrice.unit_amount / 100).toString(), // Stripe'dan gelen gerçek fiyat
-        stripePriceId: stripePrice.id
+        packagePrice: packagePrice.toString(), // Frontend'den gelen fiyat
+        stripePriceId: stripePrice?.id || 'dynamic',
+        isDynamicPrice: (!stripePrice).toString()
       },
       custom_fields: [
         {
@@ -214,8 +256,8 @@ export default async (req, res) => {
 
     res.json({ 
       url: session.url,
-      price: stripePrice.unit_amount / 100, // Gerçek fiyatı da döndür
-      currency: stripePrice.currency,
+      price: packagePrice, // Frontend'den gelen fiyat
+      currency: stripePrice?.currency || 'usd',
       packageName: product.name,
       packageId: packageId
     })
@@ -223,4 +265,5 @@ export default async (req, res) => {
     console.error('Stripe checkout error:', error)
     res.status(500).json({ error: error.message || 'Checkout creation failed' })
   }
+}
 }
