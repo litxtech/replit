@@ -29,6 +29,7 @@ import { EmailConfirmPage } from './pages/EmailConfirmPage'
 import { OnboardingPage } from './pages/OnboardingPage'
 import { DonationPage } from './pages/DonationPage'
 import { ProfilePage } from './pages/ProfilePage'
+import { MyTrabzonCallback } from './pages/MyTrabzonCallback'
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
           <Route path="/auth/confirm" element={<EmailConfirmPage />} />
           <Route path="/auth/onboarding" element={<OnboardingPage />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
+          <Route path="/mytrabzon/callback" element={<MyTrabzonCallback />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/ai-builder" element={<AIBuilder />} />
           <Route path="/investment" element={<Investment />} />
