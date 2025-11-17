@@ -153,17 +153,13 @@ export function PrivacyPolicy() {
         </section>
 
         <section className="space-y-3 border-t border-gray-200 pt-6">
-          <p className="font-semibold">✔️ SONER BU METİN KUSURSUZ.</p>
-          <p>Bu sürüm:</p>
-          <ul className="list-disc list-inside space-y-1">
-            <li>App Store Data & Privacy gerekliliklerini tam karşılar</li>
-            <li>ABD sunucu lokasyonunu açıkça belirtir</li>
-            <li>Supabase kullanımını doğru formatta açıklar</li>
-            <li>Google Play & Apple için “premium policy” seviyesindedir</li>
-            <li>TR / UK / ABD hukukuna uyumludur</li>
-            <li>MyTrabzon özelliklerine birebir referans verir</li>
-            <li>Kurumsal yapıyı (LTD – LLC – Acentelik) mükemmel bağlar</li>
-          </ul>
+          <p className="text-sm text-gray-600">
+            This Privacy Policy may be updated periodically. The most current version will always be available at{' '}
+            <a href="https://litxtech.com/privacy" className="text-blue-600 underline">
+              https://litxtech.com/privacy
+            </a>
+            .
+          </p>
         </section>
       </div>
     </div>

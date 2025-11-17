@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const heroMockup = '/assets/mytrabzon/mockup-feed.png'
+const heroMockup = '/assets/mytrabzon/hero.png'
 const logoSrc = '/assets/mytrabzon/logo.png'
 
 const audienceCards = [
@@ -64,11 +64,11 @@ const steps = [
 ]
 
 const screenshots = [
-  { src: '/assets/mytrabzon/mockup-ktu.png', label: 'University hub' },
-  { src: '/assets/mytrabzon/mockup-event.png', label: 'Olay Var! composer' },
-  { src: '/assets/mytrabzon/mockup-feed.png', label: 'Social feed' },
-  { src: '/assets/mytrabzon/mockup-groups.png', label: 'Group chats' },
-  { src: '/assets/mytrabzon/mockup-match.png', label: 'Football matches' }
+  { src: '/assets/mytrabzon/screen-1.png', label: 'University hub' },
+  { src: '/assets/mytrabzon/screen-2.png', label: 'Olay Var! composer' },
+  { src: '/assets/mytrabzon/screen-3.png', label: 'Social feed' },
+  { src: '/assets/mytrabzon/screen-4.png', label: 'Group chats' },
+  { src: '/assets/mytrabzon/screen-5.png', label: 'Football matches' }
 ]
 
 const faqs = [
