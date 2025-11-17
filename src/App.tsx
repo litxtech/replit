@@ -50,7 +50,7 @@ function App() {
           <Route path="/auth/onboarding" element={<OnboardingPage />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/mytrabzon/callback" element={<MyTrabzonCallback />} />
-          <Route path="/support" element={<SupportPage />} />
+          <Route path="/support/mytrabzon" element={<SupportPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/ai-builder" element={<AIBuilder />} />
           <Route path="/investment" element={<Investment />} />

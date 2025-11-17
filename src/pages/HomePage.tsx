@@ -577,7 +577,7 @@ export function HomePage() {
                 <Link to="/about" className="block text-gray-300 hover:text-blue-400 transition-colors">Hakkımızda</Link>
                 <Link to="/blog" className="block text-gray-300 hover:text-blue-400 transition-colors">Blog</Link>
                 <Link to="/contact" className="block text-gray-300 hover:text-blue-400 transition-colors">İletişim</Link>
-                <Link to="/support" className="block text-gray-300 hover:text-blue-400 transition-colors">Destek Merkezi</Link>
+                <Link to="/support/mytrabzon" className="block text-gray-300 hover:text-blue-400 transition-colors">Support Center</Link>
               </div>
             </div>
 
