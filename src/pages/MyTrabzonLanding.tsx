@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Shield, Users, Bell, MapPin, Smartphone, Calendar, MessageCircle, Lock } from 'lucide-react'
+import { Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const heroMockup = '/assets/mytrabzon/mockup-feed.png'
