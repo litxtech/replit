@@ -20,6 +20,7 @@ import { CommercialAgreement } from './pages/CommercialAgreement'
 import { Subprocessors } from './pages/Subprocessors'
 import { AccountDeletionPolicy } from './pages/AccountDeletionPolicy'
 import { ChildSafetyPolicy } from './pages/ChildSafetyPolicy'
+import { CommunityPolicy } from './pages/CommunityPolicy'
 import { BlogManagement } from './pages/BlogManagement'
 import { AdminLogin } from './pages/AdminLogin'
 import { SuccessPage } from './pages/SuccessPage'
@@ -30,6 +31,7 @@ import { OnboardingPage } from './pages/OnboardingPage'
 import { DonationPage } from './pages/DonationPage'
 import { ProfilePage } from './pages/ProfilePage'
 import { MyTrabzonCallback } from './pages/MyTrabzonCallback'
+import { SupportPage } from './pages/SupportPage'
 
 function App() {
   return (
@@ -48,6 +50,7 @@ function App() {
           <Route path="/auth/onboarding" element={<OnboardingPage />} />
           <Route path="/auth/callback" element={<AuthCallback />} />
           <Route path="/mytrabzon/callback" element={<MyTrabzonCallback />} />
+          <Route path="/support" element={<SupportPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/ai-builder" element={<AIBuilder />} />
           <Route path="/investment" element={<Investment />} />
@@ -62,6 +65,7 @@ function App() {
           <Route path="/subprocessors" element={<Subprocessors />} />
           <Route path="/account-deletion-policy" element={<AccountDeletionPolicy />} />
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />
+          <Route path="/community-policy" element={<CommunityPolicy />} />
           <Route path="/admin/blog" element={<BlogManagement />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/success" element={<SuccessPage />} />

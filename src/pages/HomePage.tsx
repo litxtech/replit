@@ -577,6 +577,7 @@ export function HomePage() {
                 <Link to="/about" className="block text-gray-300 hover:text-blue-400 transition-colors">Hakkımızda</Link>
                 <Link to="/blog" className="block text-gray-300 hover:text-blue-400 transition-colors">Blog</Link>
                 <Link to="/contact" className="block text-gray-300 hover:text-blue-400 transition-colors">İletişim</Link>
+                <Link to="/support" className="block text-gray-300 hover:text-blue-400 transition-colors">Destek Merkezi</Link>
               </div>
             </div>
 
@@ -590,6 +591,7 @@ export function HomePage() {
                 <Link to="/subprocessors" className="block text-gray-300 hover:text-blue-400 transition-colors">Subprocessors</Link>
                 <Link to="/account-deletion-policy" className="block text-gray-300 hover:text-blue-400 transition-colors">Account Deletion Policy</Link>
                 <Link to="/child-safety-policy" className="block text-gray-300 hover:text-blue-400 transition-colors">Child Safety Policy</Link>
+                <Link to="/community-policy" className="block text-gray-300 hover:text-blue-400 transition-colors">Community Policy</Link>
               </div>
             </div>
 
