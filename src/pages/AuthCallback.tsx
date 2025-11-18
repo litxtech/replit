@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { openMyTrabzonDeepLink } from '../lib/utils'
 import { Loader2 } from 'lucide-react'
 
 export function AuthCallback() {
@@ -39,6 +40,8 @@ export function AuthCallback() {
           return
         }
 
+        const hashSuffix = window.location.hash || ''
+
         // URL hash'ini kontrol et
         const hash = window.location.hash
         const hashParams = new URLSearchParams(hash.substring(1))
@@ -48,21 +51,26 @@ export function AuthCallback() {
         if (type === 'signup' || type === 'email') {
           // Onboarding'e yönlendir (eğer tamamlanmamışsa)
           if (!user.user_metadata?.onboarding_completed) {
+            if (openMyTrabzonDeepLink('auth/onboarding', hashSuffix)) return
             navigate('/auth/onboarding')
           } else {
+            if (openMyTrabzonDeepLink('auth/callback', hashSuffix)) return
             navigate('/')
           }
         } 
         // Eğer password recovery ise
         else if (type === 'recovery') {
+          if (openMyTrabzonDeepLink('auth/reset-password', hashSuffix)) return
           navigate('/auth/reset-password')
         }
         // Normal giriş
         else {
           // Onboarding tamamlanmamışsa onboarding'e yönlendir
           if (!user.user_metadata?.onboarding_completed) {
+            if (openMyTrabzonDeepLink('auth/onboarding', hashSuffix)) return
             navigate('/auth/onboarding')
           } else {
+            if (openMyTrabzonDeepLink('auth/callback', hashSuffix)) return
             navigate('/')
           }
         }
@@ -85,16 +93,21 @@ export function AuthCallback() {
 
         if (type === 'signup' || type === 'email') {
           if (!session.user.user_metadata?.onboarding_completed) {
+            if (openMyTrabzonDeepLink('auth/onboarding', window.location.hash || '')) return
             navigate('/auth/onboarding')
           } else {
+            if (openMyTrabzonDeepLink('auth/callback', window.location.hash || '')) return
             navigate('/')
           }
         } else if (type === 'recovery') {
+          if (openMyTrabzonDeepLink('auth/reset-password', window.location.hash || '')) return
           navigate('/auth/reset-password')
         } else {
           if (!session.user.user_metadata?.onboarding_completed) {
+            if (openMyTrabzonDeepLink('auth/onboarding', window.location.hash || '')) return
             navigate('/auth/onboarding')
           } else {
+            if (openMyTrabzonDeepLink('auth/callback', window.location.hash || '')) return
             navigate('/')
           }
         }

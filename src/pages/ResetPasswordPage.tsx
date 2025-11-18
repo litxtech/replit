@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { userAuth, supabase } from '../lib/supabase'
 import { Lock, Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react'
+import { openMyTrabzonDeepLink } from '../lib/utils'
 
 export function ResetPasswordPage() {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export function ResetPasswordPage() {
       const accessToken = hashParams.get('access_token')
       
       // Eğer hash'te recovery token varsa
-      if (type === 'recovery' && accessToken) {
+        if (type === 'recovery' && accessToken) {
         try {
           // Supabase otomatik olarak hash'teki token'ları işler
           // Biraz bekle ki Supabase session'ı ayarlasın
@@ -41,6 +42,9 @@ export function ResetPasswordPage() {
           
           if (mounted) {
             if (session && !sessionError) {
+              if (openMyTrabzonDeepLink('auth/reset-password', `#${hash}`)) {
+                return
+              }
               setStep('update')
               // Hash'i temizle (güvenlik için)
               window.history.replaceState(null, '', window.location.pathname)
@@ -67,12 +71,18 @@ export function ResetPasswordPage() {
       console.log('Auth state change:', event, session ? 'has session' : 'no session')
       
       if (event === 'PASSWORD_RECOVERY' && session) {
+        if (openMyTrabzonDeepLink('auth/reset-password', window.location.hash || '')) {
+          return
+        }
         setStep('update')
         window.history.replaceState(null, '', window.location.pathname)
       } else if (event === 'SIGNED_IN' && session) {
         // Eğer recovery token ile giriş yapıldıysa
         const hash = window.location.hash
         if (hash.includes('type=recovery')) {
+          if (openMyTrabzonDeepLink('auth/reset-password', hash)) {
+            return
+          }
           setStep('update')
           window.history.replaceState(null, '', window.location.pathname)
         }
