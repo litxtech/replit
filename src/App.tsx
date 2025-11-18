@@ -22,6 +22,7 @@ import { AccountDeletionPolicy } from './pages/AccountDeletionPolicy'
 import { ChildSafetyPolicy } from './pages/ChildSafetyPolicy'
 import { CommunityPolicy } from './pages/CommunityPolicy'
 import { MyTrabzonLanding } from './pages/MyTrabzonLanding'
+import { MyTrabzonAccountDeletion } from './pages/MyTrabzonAccountDeletion'
 import { BlogManagement } from './pages/BlogManagement'
 import { AdminLogin } from './pages/AdminLogin'
 import { SuccessPage } from './pages/SuccessPage'
@@ -68,6 +69,7 @@ function App() {
           <Route path="/child-safety-policy" element={<ChildSafetyPolicy />} />
           <Route path="/community-policy" element={<CommunityPolicy />} />
           <Route path="/mytrabzon" element={<MyTrabzonLanding />} />
+          <Route path="/mytrabzon/delete-account" element={<MyTrabzonAccountDeletion />} />
           <Route path="/admin/blog" element={<BlogManagement />} />
           <Route path="/admin/login" element={<AdminLogin />} />
           <Route path="/success" element={<SuccessPage />} />

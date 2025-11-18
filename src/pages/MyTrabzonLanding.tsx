@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { Shield } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
-const heroMockup = '/assets/mytrabzon/hero.png'
+const heroMockup = '/assets/mytrabzon/screen-1.png'
 const logoSrc = '/assets/mytrabzon/logo.png'
 
 const audienceCards = [
@@ -263,6 +263,9 @@ export function MyTrabzonLanding() {
               </Link>
               <Link to="/community-policy" className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700">
                 Community Policy
+              </Link>
+              <Link to="/mytrabzon/delete-account" className="rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-700">
+                Delete Account
               </Link>
             </div>
           </div>
