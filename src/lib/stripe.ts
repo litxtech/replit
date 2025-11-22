@@ -1,7 +1,25 @@
 // Stripe checkout integration with fallback
 // Try production first, fallback to localhost
 
-const API_BASE_URL = 'https://www.litxtech.com'
+// Dynamic API URL based on environment
+const getApiBaseUrl = () => {
+  // Production URL
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL
+  }
+  // Vercel deployment URL
+  if (window.location.hostname.includes('vercel.app')) {
+    return `https://${window.location.hostname}`
+  }
+  // Default production URL
+  if (window.location.hostname === 'www.litxtech.com' || window.location.hostname === 'litxtech.com') {
+    return 'https://www.litxtech.com'
+  }
+  // Fallback to localhost
+  return 'http://localhost:3001'
+}
+
+const API_BASE_URL = getApiBaseUrl()
 const LOCALHOST_URL = 'http://localhost:3001'
 
 export async function createCheckoutSession(priceId: string, packageName: string, packagePrice: number) {

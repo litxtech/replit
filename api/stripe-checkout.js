@@ -3,7 +3,17 @@
 
 import Stripe from 'stripe'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
+// Initialize Stripe with error handling
+if (!process.env.STRIPE_SECRET_KEY) {
+  console.error('❌ STRIPE_SECRET_KEY environment variable is missing!')
+  console.error('Please set STRIPE_SECRET_KEY in Vercel Environment Variables')
+}
+
+const stripe = process.env.STRIPE_SECRET_KEY 
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: '2024-06-20',
+    })
+  : null
 
 // Real Stripe Products - 18 packages with actual Product IDs
 const STRIPE_PRODUCTS = {
@@ -111,15 +121,33 @@ export default async (req, res) => {
   }
 
   if (req.method === 'GET') {
+    if (!stripe) {
+      return res.status(500).json({ 
+        status: 'ERROR', 
+        timestamp: new Date().toISOString(),
+        message: 'Stripe is not configured. Please set STRIPE_SECRET_KEY environment variable.',
+        error: 'STRIPE_SECRET_KEY is missing'
+      })
+    }
     return res.json({ 
       status: 'OK', 
       timestamp: new Date().toISOString(),
-      message: 'Stripe API is ready for payments'
+      message: 'Stripe API is ready for payments',
+      hasStripeKey: !!process.env.STRIPE_SECRET_KEY
     })
   }
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' })
+  }
+
+  // Check if Stripe is configured
+  if (!stripe) {
+    return res.status(500).json({ 
+      error: 'Stripe is not configured',
+      message: 'Please set STRIPE_SECRET_KEY environment variable in Vercel',
+      help: 'Go to Vercel Dashboard → Settings → Environment Variables → Add STRIPE_SECRET_KEY'
+    })
   }
 
   try {
@@ -223,8 +251,8 @@ export default async (req, res) => {
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/cancel`,
+      success_url: `${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : process.env.NEXT_PUBLIC_SITE_URL || 'https://www.litxtech.com'}/cancel`,
       metadata: {
         packageId,
         packageName: product.name,

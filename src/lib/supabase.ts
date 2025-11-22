@@ -54,7 +54,7 @@ export const userAuth = {
     return data
   },
 
-  async signInWithProvider(provider: 'google' | 'twitter' | 'twitch') {
+  async signInWithProvider(provider: 'google' | 'apple') {
     if (!supabase) {
       const errorMsg = 'Auth not configured. Please check your Supabase environment variables (VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY).'
       console.error('❌ OAuth Error:', errorMsg)
