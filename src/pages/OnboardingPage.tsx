@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
+import { openMyTrabzonDeepLink } from '../lib/utils'
 import { User, Mail, CheckCircle, ArrowRight, Loader2 } from 'lucide-react'
 
 export function OnboardingPage() {
@@ -67,8 +68,9 @@ export function OnboardingPage() {
 
       setStep(2)
       
-      // 2 saniye sonra ana sayfaya yönlendir
+      // 2 saniye sonra mobil uygulamaya veya ana sayfaya yönlendir
       setTimeout(() => {
+        if (openMyTrabzonDeepLink('auth/callback', '')) return
         navigate('/')
       }, 2000)
     } catch (error: any) {

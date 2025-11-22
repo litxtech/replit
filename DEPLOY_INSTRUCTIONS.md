@@ -48,9 +48,17 @@ Vercel Dashboard'da **Settings** > **Environment Variables** bölümüne gidin v
 ```env
 VITE_SUPABASE_URL=https://xxxxx.supabase.co
 VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+STRIPE_SECRET_KEY=sk_live_xxxxx (veya sk_test_xxxxx test için)
+NEXT_PUBLIC_SITE_URL=https://litxtech.com
 ```
 
 **Önemli:** Production, Preview ve Development için ayrı ayrı ekleyin.
+
+**Stripe Key Alma:**
+
+1. [Stripe Dashboard](https://dashboard.stripe.com) → **Developers** → **API Keys**
+2. **Secret key**'i kopyalayın (`sk_live_xxxxx` veya `sk_test_xxxxx`)
+3. Vercel'e ekleyin
 
 ### 4. Build Ayarları
 

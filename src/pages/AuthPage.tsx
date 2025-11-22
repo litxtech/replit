@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { userAuth, supabase } from '../lib/supabase'
+import { openMyTrabzonDeepLink } from '../lib/utils'
 import { Mail, Lock, LogIn, UserPlus, Sparkles, HelpCircle } from 'lucide-react'
 
 export function AuthPage() {
@@ -92,13 +93,15 @@ export function AuthPage() {
       setMessage('Giriş başarılı! Yönlendiriliyorsunuz...')
       setMessageType('success')
       
-      // Onboarding kontrolü
+      // Onboarding kontrolü ve mobil deep link yönlendirme
       if (!user.user_metadata?.onboarding_completed && !user.user_metadata?.full_name) {
         setTimeout(() => {
+          if (openMyTrabzonDeepLink('auth/onboarding', '')) return
           navigate('/auth/onboarding')
         }, 1000)
       } else {
         setTimeout(() => {
+          if (openMyTrabzonDeepLink('auth/callback', '')) return
           navigate('/')
         }, 1000)
       }

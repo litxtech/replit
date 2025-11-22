@@ -154,6 +154,8 @@ export function ResetPasswordPage() {
       setMessageType('success')
       
       setTimeout(() => {
+        // Mobil uygulamaya yönlendir (eğer mobil cihazdaysa)
+        if (openMyTrabzonDeepLink('auth/callback', '')) return
         navigate('/auth')
       }, 2000)
     } catch (e: any) {

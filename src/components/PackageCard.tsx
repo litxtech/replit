@@ -58,8 +58,19 @@ export function CheckoutModal({ package: pkg, isOpen, onClose }: CheckoutModalPr
         throw new Error('Checkout URL oluşturulamadı')
       }
     } catch (err: any) {
-      console.error('Checkout error:', err)
-      setError(err.message || 'Ödeme işlemi başlatılamadı')
+      console.error('❌ Checkout error:', err)
+      let errorMessage = err.message || 'Ödeme işlemi başlatılamadı'
+      
+      // Daha kullanıcı dostu hata mesajları
+      if (errorMessage.includes('Stripe yapılandırılmamış')) {
+        errorMessage = 'Ödeme sistemi yapılandırılmamış. Lütfen yöneticiye başvurun.'
+      } else if (errorMessage.includes('kullanılamıyor')) {
+        errorMessage = 'Ödeme sistemi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.'
+      } else if (errorMessage.includes('fetch') || errorMessage.includes('network')) {
+        errorMessage = 'İnternet bağlantınızı kontrol edin ve tekrar deneyin.'
+      }
+      
+      setError(errorMessage)
     } finally {
       setIsLoading(false)
     }

@@ -63,40 +63,69 @@ export async function createCheckoutSession(priceId: string, packageName: string
 
       if (response.ok) {
         const data = await response.json()
-        console.log('Checkout response:', data) // Debug için
+        console.log('✅ Checkout response:', data)
         return data
       } else {
-        const errorData = await response.json()
-        console.error('API Error:', errorData)
-        throw new Error(errorData.error || 'API request failed')
+        const errorData = await response.json().catch(() => ({ error: 'Unknown error' }))
+        console.error('❌ API Error:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorData
+        })
+        
+        // Daha açıklayıcı hata mesajları
+        if (errorData.error === 'Stripe is not configured') {
+          throw new Error('Stripe yapılandırılmamış. Lütfen yöneticiye başvurun.')
+        }
+        if (errorData.error === 'Invalid package ID') {
+          throw new Error('Geçersiz paket seçildi. Lütfen tekrar deneyin.')
+        }
+        
+        throw new Error(errorData.error || errorData.message || 'API isteği başarısız oldu')
       }
-    } catch (error) {
-      console.log('Production API failed, trying localhost...', error)
+    } catch (error: any) {
+      console.error('❌ Production API failed:', error)
+      // Eğer network hatası değilse, direkt fırlat (localhost'a düşmesin)
+      if (error.message && !error.message.includes('fetch')) {
+        throw error
+      }
+      console.log('Trying localhost fallback...')
     }
 
-    // Fallback to localhost
-    const localhostResponse = await fetch(`${LOCALHOST_URL}/api/stripe/checkout`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        packageId,
-        packageName,
-        packagePrice,
-      }),
-    })
+    // Fallback to localhost (sadece development için)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      try {
+        const localhostResponse = await fetch(`${LOCALHOST_URL}/api/stripe/checkout`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            packageId,
+            packageName,
+            packagePrice,
+          }),
+        })
 
-    const localhostData = await localhostResponse.json()
+        const localhostData = await localhostResponse.json()
 
-    if (!localhostResponse.ok) {
-      throw new Error(localhostData.error || 'Checkout could not be created')
+        if (!localhostResponse.ok) {
+          throw new Error(localhostData.error || 'Checkout could not be created')
+        }
+
+        return localhostData
+      } catch (localhostError: any) {
+        console.error('❌ Localhost API also failed:', localhostError)
+        throw new Error('Ödeme sistemi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin.')
+      }
+    } else {
+      // Production'da localhost'a düşme, direkt hata ver
+      throw new Error('Ödeme sistemi şu anda kullanılamıyor. Lütfen daha sonra tekrar deneyin veya destek ekibine başvurun.')
     }
-
-    return localhostData
   } catch (error: any) {
-    console.error('Checkout error:', error)
-    throw new Error(error.message || 'Payment process could not be started')
+    console.error('❌ Checkout error:', error)
+    // Hata mesajı zaten set edilmişse, onu kullan
+    throw error
   }
 }
 
