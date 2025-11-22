@@ -73,11 +73,7 @@ export function AuthPage() {
         return
       }
 
-      const { data, error } = await userAuth.signInWithEmail(email, password)
-      
-      if (error) {
-        throw error
-      }
+      await userAuth.signInWithEmail(email, password)
 
       // Session'ı kontrol et
       if (!supabase) {

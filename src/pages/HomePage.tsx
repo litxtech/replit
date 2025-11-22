@@ -24,8 +24,6 @@ export function HomePage() {
       } catch (error) {
         console.error('Error checking user:', error)
         setUser(null)
-      } finally {
-        setLoading(false)
       }
     }
 
