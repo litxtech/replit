@@ -3,16 +3,19 @@
 ## Hızlı Deploy (Vercel CLI ile)
 
 ### 1. Vercel CLI Kurulumu
+
 ```bash
 npm install -g vercel
 ```
 
 ### 2. Vercel'e Giriş Yapın
+
 ```bash
 vercel login
 ```
 
 ### 3. Projeyi Deploy Edin
+
 ```bash
 # Production deploy
 vercel --prod
@@ -24,6 +27,7 @@ npm run deploy
 ## GitHub ile Otomatik Deploy
 
 ### 1. GitHub Repository'ye Push Edin
+
 ```bash
 git add .
 git commit -m "🚀 Deploy hazırlığı"
@@ -31,7 +35,8 @@ git push origin main
 ```
 
 ### 2. Vercel Dashboard'da Proje Bağlayın
-1. https://vercel.com/dashboard adresine gidin
+
+1. <https://vercel.com/dashboard> adresine gidin
 2. **Add New Project** butonuna tıklayın
 3. GitHub repository'nizi seçin
 4. **Import** butonuna tıklayın

@@ -30,12 +30,28 @@ export function AuthCallback() {
       }
 
       // Supabase will set session via URL hash automatically on this route
-      await new Promise((r) => setTimeout(r, 500))
+      // OAuth için biraz daha bekleyelim
+      await new Promise((r) => setTimeout(r, 1000))
 
       try {
-        const { data: { user }, error } = await supabase.auth.getUser()
+        // Önce session'ı kontrol et
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession()
         
-        if (error || !user) {
+        if (sessionError || !session) {
+          console.error('Session error:', sessionError)
+          // Session yoksa, getUser'ı da dene
+          const { data: { user }, error: userError } = await supabase.auth.getUser()
+          if (userError || !user) {
+            console.error('User error:', userError)
+            navigate('/auth')
+            return
+          }
+        }
+
+        // Session'dan veya getUser'dan kullanıcıyı al
+        const user = session?.user || (await supabase.auth.getUser()).data.user
+        
+        if (!user) {
           navigate('/auth')
           return
         }
@@ -46,6 +62,10 @@ export function AuthCallback() {
         const hash = window.location.hash
         const hashParams = new URLSearchParams(hash.substring(1))
         const type = hashParams.get('type')
+        const accessToken = hashParams.get('access_token')
+
+        // OAuth girişi (access_token varsa ama type yoksa)
+        const isOAuthLogin = accessToken && !type
 
         // Eğer email confirmation ise
         if (type === 'signup' || type === 'email') {
@@ -63,14 +83,19 @@ export function AuthCallback() {
           if (openMyTrabzonDeepLink('auth/reset-password', hashSuffix)) return
           navigate('/auth/reset-password')
         }
-        // Normal giriş
+        // OAuth girişi veya normal giriş
         else {
+          // Hash'i temizle (güvenlik için)
+          if (hash) {
+            window.history.replaceState(null, '', window.location.pathname)
+          }
+          
           // Onboarding tamamlanmamışsa onboarding'e yönlendir
-          if (!user.user_metadata?.onboarding_completed) {
-            if (openMyTrabzonDeepLink('auth/onboarding', hashSuffix)) return
+          if (!user.user_metadata?.onboarding_completed && !user.user_metadata?.full_name) {
+            if (openMyTrabzonDeepLink('auth/onboarding', '')) return
             navigate('/auth/onboarding')
           } else {
-            if (openMyTrabzonDeepLink('auth/callback', hashSuffix)) return
+            if (openMyTrabzonDeepLink('auth/callback', '')) return
             navigate('/')
           }
         }
@@ -85,29 +110,39 @@ export function AuthCallback() {
     // Auth state değişikliklerini dinle
     if (!supabase) return
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
       if (event === 'SIGNED_IN' && session?.user) {
         const hash = window.location.hash
         const hashParams = new URLSearchParams(hash.substring(1))
         const type = hashParams.get('type')
+        const accessToken = hashParams.get('access_token')
+        
+        // OAuth girişi kontrolü
+        const isOAuthLogin = accessToken && !type
+
+        // Hash'i temizle (güvenlik için)
+        if (hash) {
+          window.history.replaceState(null, '', window.location.pathname)
+        }
 
         if (type === 'signup' || type === 'email') {
-          if (!session.user.user_metadata?.onboarding_completed) {
-            if (openMyTrabzonDeepLink('auth/onboarding', window.location.hash || '')) return
+          if (!session.user.user_metadata?.onboarding_completed && !session.user.user_metadata?.full_name) {
+            if (openMyTrabzonDeepLink('auth/onboarding', '')) return
             navigate('/auth/onboarding')
           } else {
-            if (openMyTrabzonDeepLink('auth/callback', window.location.hash || '')) return
+            if (openMyTrabzonDeepLink('auth/callback', '')) return
             navigate('/')
           }
         } else if (type === 'recovery') {
-          if (openMyTrabzonDeepLink('auth/reset-password', window.location.hash || '')) return
+          if (openMyTrabzonDeepLink('auth/reset-password', '')) return
           navigate('/auth/reset-password')
         } else {
-          if (!session.user.user_metadata?.onboarding_completed) {
-            if (openMyTrabzonDeepLink('auth/onboarding', window.location.hash || '')) return
+          // OAuth veya normal giriş
+          if (!session.user.user_metadata?.onboarding_completed && !session.user.user_metadata?.full_name) {
+            if (openMyTrabzonDeepLink('auth/onboarding', '')) return
             navigate('/auth/onboarding')
           } else {
-            if (openMyTrabzonDeepLink('auth/callback', window.location.hash || '')) return
+            if (openMyTrabzonDeepLink('auth/callback', '')) return
             navigate('/')
           }
         }

@@ -113,7 +113,7 @@ export function ResetPasswordPage() {
       }
 
       await userAuth.resetPassword(email)
-      setMessage('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi. Lütfen e-postanızı kontrol edin.')
+      setMessage('Şifre sıfırlama bağlantısı e-posta adresinize gönderildi! Lütfen e-postanızı kontrol edin (spam klasörü dahil). Bağlantı 1 saat süreyle geçerlidir.')
       setMessageType('success')
     } catch (e: any) {
       console.error('Password reset error:', e)
@@ -259,6 +259,7 @@ export function ResetPasswordPage() {
           </div>
           <h1 className="text-3xl font-bold text-white mb-2">Şifremi Unuttum</h1>
           <p className="text-gray-300">E-posta adresinize şifre sıfırlama bağlantısı göndereceğiz</p>
+          <p className="text-sm text-gray-400 mt-2">E-postanızı kontrol etmeyi unutmayın (spam klasörü dahil)</p>
         </div>
 
         <form onSubmit={handleRequestReset} className="space-y-6">

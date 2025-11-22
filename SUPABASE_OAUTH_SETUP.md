@@ -82,13 +82,35 @@ Google ve Apple ile giriş/kayıt işlemlerinin çalışması için Supabase Das
 
 Supabase Dashboard'da **Settings** > **Authentication** > **URL Configuration** bölümünde şu URL'lerin olduğundan emin olun:
 
+### Production URLs
 ```
+https://www.litxtech.com/auth/reset-password
+https://www.litxtech.com/auth/confirm
 https://www.litxtech.com/auth/callback
+https://litxtech.com/auth/reset-password
 https://litxtech.com/auth/callback
+https://litxtech.com/auth/onboarding
+https://xcvcplwimicylaxghiak.supabase.co/auth/v1/callback
+```
+
+### Development URLs
+```
+http://localhost:3000
+http://localhost:3000/auth/reset-password
 http://localhost:3000/auth/callback
+http://localhost:3000/auth/onboarding
+http://localhost:8081
+http://localhost:8081/auth/reset-password
 http://localhost:8081/auth/callback
+http://localhost:8081/auth/onboarding
+```
+
+### Mobile/Deep Link URLs
+```
+mytrabzon://auth/reset-password
 mytrabzon://auth/callback
-litxtech://auth/callback
+mytrabzon://auth/onboarding
+litxtech://auth/onboarding
 ```
 
 ## 4. Test Etme

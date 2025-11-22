@@ -9,7 +9,7 @@ Eksiksiz authentication sisteminin çalışması için Supabase Dashboard'da aş
 3. **Settings** > **Authentication** > **URL Configuration** bölümüne gidin
 4. **Site URL** alanına sitenizin URL'ini girin:
    ```
-   https://www.litxtech.com
+   https://litxtech.com
    ```
 
 ## 2. Redirect URLs Ayarları
@@ -19,9 +19,12 @@ Aynı sayfada **Redirect URLs** bölümüne şu URL'leri ekleyin (her URL'yi ayr
 ### Production URLs
 ```
 https://www.litxtech.com/auth/reset-password
-https://www.litxtech.com/auth/callback
 https://www.litxtech.com/auth/confirm
-https://www.litxtech.com/auth/onboarding
+https://www.litxtech.com/auth/callback
+https://litxtech.com/auth/reset-password
+https://litxtech.com/auth/callback
+https://litxtech.com/auth/onboarding
+https://xcvcplwimicylaxghiak.supabase.co/auth/v1/callback
 ```
 
 ### Development URLs
@@ -29,25 +32,19 @@ https://www.litxtech.com/auth/onboarding
 http://localhost:3000
 http://localhost:3000/auth/reset-password
 http://localhost:3000/auth/callback
-http://localhost:3000/auth/confirm
 http://localhost:3000/auth/onboarding
 http://localhost:8081
 http://localhost:8081/auth/reset-password
 http://localhost:8081/auth/callback
-http://localhost:8081/auth/confirm
 http://localhost:8081/auth/onboarding
 ```
 
 ### Mobile/Deep Link URLs
 ```
-litxtech://auth/callback
-litxtech://auth/reset-password
-litxtech://auth/confirm
-litxtech://auth/onboarding
-mytrabzon://auth/callback
 mytrabzon://auth/reset-password
-mytrabzon://auth/confirm
+mytrabzon://auth/callback
 mytrabzon://auth/onboarding
+litxtech://auth/onboarding
 ```
 
 **Önemli:** Her URL'yi ayrı satırda ekleyin ve **Save** butonuna tıklayın.
@@ -59,17 +56,17 @@ mytrabzon://auth/onboarding
 ### Signup Email Template
 - **Confirm signup** template'ini seçin
 - Email template'inde `{{ .ConfirmationURL }}` değişkeninin kullanıldığından emin olun
-- Redirect URL: `https://www.litxtech.com/auth/confirm`
+- Redirect URL: `https://litxtech.com/auth/confirm` veya `https://www.litxtech.com/auth/confirm`
 
 ### Reset Password Email Template
 - **Reset Password** template'ini seçin
 - Email template'inde `{{ .ConfirmationURL }}` değişkeninin kullanıldığından emin olun
-- Redirect URL: `https://www.litxtech.com/auth/reset-password`
+- Redirect URL: `https://litxtech.com/auth/reset-password` veya `https://www.litxtech.com/auth/reset-password`
 
 ### Magic Link Email Template
 - **Magic Link** template'ini seçin
 - Email template'inde `{{ .ConfirmationURL }}` değişkeninin kullanıldığından emin olun
-- Redirect URL: `https://www.litxtech.com/auth/callback`
+- Redirect URL: `https://litxtech.com/auth/callback` veya `https://www.litxtech.com/auth/callback`
 
 ## 4. Email Confirmation Ayarları
 

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { userAuth } from '../lib/supabase'
-import { Mail, Lock, LogIn, UserPlus, Sparkles } from 'lucide-react'
+import { Mail, Lock, LogIn, UserPlus, Sparkles, HelpCircle } from 'lucide-react'
 
 export function AuthPage() {
   const navigate = useNavigate()
@@ -271,32 +271,40 @@ export function AuthPage() {
           </div>
 
           {mode === 'signup' && (
-            <div>
-              <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
-                Şifreyi Tekrar Girin
-              </label>
-              <div className="relative">
-                <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                <input
-                  id="confirmPassword"
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
-                  required
-                />
+            <>
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-300 mb-2">
+                  Şifreyi Tekrar Girin
+                </label>
+                <div className="relative">
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    id="confirmPassword"
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                    required
+                  />
+                </div>
               </div>
-            </div>
+              <div className="flex items-start gap-2 p-3 bg-blue-500/10 border border-blue-500/20 rounded-lg">
+                <HelpCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                <p className="text-xs text-gray-300">
+                  Şifrenizi unutursanız, giriş sayfasındaki <Link to="/auth/reset-password" className="text-purple-400 hover:text-purple-300 underline">"Şifremi Unuttum"</Link> linkini kullanabilirsiniz.
+                </p>
+              </div>
+            </>
           )}
 
           {mode === 'signin' && (
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-end">
               <Link
                 to="/auth/reset-password"
-                className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                className="text-sm text-purple-400 hover:text-purple-300 transition-colors font-medium underline underline-offset-2"
               >
-                Şifremi Unuttum
+                Şifremi Unuttum?
               </Link>
             </div>
           )}

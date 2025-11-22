@@ -1,18 +1,52 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Menu, X, Zap, Rocket, Shield, Star, Users, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud, Heart, Coffee } from 'lucide-react'
+import { Menu, X, Zap, Rocket, Shield, Star, Users, Play, Monitor, ArrowRight, Globe, Phone, Mail, ChevronDown, Code, Cpu, Database, Cloud, Heart, Coffee, User } from 'lucide-react'
 import { PackageCard } from '../components/PackageCard'
 import { PACKAGE_CATEGORIES } from '../data/packages'
 import { FloatingCodeElements, AnimatedStats, HeroCodeFlow, BackgroundCodeParticles, BreathingTitle, GlowButton, AIInteraction, MatrixCodeRain } from '../components/AnimatedElements'
 import { LanguageSwitcher, LanguageSwitcherCompact } from '../components/LanguageSwitcher'
 import { useTranslation, useLanguage } from '../contexts/LanguageContext'
+import { supabase, userAuth } from '../lib/supabase'
 
 export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('webSaaS')
+  const [user, setUser] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
   const t = useTranslation()
   const { language } = useLanguage()
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const currentUser = await userAuth.getUser()
+        setUser(currentUser)
+      } catch (error) {
+        console.error('Error checking user:', error)
+        setUser(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    checkUser()
+
+    // Auth state değişikliklerini dinle
+    if (supabase) {
+      const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+        if (event === 'SIGNED_IN' && session?.user) {
+          setUser(session.user)
+        } else if (event === 'SIGNED_OUT') {
+          setUser(null)
+        }
+      })
+
+      return () => {
+        subscription.unsubscribe()
+      }
+    }
+  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden animate-gradient">
@@ -100,7 +134,14 @@ export function HomePage() {
                 <Heart className="w-4 h-4" />
                 {t.donation.support}
               </Link>
-              <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.login}</Link>
+              {user ? (
+                <Link to="/profile" className="text-white hover:text-blue-400 transition-colors font-medium flex items-center gap-1">
+                  <User className="w-4 h-4" />
+                  {user.user_metadata?.full_name || user.email?.split('@')[0] || 'Profil'}
+                </Link>
+              ) : (
+                <Link to="/auth" className="text-white hover:text-blue-400 transition-colors font-medium">{t.nav.login}</Link>
+              )}
               <Link to="/contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg">
                 {t.nav.getQuote}
               </Link>
@@ -132,7 +173,14 @@ export function HomePage() {
                   <div className="flex justify-center mb-4">
                     <LanguageSwitcherCompact />
                   </div>
-                  <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">{t.nav.login}</Link>
+                  {user ? (
+                    <Link to="/profile" className="block text-white hover:text-blue-400 transition-colors mb-2 flex items-center gap-2">
+                      <User className="w-4 h-4" />
+                      {user.user_metadata?.full_name || user.email?.split('@')[0] || 'Profil'}
+                    </Link>
+                  ) : (
+                    <Link to="/auth" className="block text-white hover:text-blue-400 transition-colors mb-2">{t.nav.login}</Link>
+                  )}
                   <Link to="/contact" className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg text-center">{t.nav.getQuote}</Link>
                 </div>
               </div>
