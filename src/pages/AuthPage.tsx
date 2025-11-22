@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { userAuth } from '../lib/supabase'
+import { userAuth, supabase } from '../lib/supabase'
 import { Mail, Lock, LogIn, UserPlus, Sparkles, HelpCircle } from 'lucide-react'
 
 export function AuthPage() {
@@ -69,20 +69,47 @@ export function AuthPage() {
       if (!email || !password) {
         setMessage('Lütfen tüm alanları doldurun')
         setMessageType('error')
+        setLoading(false)
         return
       }
 
-      await userAuth.signInWithEmail(email, password)
+      const { data, error } = await userAuth.signInWithEmail(email, password)
+      
+      if (error) {
+        throw error
+      }
+
+      // Session'ı kontrol et
+      if (!supabase) {
+        throw new Error('Auth not configured')
+      }
+
+      // Session'ın kurulması için biraz bekle
+      await new Promise((r) => setTimeout(r, 500))
+
+      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      
+      if (userError || !user) {
+        throw new Error('Giriş yapılamadı. Lütfen tekrar deneyin.')
+      }
+
       setMessage('Giriş başarılı! Yönlendiriliyorsunuz...')
       setMessageType('success')
       
-      setTimeout(() => {
-        navigate('/')
-      }, 1000)
+      // Onboarding kontrolü
+      if (!user.user_metadata?.onboarding_completed && !user.user_metadata?.full_name) {
+        setTimeout(() => {
+          navigate('/auth/onboarding')
+        }, 1000)
+      } else {
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
+      }
     } catch (e: any) {
+      console.error('Sign in error:', e)
       setMessage(e.message || 'Giriş başarısız oldu')
       setMessageType('error')
-    } finally {
       setLoading(false)
     }
   }

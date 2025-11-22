@@ -62,10 +62,6 @@ export function AuthCallback() {
         const hash = window.location.hash
         const hashParams = new URLSearchParams(hash.substring(1))
         const type = hashParams.get('type')
-        const accessToken = hashParams.get('access_token')
-
-        // OAuth girişi (access_token varsa ama type yoksa)
-        const isOAuthLogin = accessToken && !type
 
         // Eğer email confirmation ise
         if (type === 'signup' || type === 'email') {
@@ -115,10 +111,6 @@ export function AuthCallback() {
         const hash = window.location.hash
         const hashParams = new URLSearchParams(hash.substring(1))
         const type = hashParams.get('type')
-        const accessToken = hashParams.get('access_token')
-        
-        // OAuth girişi kontrolü
-        const isOAuthLogin = accessToken && !type
 
         // Hash'i temizle (güvenlik için)
         if (hash) {

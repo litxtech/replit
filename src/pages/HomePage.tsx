@@ -13,7 +13,6 @@ export function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState('webSaaS')
   const [user, setUser] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
   const t = useTranslation()
   const { language } = useLanguage()
 
